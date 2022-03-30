@@ -1,0 +1,1009 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>31. Semaphores · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="32.common-concurrency-problems.html" />
+    
+    
+    <link rel="prev" href="30.-condition-variables.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    CS Notes
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">OSTEP</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../virtualization/">
+            
+                <a href="../virtualization/">
+            
+                    
+                    Virtualization
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="../virtualization/6.mechanism-limited-direct-execution.html">
+            
+                <a href="../virtualization/6.mechanism-limited-direct-execution.html">
+            
+                    
+                    6.Mechanism: Limited Direct Execution
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="../virtualization/7.scheduling-introduction.html">
+            
+                <a href="../virtualization/7.scheduling-introduction.html">
+            
+                    
+                    7.Scheduling: Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.3" data-path="../virtualization/8.scheduling-the-multi-level-feedback-queue.html">
+            
+                <a href="../virtualization/8.scheduling-the-multi-level-feedback-queue.html">
+            
+                    
+                    8.Scheduling: The Multi-Level Feedback Queue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.4" data-path="../virtualization/9.scheduling-proportional-share.html">
+            
+                <a href="../virtualization/9.scheduling-proportional-share.html">
+            
+                    
+                    9.Scheduling: Proportional Share
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.5" data-path="../virtualization/10.-multiprocessor-scheduling.html">
+            
+                <a href="../virtualization/10.-multiprocessor-scheduling.html">
+            
+                    
+                    10. Multiprocessor Scheduling
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.6" data-path="../virtualization/13.the-abstraction-address-spaces.html">
+            
+                <a href="../virtualization/13.the-abstraction-address-spaces.html">
+            
+                    
+                    13.The Abstraction: Address Spaces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.7" data-path="../virtualization/14.interlude-memory-api.html">
+            
+                <a href="../virtualization/14.interlude-memory-api.html">
+            
+                    
+                    14.Interlude: Memory API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.8" data-path="../virtualization/15.mechanism-address-translation.html">
+            
+                <a href="../virtualization/15.mechanism-address-translation.html">
+            
+                    
+                    15.Mechanism: Address Translation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.9" data-path="../virtualization/16.-segmentation.html">
+            
+                <a href="../virtualization/16.-segmentation.html">
+            
+                    
+                    16. Segmentation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.10" data-path="../virtualization/17.-free-space-management.html">
+            
+                <a href="../virtualization/17.-free-space-management.html">
+            
+                    
+                    17. Free-Space Management
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.11" data-path="../virtualization/18.-paging-introduction.html">
+            
+                <a href="../virtualization/18.-paging-introduction.html">
+            
+                    
+                    18. Paging: Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.12" data-path="../virtualization/19.-paging-faster-translations-tlbs.html">
+            
+                <a href="../virtualization/19.-paging-faster-translations-tlbs.html">
+            
+                    
+                    19. Paging: Faster Translations (TLBs)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.13" data-path="../virtualization/20.-paging-smaller-tables.html">
+            
+                <a href="../virtualization/20.-paging-smaller-tables.html">
+            
+                    
+                    20. Paging: Smaller Tables
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.14" data-path="../virtualization/21.-beyond-physical-memory-mechanisms.html">
+            
+                <a href="../virtualization/21.-beyond-physical-memory-mechanisms.html">
+            
+                    
+                    21. Beyond Physical Memory: Mechanisms
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.15" data-path="../virtualization/22.beyond-physical-memory-policies.html">
+            
+                <a href="../virtualization/22.beyond-physical-memory-policies.html">
+            
+                    
+                    22.Beyond Physical Memory: Policies
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.16" data-path="../virtualization/23.-complete-virtual-memory-systems.html">
+            
+                <a href="../virtualization/23.-complete-virtual-memory-systems.html">
+            
+                    
+                    23. Complete Virtual Memory Systems
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Concurrency
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="26.-concurrency-an-introduction.html">
+            
+                <a href="26.-concurrency-an-introduction.html">
+            
+                    
+                    26. Concurrency: An Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.2" data-path="27.-interlude-thread-api.html">
+            
+                <a href="27.-interlude-thread-api.html">
+            
+                    
+                    27. Interlude: Thread API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.3" data-path="28.-locks.html">
+            
+                <a href="28.-locks.html">
+            
+                    
+                    28. Locks
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.4" data-path="29.-lock-based-concurrent-data-structures.html">
+            
+                <a href="29.-lock-based-concurrent-data-structures.html">
+            
+                    
+                    29. Lock-based Concurrent Data Structures
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.5" data-path="30.-condition-variables.html">
+            
+                <a href="30.-condition-variables.html">
+            
+                    
+                    30. Condition Variables
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.2.6" data-path="31.-semaphores.html">
+            
+                <a href="31.-semaphores.html">
+            
+                    
+                    31. Semaphores
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.7" data-path="32.common-concurrency-problems.html">
+            
+                <a href="32.common-concurrency-problems.html">
+            
+                    
+                    32.Common Concurrency Problems
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.8" data-path="33.-event-based-concurrency.html">
+            
+                <a href="33.-event-based-concurrency.html">
+            
+                    
+                    33. Event-based Concurrency
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../persistence.md">
+            
+                <span>
+            
+                    
+                    Persistence
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.3.1" data-path="../persistence/36. IO Devices.html">
+            
+                <a href="../persistence/36. IO Devices.html">
+            
+                    
+                    36. IO Devices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.2" data-path="../persistence/39.Interlude Files and Directories.html">
+            
+                <a href="../persistence/39.Interlude Files and Directories.html">
+            
+                    
+                    39.Interlude Files and Directories
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.3" data-path="../persistence/40.File System Implementation.html">
+            
+                <a href="../persistence/40.File System Implementation.html">
+            
+                    
+                    40.File System Implementation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.4" data-path="../persistence/41.Locality and The Fast File System.html">
+            
+                <a href="../persistence/41.Locality and The Fast File System.html">
+            
+                    
+                    41.Locality and The Fast File System
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.5" data-path="../persistence/42.Crash Consistency FSCK and Journaling.html">
+            
+                <a href="../persistence/42.Crash Consistency FSCK and Journaling.html">
+            
+                    
+                    42.Crash Consistency FSCK and Journaling
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.6" data-path="../persistence/43.Log-structured File Systems.html">
+            
+                <a href="../persistence/43.Log-structured File Systems.html">
+            
+                    
+                    43.Log-structured File Systems
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >31. Semaphores</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="31-semaphores">31. Semaphores</h1>
+<p>&#x901A;&#x8FC7;&#x4E4B;&#x524D;&#x7684;&#x77E5;&#x8BC6;&#x6211;&#x4EEC;&#x77E5;&#x9053;&#xFF0C;&#x89E3;&#x51B3;&#x5E76;&#x53D1;&#x95EE;&#x9898;&#x540C;&#x65F6;&#x9700;&#x8981;&#x9501;&#x548C;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x3002;&#x6709;&#x6CA1;&#x6709;&#x4E00;&#x79CD;&#x529E;&#x6CD5;&#x5C06;&#x5B83;&#x4EEC;&#x4E24;&#x8005;&#x7ED3;&#x5408;&#x8D77;&#x6765;&#x5462;&#xFF1F;&#x5B83;&#x5C31;&#x662F;<strong>&#x4FE1;&#x53F7;&#x91CF;&#xFF08;semaphore&#xFF09;</strong>&#xFF0C;&#x6700;&#x65E9;&#x7531;<strong>Edsger Dijkstra</strong>&#x63D0;&#x51FA;&#x3002;</p>
+<p>CRUX&#xFF1A;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x4FE1;&#x53F7;&#x91CF;&#xFF1F;</p>
+<h2 id="311-semaphores-a-definition">31.1 Semaphores: A Definition</h2>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;semaphore.h&gt;</span></span>
+<span class="hljs-keyword">sem_t</span> s;
+sem_init(&amp;s, <span class="hljs-number">0</span>, X);
+<span class="hljs-comment">// second arg set to 0:the semaphore is shared between threads in the same process</span>
+<span class="hljs-comment">// third arg: initial value</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sem_wait</span><span class="hljs-params">(sem_t *s)</span> </span>{
+    <span class="hljs-comment">//decrement the value of semaphore s by one</span>
+    <span class="hljs-comment">//wait if value of semaphore s is negative</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sem_post</span><span class="hljs-params">(sem_t *s)</span> </span>{
+    <span class="hljs-comment">//incremrnt the value of semaphore s by one</span>
+    <span class="hljs-comment">//if there are one or more threads waiting, wake one</span>
+}
+</code></pre>
+<ul>
+<li>&#x4FE1;&#x53F7;&#x91CF;&#x521D;&#x503C;X&#x7684;&#x9009;&#x53D6;&#x53D6;&#x51B3;&#x4E8E;&#x521D;&#x59CB;&#x5316;&#x540E;&#x60F3;&#x8981;&#x7ACB;&#x5373;&#x5206;&#x914D;&#x7684;&#x8D44;&#x6E90;&#x6570;</li>
+<li>&#x4FE1;&#x53F7;&#x91CF;&#x4E3A;&#x8D1F;&#x503C;&#x65F6;&#xFF0C;&#x5176;&#x7EDD;&#x5BF9;&#x503C;&#x4E3A;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x6570;</li>
+</ul>
+<h2 id="312-binary-semaphores-locks">31.2 Binary Semaphores (Locks)</h2>
+<pre><code class="lang-c"><span class="hljs-keyword">sem_t</span> m;
+sem_init(&amp;m, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+
+sem_wait(&amp;m);
+<span class="hljs-comment">//critical section</span>
+sem_post(&amp;m);
+</code></pre>
+<p>&#x5F53;&#x6210;&#x9501;&#x7528;&#x7684;&#x4FE1;&#x53F7;&#x91CF;&#x79F0;&#x4E3A;<strong>&#x4E8C;&#x5143;&#x4FE1;&#x53F7;&#x91CF;&#xFF08;binary semaphores&#xFF09;</strong></p>
+<p>&#x4E8C;&#x5143;&#x4FE1;&#x53F7;&#x91CF;&#x4E2D;&#xFF0C;&#x521D;&#x503C;X&#x5E94;&#x8BE5;&#x4E3A;1</p>
+<p><img src="../../.gitbook/assets/image 20211218142548933" alt="image-20211218142548933"></p>
+<h2 id="313-semaphores-for-ordering">31.3 Semaphores For Ordering</h2>
+<p>&#x4FE1;&#x53F7;&#x91CF;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;&#x4E8E;&#x4E8B;&#x4EF6;&#x6392;&#x5E8F;&#x3002;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">sem_t</span> s;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> *<span class="hljs-title">child</span><span class="hljs-params">(<span class="hljs-keyword">void</span> *arg)</span> </span>{
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;child\n&quot;</span>);
+    sem_post(&amp;s); <span class="hljs-comment">// signal here: child is done</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> *argv[])</span> </span>{
+    sem_init(&amp;s, <span class="hljs-number">0</span>, X); <span class="hljs-comment">// what should X be?</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;parent: begin\n&quot;</span>);
+    <span class="hljs-keyword">pthread_t</span> c;
+    Pthread_create(&amp;c, <span class="hljs-literal">NULL</span>, child, <span class="hljs-literal">NULL</span>);
+    sem_wait(&amp;s); <span class="hljs-comment">// wait here for child</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;parent: end\n&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>&#x7528;&#x4E8E;&#x6392;&#x5E8F;&#x7684;&#x4FE1;&#x53F7;&#x91CF;&#x521D;&#x503C;&#x5E94;&#x8BBE;&#x4E3A;0&#xFF0C;&#x8003;&#x8651;&#x4E24;&#x79CD;case&#xFF1A;</p>
+<ul>
+<li>parent&#x5148;&#x8FD0;&#x884C;sem_wait&#xFF0C;&#x4FE1;&#x53F7;-1&#xFF0C;&#x7B49;&#x5F85;&#xFF1B;child&#x8FD0;&#x884C;sem_post&#xFF0C;&#x4FE1;&#x53F7;+1=0&#xFF0C;&#x53EB;&#x9192;parent&#x3002;</li>
+<li>child&#x5148;&#x8FD0;&#x884C;sem_post&#xFF0C;&#x4FE1;&#x53F7;+1=1&#xFF1B;parent&#x8FD0;&#x884C;sem_wait&#xFF0C;&#x56E0;&#x4E3A;&#x4FE1;&#x53F7;&#x4E3A;1&#xFF0C;&#x8FD4;&#x56DE;&#x3002;</li>
+</ul>
+<p><img src="../../.gitbook/assets/image 20211218143511624" alt="image-20211218143511624"></p>
+<h2 id="314-the-producerconsumer-bounded-buffer-problem">31.4 The Producer/Consumer (Bounded Buffer) Problem</h2>
+<p>&#x7528;&#x4FE1;&#x53F7;&#x91CF;&#x89E3;&#x51B3;&#x751F;&#x4EA7;&#x8005;/&#x6D88;&#x8D39;&#x8005;&#x95EE;&#x9898;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">int</span> buffer[MAX];
+<span class="hljs-keyword">int</span> fill = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">int</span> use = <span class="hljs-number">0</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">put</span><span class="hljs-params">(<span class="hljs-keyword">int</span> value)</span> </span>{
+    buffer[fill] = value;        <span class="hljs-comment">// Line F1</span>
+    fill = (fill + <span class="hljs-number">1</span>) % MAX;    <span class="hljs-comment">// Line F2</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">get</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> tmp = buffer[use];        <span class="hljs-comment">// Line G1</span>
+    use = (use + <span class="hljs-number">1</span>) % MAX;        <span class="hljs-comment">// Line G2</span>
+    <span class="hljs-keyword">return</span> tmp;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span>*<span class="hljs-title">producer</span><span class="hljs-params">(<span class="hljs-keyword">void</span>*arg)</span> </span>{
+    <span class="hljs-keyword">int</span> i;
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; loops; i++) {
+        sem_wait(&amp;empty);       <span class="hljs-comment">// Line P1</span>
+        sem_wait(&amp;mutex);       <span class="hljs-comment">// Line P1.5 (MUTEX HERE)</span>
+        put(i);                 <span class="hljs-comment">// Line P2</span>
+        sem_post(&amp;mutex);       <span class="hljs-comment">// Line P2.5 (AND HERE)</span>
+        sem_post(&amp;full);        <span class="hljs-comment">// Line P3</span>
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span>*<span class="hljs-title">consumer</span><span class="hljs-params">(<span class="hljs-keyword">void</span>*arg)</span> </span>{
+    <span class="hljs-keyword">int</span> i;
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; loops; i++) {
+        sem_wait(&amp;full);        <span class="hljs-comment">// Line C1</span>
+        sem_wait(&amp;mutex);       <span class="hljs-comment">// Line C1.5 (MUTEX HERE)</span>
+        <span class="hljs-keyword">int</span> tmp = get();        <span class="hljs-comment">// Line C2</span>
+        sem_post(&amp;mutex);       <span class="hljs-comment">// Line C2.5 (AND HERE)</span>
+        sem_post(&amp;empty);       <span class="hljs-comment">// Line C3</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, tmp);
+    }
+}
+</code></pre>
+<p>&#x51E0;&#x4E2A;&#x5173;&#x952E;&#x70B9;&#xFF1A;</p>
+<ol>
+<li>&#x5982;&#x679C;&#x6211;&#x4EEC;&#x4E0D;&#x52A0;mutex&#x4FE1;&#x53F7;&#xFF0C;&#x5728;&#x591A;&#x751F;&#x4EA7;&#x8005;&#x60C5;&#x5F62;&#x4E0B;&#x4F1A;&#x53D1;&#x5C55;data race condition&#xFF0C;&#x5BFC;&#x81F4;&#x6570;&#x636E;&#x88AB;&#x8986;&#x76D6;&#x3002;</li>
+<li>mutex&#x5982;&#x679C;&#x5305;&#x88F9;&#x5728;empty\&amp;fill&#x4FE1;&#x53F7;&#x5916;&#xFF0C;&#x4F1A;&#x5BFC;&#x81F4;<strong>&#x6B7B;&#x9501;&#xFF08;deadlock&#xFF09;</strong>&#xFF1A;&#x751F;&#x4EA7;&#x8005;&#x62FF;&#x5230;mutex&#x5E76;&#x8FDB;&#x5165;wait&#xFF0C;&#x5524;&#x9192;&#x6D88;&#x8D39;&#x8005;&#xFF0C;&#x4F46;&#x662F;&#x6D88;&#x8D39;&#x8005;&#x62FF;&#x4E0D;&#x5230;mutex&#xFF0C;&#x6C38;&#x8FDC;&#x5904;&#x4E8E;wait&#x72B6;&#x6001;&#x3002;&#x56E0;&#x6B64;mutex&#x53EA;&#x5E94;&#x8BE5;&#x5305;&#x88F9;critical section&#xFF08;&#x5373;put/get&#x64CD;&#x4F5C;&#xFF09;&#x3002;</li>
+</ol>
+<h2 id="315-reader-writer-locks">31.5 Reader-Writer Locks</h2>
+<p><strong>&#x8BFB;&#x5199;&#x9501;</strong>&#x53EF;&#x7528;&#x4E8E;&#x4FDD;&#x62A4;&#x5E76;&#x53D1;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x8BFB;&#x5199;&#x4EFB;&#x52A1;&#x3002;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-keyword">_rwlock_t</span> {
+    <span class="hljs-keyword">sem_t</span> lock;      <span class="hljs-comment">// binary semaphore (basic lock)</span>
+    <span class="hljs-keyword">sem_t</span> writelock; <span class="hljs-comment">// allow ONE writer/MANY readers</span>
+    <span class="hljs-keyword">int</span>   readers;   <span class="hljs-comment">// #readers in critical section</span>
+} <span class="hljs-keyword">rwlock_t</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">rwlock_init</span><span class="hljs-params">(rwlock_t *rw)</span> </span>{
+    rw-&gt;readers = <span class="hljs-number">0</span>;
+    sem_init(&amp;rw-&gt;lock, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+    sem_init(&amp;rw-&gt;writelock, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">rwlock_acquire_readlock</span><span class="hljs-params">(rwlock_t *rw)</span> </span>{
+    sem_wait(&amp;rw-&gt;lock);
+    rw-&gt;readers++;
+    <span class="hljs-keyword">if</span> (rw-&gt;readers == <span class="hljs-number">1</span>) <span class="hljs-comment">// first reader gets writelock</span>
+        sem_wait(&amp;rw-&gt;writelock);
+    sem_post(&amp;rw-&gt;lock);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">rwlock_release_readlock</span><span class="hljs-params">(rwlock_t *rw)</span> </span>{
+    sem_wait(&amp;rw-&gt;lock);
+    rw-&gt;readers--;
+    <span class="hljs-keyword">if</span> (rw-&gt;readers == <span class="hljs-number">0</span>) <span class="hljs-comment">// last reader lets it go</span>
+        sem_post(&amp;rw-&gt;writelock);
+    sem_post(&amp;rw-&gt;lock);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">rwlock_acquire_writelock</span><span class="hljs-params">(rwlock_t *rw)</span> </span>{
+    sem_wait(&amp;rw-&gt;writelock);
+}
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">rwlock_release_writelock</span><span class="hljs-params">(rwlock_t *rw)</span> </span>{
+    sem_post(&amp;rw-&gt;writelock);
+}
+</code></pre>
+<p>&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x7684;&#x7F3A;&#x70B9;&#x662F;readers&#x5BB9;&#x6613;&#x4F7F;writers&#x9965;&#x997F;&#x3002;&#x4E3A;&#x4E86;&#x63D0;&#x9AD8;&#x516C;&#x5E73;&#x6027;&#xFF0C;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x4E92;&#x65A5;&#x4FE1;&#x53F7;&#x91CF;S&#xFF0C;&#x52A0;&#x5728;reader/writer&#x7684;acquire_lock&#x51FD;&#x6570;&#x4E0A;&#x3002;</p>
+<p>&#x8BFB;&#x5199;&#x9501;&#x5E94;&#x5F53;&#x8C28;&#x614E;&#x4F7F;&#x7528;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x6BD4;&#x8F83;&#x590D;&#x6742;&#xFF0C;&#x5BFC;&#x81F4;&#x6027;&#x80FD;&#x4E0B;&#x964D;&#x3002;&#xFF08;<strong>Hill&apos;s Law: simple and dump can be better</strong>&#xFF09;</p>
+<h2 id="316-the-dining-philosophers">31.6 The Dining Philosophers</h2>
+<p><strong>&#x54F2;&#x5B66;&#x5BB6;&#x5C31;&#x9910;</strong>&#x662F;&#x4E00;&#x4E2A;&#x8457;&#x540D;&#x7684;&#x591A;&#x7EBF;&#x7A0B;&#x95EE;&#x9898;&#x3002;&#x5047;&#x8BBE;5&#x4E2A;&#x54F2;&#x5B66;&#x5BB6;&#x56F4;&#x7740;&#x5706;&#x684C;&#x5750;&#xFF0C;&#x6BCF;&#x4EBA;&#x5DE6;&#x53F3;&#x4E24;&#x8FB9;&#x90FD;&#x6709;&#x4E00;&#x628A;&#x53C9;&#x5B50;&#xFF0C;&#x54F2;&#x5B66;&#x5BB6;&#x601D;&#x8003;&#x65F6;&#x4E0D;&#x4F1A;&#x7528;&#x9910;&#xFF0C;&#x7528;&#x9910;&#x65F6;&#x5219;&#x5FC5;&#x987B;&#x62FF;&#x8D77;&#x5DE6;&#x53F3;&#x4E24;&#x628A;&#x53C9;&#x5B50;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) {
+    think();
+    get_forks(p);
+    eat();
+    put_forks(p);
+}
+</code></pre>
+<p>&#x7ED9;&#x6BCF;&#x4E00;&#x628A;&#x53C9;&#x5B50;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x4FE1;&#x53F7;&#x91CF;&#xFF0C;&#x4E00;&#x4E2A;&#x5931;&#x8D25;&#x7684;&#x5C1D;&#x8BD5;&#x662F;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">get_forks</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p)</span> </span>{
+    sem_wait(&amp;forks[left(p)]);
+    sem_wait(&amp;forks[right(p)]);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">put_forks</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p)</span> </span>{
+    sem_post(&amp;forks[left(p)]);
+    sem_post(&amp;forks[right(p)]);
+}
+</code></pre>
+<p>&#x6BCF;&#x4E2A;&#x4EBA;&#x90FD;&#x5148;&#x62FF;&#x8D77;&#x4E86;&#x5DE6;&#x624B;&#x8FB9;&#x7684;&#x53C9;&#x5B50;&#xFF0C;&#x5BFC;&#x81F4;<strong>&#x6B7B;&#x9501;</strong>&#xFF08;&#x8D44;&#x6E90;&#x4F9D;&#x8D56;&#x6210;&#x73AF;&#xFF09;&#x3002;</p>
+<p>&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x662F;&#x6539;&#x53D8;&#x5176;&#x4E2D;&#x4E00;&#x4EBA;&#x62FF;&#x8D77;&#x53C9;&#x5B50;&#x7684;&#x987A;&#x5E8F;&#xFF0C;&#x6765;&#x6253;&#x7834;&#x4F9D;&#x8D56;&#x73AF;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">get_forks</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p)</span> </span>{
+    <span class="hljs-keyword">if</span> (p == <span class="hljs-number">4</span>) {
+        sem_wait($forks[right(p)]);
+        sem_wait(&amp;forks[left(p)]);
+    } <span class="hljs-keyword">else</span> {
+        sem_wait(&amp;forks[left(p)]);
+        sem_wait(&amp;forks[right(P)]);
+    }
+}
+</code></pre>
+<h2 id="317-thread-throttling">31.7 Thread Throttling</h2>
+<p>&#x5BF9;&#x4E8E;memory-intensive-region&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x521D;&#x59CB;&#x5316;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x503C;&#xFF0C;&#x5373;&#x6700;&#x591A;&#x5141;&#x8BB8;&#x7684;&#x7EBF;&#x7A0B;&#x6570;&#xFF0C;&#x653E;&#x7F6E;sem_wait()&#x548C;sem_post()&#x73AF;&#x7ED5;&#x5728;&#x5468;&#x56F4;&#xFF0C;&#x4ECE;&#x800C;&#x907F;&#x514D;thrashing&#xFF08;&#x9891;&#x7E41;&#x7684;&#x9875;&#x4EA4;&#x6362;&#xFF09;&#x3002;&#x8FD9;&#x79CD;&#x529E;&#x6CD5;&#x53EB;<strong>throttling</strong>&#xFF0C;&#x662F;<strong>admission control</strong>&#x7684;&#x4E00;&#x79CD;&#x5F62;&#x5F0F;&#x3002;</p>
+<h2 id="318-how-to-implement-semaphores">31.8 How To Implement Semaphores</h2>
+<p>&#x4F7F;&#x7528;&#x6761;&#x4EF6;&#x53D8;&#x91CF;&#x548C;&#x4E92;&#x65A5;&#x9501;&#x5B9E;&#x73B0;&#x4FE1;&#x53F7;&#x91CF;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> __Zem_t {
+    <span class="hljs-keyword">int</span> value;
+    <span class="hljs-keyword">pthread_cond_t</span> cond;
+    <span class="hljs-keyword">pthread_mutex_t</span> lock;
+} Zem_t;
+
+<span class="hljs-comment">// only one thread can call this</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Zem_init</span><span class="hljs-params">(Zem_t *s, <span class="hljs-keyword">int</span> value)</span> </span>{
+    s-&gt;value = value;
+    Cond_init(&amp;s-&gt;cond);
+    Mutex_init(&amp;s-&gt;lock);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Zem_wait</span><span class="hljs-params">(Zem_t *s)</span> </span>{
+    Mutex_lock(&amp;s-&gt;lock);
+    <span class="hljs-keyword">while</span> (s-&gt;value &lt;= <span class="hljs-number">0</span>)
+        Cond_wait(&amp;s-&gt;cond, &amp;s-&gt;lock);
+    s-&gt;value--;
+    Mutex_unlock(&amp;s-&gt;lock);
+}
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Zem_post</span><span class="hljs-params">(Zem_t *s)</span> </span>{
+    Mutex_lock(&amp;s-&gt;lock);
+    s-&gt;value++;
+    Cond_signal(&amp;s-&gt;cond);
+    Mutex_unlock(&amp;s-&gt;lock);
+}
+</code></pre>
+<h2 id="hw">HW</h2>
+<p>&#x4EE5;&#x4E0B;&#x5185;&#x5BB9;&#x6765;&#x81EA;<a href="https://greenteapress.com/semaphores/LittleBookOfSemaphores.pdf" target="_blank">The Little Book of Semaphores</a></p>
+<h3 id="reader-writer-nostarve">reader-writer-nostarve</h3>
+<p>&#x539F;&#x672C;&#x7684;&#x8BFB;&#x5199;&#x9501;&#x4E4B;&#x6240;&#x4EE5;&#x4F1A;&#x9020;&#x6210;writer&#x9965;&#x997F;&#xFF0C;&#x662F;&#x56E0;&#x4E3A;&#x5F53;&#x6392;&#x5728;writer&#x524D;&#x6700;&#x540E;&#x4E00;&#x4E2A;reader signal writelock&#x540E;&#x53C8;signal lock&#xFF0C;&#x4F7F;&#x5F97;&#x6392;&#x5728;writer&#x540E;&#x7684;reader&#x201C;&#x63D2;&#x961F;&#x201D;&#x3002;</p>
+<p>&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x662F;&#x52A0;&#x4E00;&#x4E2A;readlock&#x4F5C;&#x4E3A;turnstile&#xFF0C;writer&#x8FDB;&#x5165;&#x6392;&#x961F;&#x65F6;&#x62FF;&#x5230;readlock&#xFF0C;block&#x6392;&#x5728;&#x540E;&#x9762;&#x7684;reader&#xFF0C;&#x5F53;writer&#x7684;&#x5199;&#x64CD;&#x4F5C;&#x5B8C;&#x6210;&#x540E;&#x518D;&#x89E3;&#x9501;&#xFF0C;&#x8BA9;&#x540E;&#x9762;&#x7684;reader&#x8FD0;&#x884C;&#x3002;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-keyword">__rwlock_t</span> {
+    <span class="hljs-keyword">sem_t</span> lock;
+    <span class="hljs-keyword">sem_t</span> writelock;
+    <span class="hljs-keyword">sem_t</span> readlock;    <span class="hljs-comment">//turnstile</span>
+    <span class="hljs-keyword">int</span> readers;
+} <span class="hljs-keyword">rwlock_t</span>;
+
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">rwlock_init</span><span class="hljs-params">(rwlock_t *rw)</span> </span>{
+    rw-&gt;readers = <span class="hljs-number">0</span>;
+    Sem_init(&amp;rw-&gt;lock, <span class="hljs-number">1</span>);
+    Sem_init(&amp;rw-&gt;writelock, <span class="hljs-number">1</span>);
+    Sem_init(&amp;rw-&gt;readlock, <span class="hljs-number">1</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">rwlock_acquire_readlock</span><span class="hljs-params">(rwlock_t *rw)</span> </span>{
+    Sem_wait(&amp;rw-&gt;readlock);    <span class="hljs-comment">//NEW LINE, block readers followed by writer</span>
+    Sem_post(&amp;rw-&gt;readlock);    <span class="hljs-comment">//NEW LINE</span>
+    Sem_wait(&amp;rw-&gt;lock);
+    rw-&gt;readers++;
+    <span class="hljs-keyword">if</span> (rw-&gt;readers == <span class="hljs-number">1</span>)
+        Sem_wait(&amp;rw-&gt;writelock);
+    Sem_post(&amp;rw-&gt;lock);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">rwlock_release_readlock</span><span class="hljs-params">(rwlock_t *rw)</span> </span>{
+    Sem_wait(&amp;rw-&gt;lock);
+    rw-&gt;readers--;
+    <span class="hljs-keyword">if</span> (rw-&gt;readers == <span class="hljs-number">0</span>)
+        Sem_post(&amp;rw-&gt;writelock);
+    Sem_post(&amp;rw-&gt;lock);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">rwlock_acquire_writelock</span><span class="hljs-params">(rwlock_t *rw)</span> </span>{
+    Sem_wait(&amp;rw-&gt;readlock);    <span class="hljs-comment">//NEW LINE</span>
+    Sem_wait(&amp;rw-&gt;writelock);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">rwlock_release_writelock</span><span class="hljs-params">(rwlock_t *rw)</span> </span>{
+    Sem_post(&amp;rw-&gt;readlock);    <span class="hljs-comment">//NEW LINE</span>
+    Sem_post(&amp;rw-&gt;writelock);
+}
+</code></pre>
+<h3 id="no-starve-mutex">no-starve mutex</h3>
+<p>&#x8981;&#x4F7F;&#x4E00;&#x4E2A;&#x5E76;&#x53D1;&#x7CFB;&#x7EDF;&#x514D;&#x53D7;&#x9965;&#x997F;&#xFF0C;&#x9700;&#x5177;&#x6709;&#x5982;&#x4E0B;&#x6027;&#x8D28;&#xFF1A;</p>
+<ul>
+<li><strong>Property1&#xFF1A;</strong>&#x5982;&#x679C;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x51C6;&#x5907;&#x8FD0;&#x884C;&#xFF0C;&#x90A3;&#x4E48;&#x8C03;&#x5EA6;&#x8005;&#x5E94;&#x8BA9;&#x5176;&#x8FD0;&#x884C;&#x3002;</li>
+<li><strong>Property2&#xFF1A;</strong>&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x51C6;&#x5907;&#x8FD0;&#x884C;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x7B49;&#x5F85;&#x8FD0;&#x884C;&#x7684;&#x65F6;&#x95F4;&#x662F;&#x6709;&#x754C;&#x7684;&#x3002;</li>
+<li><strong>Property3&#xFF1A;</strong>&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x4FE1;&#x53F7;&#x91CF;&#x6267;&#x884C;signal&#x65F6;&#x6709;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#xFF0C;&#x90A3;&#x4E48;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;&#x7B49;&#x5F85;&#x7684;&#x7EBF;&#x7A0B;&#x5E94;&#x8BE5;&#x88AB;&#x5524;&#x9192;&#x3002;</li>
+<li><strong>Property4&#xFF1A;</strong>&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x4E00;&#x4E2A;&#x4FE1;&#x53F7;&#x91CF;&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x88AB;&#x5524;&#x9192;&#x7684;&#x7EBF;&#x7A0B;&#x6570;&#x91CF;&#x662F;&#x6709;&#x754C;&#x7684;&#x3002;</li>
+</ul>
+<p>&#x6EE1;&#x8DB3;&#x6027;&#x8D28;4&#x7684;&#x4FE1;&#x53F7;&#x91CF;&#x53EB;&#x505A;<strong>strong semaphore</strong>&#xFF0C;&#x800C;&#x53EA;&#x6EE1;&#x8DB3;&#x6027;&#x8D28;3&#x7684;&#x53EB;&#x505A;<strong>weak semaphore</strong></p>
+<p>no-starve-mutex&#x57FA;&#x4E8E;weak semaphore&#x3002;&#x6734;&#x7D20;&#x7684;mutex&#x5BFC;&#x81F4;&#x9965;&#x997F;&#x7684;&#x539F;&#x56E0;&#x662F;&#x51FA;&#x73B0;&#x4E86;&#x5355;&#x7EBF;&#x7A0B;&#x7684;loop&#xFF08;&#x5373;&#x5728;&#x6709;&#x9650;&#x4E2A;&#x7EBF;&#x7A0B;&#x6761;&#x4EF6;&#x4E0B;&#xFF0C;&#x4E00;&#x4E2A;&#x5DF2;&#x7ECF;release lock&#x7684;&#x7EBF;&#x7A0B;&#x53C8;&#x83B7;&#x5F97;&#x4E86;lock&#xFF0C;&#x53D6;&#x4EE3;&#x4E86;&#x67D0;&#x4E2A;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x7684;&#x7EBF;&#x7A0B;&#x7684;&#x4F4D;&#x7F6E;&#xFF09;&#x3002;</p>
+<p>&#x7531;Morris&#x63D0;&#x51FA;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x662F;&#x8BBE;&#x7F6E;&#x4E24;&#x4E2A;turnstile <code>t1</code>&#x548C;<code>t2</code>&#xFF0C;&#x5C06;&#x4EE3;&#x7801;&#x5206;&#x5272;&#x6210;&#x4E09;&#x4E2A;&#x7B49;&#x5F85;&#x533A;&#xFF1A;room1, room2, room3(critical section)</p>
+<ul>
+<li>&#x9636;&#x6BB5;&#x4E00;&#xFF1A;&#x6253;&#x5F00;t1&#xFF0C;&#x8BA9;room1&#x4E2D;&#x7B49;&#x5F85;&#x7684;&#x7EBF;&#x7A0B;&#x8FDB;&#x5165;room2&#xFF1B;&#x6B64;&#x65F6;t2&#x5173;&#x95ED;&#xFF0C;&#x5835;&#x4F4F;&#x5C06;&#x8981;&#x8FDB;&#x5165;room3&#x7684;&#x7EBF;&#x7A0B;&#xFF1B;&#x5F53;room1&#x4E2D;&#x7EBF;&#x7A0B;&#x4E3A;0&#xFF0C;&#x5173;&#x95ED;t1&#xFF0C;&#x6B64;&#x65F6;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x5728;room2&#x7B49;&#x5F85;&#x3002;</li>
+<li>&#x9636;&#x6BB5;&#x4E8C;&#xFF1A;&#x6253;&#x5F00;t2&#xFF0C;&#x8BA9;room2&#x4E2D;&#x7B49;&#x5F85;&#x7684;&#x7EBF;&#x7A0B;&#x8FDB;&#x5165;room3&#xFF08;critical section&#xFF09;&#xFF1B;&#x6B64;&#x65F6;t1&#x5173;&#x95ED;&#xFF0C;&#x5835;&#x4F4F;&#x60F3;&#x8981;&#x56DE;&#x5230;room2&#x7684;&#x7EBF;&#x7A0B;&#xFF1B;&#x5F53;room2&#x4E2D;&#x7EBF;&#x7A0B;&#x6570;&#x4E3A;0&#xFF0C;&#x6253;&#x5F00;t1&#xFF0C;&#x5141;&#x8BB8;room3&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x56DE;&#x5230;room2&#x3002;</li>
+</ul>
+<pre><code class="lang-c"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-keyword">__ns_mutex_t</span> {
+    <span class="hljs-keyword">int</span> room1;    
+    <span class="hljs-keyword">int</span> room2;
+    <span class="hljs-keyword">sem_t</span> mutex;
+    <span class="hljs-keyword">sem_t</span> t1;
+    <span class="hljs-keyword">sem_t</span> t2;
+} <span class="hljs-keyword">ns_mutex_t</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ns_mutex_init</span><span class="hljs-params">(ns_mutex_t *m)</span> </span>{
+    m-&gt;room1 = <span class="hljs-number">0</span>;
+    m-&gt;room2 = <span class="hljs-number">0</span>;
+    Sem_init(&amp;m-&gt;mutex, <span class="hljs-number">1</span>);
+    Sem_init(&amp;m-&gt;t1, <span class="hljs-number">1</span>);
+    Sem_init(&amp;m-&gt;t2, <span class="hljs-number">0</span>);    
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ns_mutex_acquire</span><span class="hljs-params">(ns_mutex_t *m)</span> </span>{
+    Sem_wait(&amp;m-&gt;mutex);
+    m-&gt;room1++;
+    Sem_post(&amp;m-&gt;mutex);
+
+    Sem_wait(&amp;m-&gt;t1);
+    m-&gt;room2++;
+    Sem_wait(&amp;m-&gt;mutex);
+    m-&gt;room1--;
+
+    <span class="hljs-keyword">if</span> (m-&gt;room1 == <span class="hljs-number">0</span>) {
+        Sem_post(&amp;m-&gt;mutex);
+        Sem_post(&amp;m-&gt;t2);
+    } <span class="hljs-keyword">else</span> {
+        Sem_post(&amp;m-&gt;mutex);
+        Sem_post(&amp;m-&gt;t1);
+    }
+    Sem_wait(&amp;m-&gt;t2);
+    m-&gt;room2--;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ns_mutex_release</span><span class="hljs-params">(ns_mutex_t *m)</span> </span>{
+    <span class="hljs-keyword">if</span> (m-&gt;room2 == <span class="hljs-number">0</span>)
+        Sem_post(&amp;m-&gt;t1);
+    <span class="hljs-keyword">else</span>
+        Sem_post(&amp;m-&gt;t2);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> *<span class="hljs-title">worker</span><span class="hljs-params">(<span class="hljs-keyword">void</span> *arg)</span> </span>{
+    ns_mutex_acquire(&amp;m);
+    <span class="hljs-comment">//critical section</span>
+    ns_mutex_release(&amp;m);
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+}
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="30.-condition-variables.html" class="navigation navigation-prev " aria-label="Previous page: 30. Condition Variables">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="32.common-concurrency-problems.html" class="navigation navigation-next " aria-label="Next page: 32.Common Concurrency Problems">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"31. Semaphores","level":"2.2.6","depth":2,"next":{"title":"32.Common Concurrency Problems","level":"2.2.7","depth":2,"path":"ostep/concurrency/32.common-concurrency-problems.md","ref":"ostep/concurrency/32.common-concurrency-problems.md","articles":[]},"previous":{"title":"30. Condition Variables","level":"2.2.5","depth":2,"path":"ostep/concurrency/30.-condition-variables.md","ref":"ostep/concurrency/30.-condition-variables.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ostep/concurrency/31.-semaphores.md","mtime":"2022-03-30T14:11:57.193Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-03-30T14:33:14.910Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

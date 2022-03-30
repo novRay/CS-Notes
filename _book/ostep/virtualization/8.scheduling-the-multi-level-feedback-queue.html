@@ -1,0 +1,724 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>8.Scheduling: The Multi-Level Feedback Queue · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="9.scheduling-proportional-share.html" />
+    
+    
+    <link rel="prev" href="7.scheduling-introduction.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    CS Notes
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">OSTEP</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Virtualization
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="6.mechanism-limited-direct-execution.html">
+            
+                <a href="6.mechanism-limited-direct-execution.html">
+            
+                    
+                    6.Mechanism: Limited Direct Execution
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="7.scheduling-introduction.html">
+            
+                <a href="7.scheduling-introduction.html">
+            
+                    
+                    7.Scheduling: Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.1.3" data-path="8.scheduling-the-multi-level-feedback-queue.html">
+            
+                <a href="8.scheduling-the-multi-level-feedback-queue.html">
+            
+                    
+                    8.Scheduling: The Multi-Level Feedback Queue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.4" data-path="9.scheduling-proportional-share.html">
+            
+                <a href="9.scheduling-proportional-share.html">
+            
+                    
+                    9.Scheduling: Proportional Share
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.5" data-path="10.-multiprocessor-scheduling.html">
+            
+                <a href="10.-multiprocessor-scheduling.html">
+            
+                    
+                    10. Multiprocessor Scheduling
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.6" data-path="13.the-abstraction-address-spaces.html">
+            
+                <a href="13.the-abstraction-address-spaces.html">
+            
+                    
+                    13.The Abstraction: Address Spaces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.7" data-path="14.interlude-memory-api.html">
+            
+                <a href="14.interlude-memory-api.html">
+            
+                    
+                    14.Interlude: Memory API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.8" data-path="15.mechanism-address-translation.html">
+            
+                <a href="15.mechanism-address-translation.html">
+            
+                    
+                    15.Mechanism: Address Translation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.9" data-path="16.-segmentation.html">
+            
+                <a href="16.-segmentation.html">
+            
+                    
+                    16. Segmentation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.10" data-path="17.-free-space-management.html">
+            
+                <a href="17.-free-space-management.html">
+            
+                    
+                    17. Free-Space Management
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.11" data-path="18.-paging-introduction.html">
+            
+                <a href="18.-paging-introduction.html">
+            
+                    
+                    18. Paging: Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.12" data-path="19.-paging-faster-translations-tlbs.html">
+            
+                <a href="19.-paging-faster-translations-tlbs.html">
+            
+                    
+                    19. Paging: Faster Translations (TLBs)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.13" data-path="20.-paging-smaller-tables.html">
+            
+                <a href="20.-paging-smaller-tables.html">
+            
+                    
+                    20. Paging: Smaller Tables
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.14" data-path="21.-beyond-physical-memory-mechanisms.html">
+            
+                <a href="21.-beyond-physical-memory-mechanisms.html">
+            
+                    
+                    21. Beyond Physical Memory: Mechanisms
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.15" data-path="22.beyond-physical-memory-policies.html">
+            
+                <a href="22.beyond-physical-memory-policies.html">
+            
+                    
+                    22.Beyond Physical Memory: Policies
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.16" data-path="23.-complete-virtual-memory-systems.html">
+            
+                <a href="23.-complete-virtual-memory-systems.html">
+            
+                    
+                    23. Complete Virtual Memory Systems
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../concurrency/">
+            
+                <a href="../concurrency/">
+            
+                    
+                    Concurrency
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="../concurrency/26.-concurrency-an-introduction.html">
+            
+                <a href="../concurrency/26.-concurrency-an-introduction.html">
+            
+                    
+                    26. Concurrency: An Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.2" data-path="../concurrency/27.-interlude-thread-api.html">
+            
+                <a href="../concurrency/27.-interlude-thread-api.html">
+            
+                    
+                    27. Interlude: Thread API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.3" data-path="../concurrency/28.-locks.html">
+            
+                <a href="../concurrency/28.-locks.html">
+            
+                    
+                    28. Locks
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.4" data-path="../concurrency/29.-lock-based-concurrent-data-structures.html">
+            
+                <a href="../concurrency/29.-lock-based-concurrent-data-structures.html">
+            
+                    
+                    29. Lock-based Concurrent Data Structures
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.5" data-path="../concurrency/30.-condition-variables.html">
+            
+                <a href="../concurrency/30.-condition-variables.html">
+            
+                    
+                    30. Condition Variables
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.6" data-path="../concurrency/31.-semaphores.html">
+            
+                <a href="../concurrency/31.-semaphores.html">
+            
+                    
+                    31. Semaphores
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.7" data-path="../concurrency/32.common-concurrency-problems.html">
+            
+                <a href="../concurrency/32.common-concurrency-problems.html">
+            
+                    
+                    32.Common Concurrency Problems
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.8" data-path="../concurrency/33.-event-based-concurrency.html">
+            
+                <a href="../concurrency/33.-event-based-concurrency.html">
+            
+                    
+                    33. Event-based Concurrency
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../persistence.md">
+            
+                <span>
+            
+                    
+                    Persistence
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.3.1" data-path="../persistence/36. IO Devices.html">
+            
+                <a href="../persistence/36. IO Devices.html">
+            
+                    
+                    36. IO Devices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.2" data-path="../persistence/39.Interlude Files and Directories.html">
+            
+                <a href="../persistence/39.Interlude Files and Directories.html">
+            
+                    
+                    39.Interlude Files and Directories
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.3" data-path="../persistence/40.File System Implementation.html">
+            
+                <a href="../persistence/40.File System Implementation.html">
+            
+                    
+                    40.File System Implementation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.4" data-path="../persistence/41.Locality and The Fast File System.html">
+            
+                <a href="../persistence/41.Locality and The Fast File System.html">
+            
+                    
+                    41.Locality and The Fast File System
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.5" data-path="../persistence/42.Crash Consistency FSCK and Journaling.html">
+            
+                <a href="../persistence/42.Crash Consistency FSCK and Journaling.html">
+            
+                    
+                    42.Crash Consistency FSCK and Journaling
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.6" data-path="../persistence/43.Log-structured File Systems.html">
+            
+                <a href="../persistence/43.Log-structured File Systems.html">
+            
+                    
+                    43.Log-structured File Systems
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >8.Scheduling: The Multi-Level Feedback Queue</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="8scheduling-the-multi-level-feedback-queue">8.Scheduling: The Multi-Level Feedback Queue</h1>
+<p>&#x4E0A;&#x4E00;&#x7AE0;&#x4E2D;&#x7684;&#x7B97;&#x6CD5;&#x591A;&#x5C11;&#x5B58;&#x5728;&#x5404;&#x79CD;&#x7F3A;&#x9677;&#x3002;&#x5982;&#x4F55;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x95F4;&#x672A;&#x77E5;&#x7684;&#x6761;&#x4EF6;&#x4E0B;&#xFF0C;&#x65E2;&#x5B9E;&#x73B0;&#x4F4E;&#x54CD;&#x5E94;&#x65F6;&#x95F4;&#xFF0C;&#x53C8;&#x5B9E;&#x73B0;&#x4F4E;&#x5468;&#x8F6C;&#x65F6;&#x95F4;&#x5462;&#xFF1F;&#x672C;&#x7AE0;&#x4ECB;&#x7ECD;&#x4E86;<strong>&#x591A;&#x7EA7;&#x53CD;&#x9988;&#x961F;&#x5217;&#xFF08; Multi-level Feed-back Queue (MLFQ)&#xFF09;</strong>&#xFF0C;&#x4E00;&#x79CD;&#x57FA;&#x4E8E;<strong>&#x4F18;&#x5148;&#x7EA7;&#xFF08;priority&#xFF09;</strong>&#x673A;&#x5236;&#xFF0C;&#x80FD;&#x591F;&#x901A;&#x8FC7;&#x4EFB;&#x52A1;&#x8FC7;&#x53BB;&#x7684;&#x6765;&#x9884;&#x6D4B;&#x5C06;&#x6765;&#x7684;&#x884C;&#x4E3A;&#x7684;&#x7B97;&#x6CD5;&#x3002;</p>
+<h2 id="81-mlfq-basic-rules">8.1 MLFQ: Basic Rules</h2>
+<p>&#x5B83;&#x7684;&#x57FA;&#x672C;&#x8C03;&#x5EA6;&#x89C4;&#x5219;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ul>
+<li>Rule 1: &#x5982;&#x679C; $$Priority(A) &gt; Priority(B)$$&#xFF0C;A run&#x3002;</li>
+<li>Rule 2: &#x5982;&#x679C; $$Priority(A) = Priority(B)$$&#xFF0C;AB&#x8F6E;&#x8F6C;&#xFF08;RR&#xFF09;</li>
+</ul>
+<h2 id="82-attempt-1-how-to-change-priority">8.2 Attempt #1: How To Change Priority</h2>
+<p>&#x66F4;&#x6539;&#x4F18;&#x5148;&#x7EA7;&#x89C4;&#x5219;&#xFF1A;</p>
+<ul>
+<li>Rule 3: &#x5F53;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x8FDB;&#x5165;&#x7CFB;&#x7EDF;&#xFF0C;&#x5B83;&#x88AB;&#x7F6E;&#x4E3A;&#x6700;&#x9AD8;&#x4F18;&#x5148;&#x7EA7;&#xFF08;&#x961F;&#x9996;&#xFF09;</li>
+<li>Rule 4a: &#x5982;&#x679C;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x8FD0;&#x884C;&#x65F6;&#x7528;&#x5B8C;&#x4E86;&#x6574;&#x4E2A;&#x65F6;&#x95F4;&#x5207;&#x7247;&#xFF0C;&#x964D;&#x4F4E;&#x5176;&#x4F18;&#x5148;&#x7EA7;</li>
+<li>Rule 4b: &#x5982;&#x679C;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x5728;&#x5176;&#x65F6;&#x95F4;&#x5207;&#x7247;&#x7528;&#x5C3D;&#x524D;&#x653E;&#x5F03;&#x4E86;CPU&#x63A7;&#x5236;&#x6743;&#xFF0C;&#x5B83;&#x4FDD;&#x6301;&#x539F;&#x6765;&#x7684;&#x4F18;&#x5148;&#x7EA7;</li>
+</ul>
+<p>&#x5B83;&#x4EEC;&#x7684;&#x9053;&#x7406;&#x662F;&#xFF1A;&#x5F53;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x4EFB;&#x52A1;&#x8FDB;&#x6765;&#xFF0C;CPU&#x4E0D;&#x77E5;&#x5B83;&#x7684;&#x8FD0;&#x884C;&#x65F6;&#x95F4;&#xFF0C;&#x56E0;&#x6B64;&#x5148;&#x5047;&#x8BBE;&#x5B83;&#x662F;&#x4E2A;&#x5F88;&#x77ED;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x7ED9;&#x5B83;&#x6700;&#x9AD8;&#x4F18;&#x5148;&#x7EA7;&#x3002;&#x5982;&#x679C;&#x5141;&#x8BB8;&#x5B8C;&#x4E00;&#x4E2A;&#x65F6;&#x95F4;&#x5207;&#x7247;&#xFF0C;&#x518D;&#x964D;&#x4F4E;&#x5176;&#x4F18;&#x5148;&#x7EA7;&#x3002;&#x4F46;&#x5982;&#x679C;&#x662F;&#x4E00;&#x4E2A;&#x4EA4;&#x4E92;&#x5F0F;&#x4EFB;&#x52A1;&#xFF08;&#x6BD4;&#x5982;&#x9700;&#x8981;&#x7B49;&#x5F85;&#x7528;&#x6237;&#x4ECE;&#x952E;&#x76D8;&#x9F20;&#x6807;&#x8F93;&#x5165;&#xFF09;&#xFF0C;&#x5B83;&#x4F1A;&#x5728;&#x65F6;&#x95F4;&#x5207;&#x7247;&#x7528;&#x5B8C;&#x524D;&#x5C31;&#x201C;&#x653E;&#x5F00;&#x201D;CPU&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x8BE5;&#x60E9;&#x7F5A;&#x5B83;&#x3002;</p>
+<p>&#x4F46;&#x8FD9;&#x5E76;&#x4E0D;&#x5B8C;&#x7F8E;&#x3002; &#x9996;&#x5148;&#xFF0C;&#x8FC7;&#x591A;&#x7684;&#x4EA4;&#x4E92;&#x5F0F;&#x4EFB;&#x52A1;&#x7EC4;&#x5408;&#x8D77;&#x6765;&#x4F1A;&#x6D88;&#x8017;&#x6574;&#x4E2A;CPU&#x65F6;&#x95F4;&#xFF0C;&#x4F7F;&#x5F97;&#x4E00;&#x4E9B;&#x957F;&#x4EFB;&#x52A1;&#x6C38;&#x8FDC;&#x5F97;&#x4E0D;&#x5230;&#x6267;&#x884C;&#xFF0C;&#x79F0;&#x4E4B;&#x4E3A;<strong>&#x4EFB;&#x52A1;&#x9965;&#x997F;</strong>&#xFF1B; &#x5176;&#x6B21;&#xFF0C;&#x8BD5;&#x60F3;&#x4E00;&#x4E2A;&#x957F;&#x65F6;&#x95F4;I/O&#x64CD;&#x4F5C;&#x6BCF;&#x6B21;&#x90FD;&#x5728;&#x65F6;&#x95F4;&#x5207;&#x7247;&#x6700;&#x540E;1%&#x624D;&#x201C;&#x653E;&#x5F00;&#x201D;CPU&#xFF0C;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#x8FD1;&#x4E4E;&#x4E8E;&#x5784;&#x65AD;&#x4E86;CPU&#xFF0C;&#x8FD9;&#x5C06;&#x5BFC;&#x81F4;&#x4E25;&#x91CD;&#x7684;&#x5B89;&#x5168;&#x95EE;&#x9898;&#x3002;</p>
+<h2 id="83-attempt-2-the-priority-boost">8.3 Attempt #2: The Priority Boost</h2>
+<p>&#x4E3A;&#x4E86;&#x89E3;&#x51B3;&#x4E0A;&#x9762;&#x63D0;&#x5230;&#x7684;&#x7F3A;&#x9677;&#xFF0C;&#x63D0;&#x51FA;&#x7B2C;&#x4E94;&#x6761;&#x89C4;&#x5219;&#xFF1A;</p>
+<ul>
+<li>Rule 5: &#x6BCF;&#x8FC7;$$S$$&#x65F6;&#x95F4;&#xFF0C;&#x5C06;&#x6240;&#x6709;&#x7CFB;&#x7EDF;&#x4E2D;&#x7684;&#x4EFB;&#x52A1;&#x63D0;&#x9AD8;&#x5230;&#x6700;&#x9AD8;&#x7EA7;</li>
+</ul>
+<p><img src="../../.gitbook/assets/image 20211207221139593" alt=""></p>
+<p>&#x8FD9;&#x6761;&#x89C4;&#x5219;&#x89E3;&#x51B3;&#x4E86;&#x4EFB;&#x52A1;&#x9965;&#x997F;&#x95EE;&#x9898;&#xFF0C;&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;&#x5408;&#x9002;&#x7684;$$S$$&#xFF0C;&#x8BA9;&#x957F;&#x4EFB;&#x52A1;&#x548C;&#x4EA4;&#x4E92;&#x4EFB;&#x52A1;&#x90FD;&#x5F97;&#x5230;&#x4E86;&#x66F4;&#x597D;&#x7684;CPU&#x5206;&#x914D;&#x3002;</p>
+<h2 id="84-attempt-3-better-accounting">8.4 Attempt #3: Better Accounting</h2>
+<p>&#x4E0B;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#x662F;&#xFF1A;&#x5982;&#x4F55;&#x9632;&#x6B62;&#x8C03;&#x5EA6;&#x5668;&#x88AB;&#x73A9;&#x5F04;&#xFF1F;&#x7F6A;&#x9B41;&#x7978;&#x9996;&#x5176;&#x5B9E;&#x662F;&#x89C4;&#x5219;4a&#x548C;4b&#xFF0C;&#x5B83;&#x4EEC;&#x5141;&#x8BB8;&#x4E86;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x5360;&#x636E;&#x7740;&#x9AD8;&#x4F18;&#x5148;&#x7EA7;&#x3002;&#x56E0;&#x6B64;&#x9700;&#x8981;&#x91CD;&#x5199;&#x89C4;&#x5219;4&#xFF1A;</p>
+<ul>
+<li>Rule 4: &#x4E00;&#x65E6;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x7528;&#x5B8C;&#x4E86;&#x5B83;&#x5728;&#x8BE5;&#x5C42;&#x88AB;&#x5206;&#x914D;&#x7684;&#x65F6;&#x95F4;&#xFF08;&#x4E0D;&#x7BA1;&#x5B83;&#x653E;&#x5F00;CPU&#x4E86;&#x591A;&#x5C11;&#x6B21;&#xFF09;&#xFF0C;&#x5B83;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x90FD;&#x88AB;&#x964D;&#x4F4E;&#x4E00;&#x4E2A;&#x7B49;&#x7EA7;</li>
+</ul>
+<p><img src="../../.gitbook/assets/image 20211207215329321" alt=""></p>
+<p>&#x5176;&#x8574;&#x542B;&#x7684;&#x601D;&#x60F3;&#x662F;&#xFF1A;&#x4E0D;&#x8BE5;&#x5FD8;&#x8BB0;&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#x5728;&#x4E00;&#x4E2A;level&#x4E0A;&#x7528;&#x4E86;&#x591A;&#x5C11;&#x65F6;&#x95F4;&#x5207;&#x7247;</p>
+<h2 id="85-tuning-mlfq-and-other-issues">8.5 Tuning MLFQ And Other Issues</h2>
+<p>MLFQ&#x6709;&#x4E00;&#x4E9B;&#x53C2;&#x6570;&#x9700;&#x8981;&#x8C03;&#x8282;&#xFF0C;&#x6BD4;&#x5982;&#x5E94;&#x8BE5;&#x8BBE;&#x7F6E;&#x591A;&#x5C11;&#x4E2A;&#x961F;&#x5217;&#xFF1F;&#x6BCF;&#x4E2A;&#x961F;&#x5217;&#x7684;&#x65F6;&#x95F4;&#x5207;&#x7247;&#x5E94;&#x8BE5;&#x591A;&#x5927;&#xFF1F;&#x4F18;&#x5148;&#x7EA7;&#x63D0;&#x9AD8;&#x7684;&#x9891;&#x7387;&#x5E94;&#x8BE5;&#x591A;&#x5C11;&#xFF1F;&#x8FD9;&#x4E9B;&#x95EE;&#x9898;&#x901A;&#x5E38;&#x6CA1;&#x6709;&#x7B80;&#x5355;&#x7684;&#x7B54;&#x6848;&#xFF0C;&#x4E0D;&#x8FC7;&#x4E00;&#x4E2A;&#x5E38;&#x89C1;&#x60F3;&#x6CD5;&#x662F;&#xFF1A;&#x8D8A;&#x4F4E;&#x7684;level&#xFF0C;&#x8D8A;&#x9AD8;&#x7684;&#x65F6;&#x95F4;&#x5207;&#x7247;&#x914D;&#x989D;&#x3002;</p>
+<p><img src="../../.gitbook/assets/image 20211207220146276" alt=""></p>
+<h2 id="86-mlfq-summary">8.6 MLFQ: Summary</h2>
+<p>MLFQ&#x5BF9;&#x4E8E;&#x4EFB;&#x52A1;&#x6BCF;&#x8FC7;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x7684;&#x8868;&#x73B0;&#x505A;&#x51FA;&#x54CD;&#x5E94;&#x5408;&#x9002;&#x7684;&#x8C03;&#x6574;&#x3002;&#x5BF9;&#x4E8E;&#x77ED;&#x4EA4;&#x4E92;&#x5F0F;&#x4EFB;&#x52A1;&#x6709;&#x51FA;&#x8272;&#x7684;&#x6574;&#x4F53;&#x6027;&#x80FD;&#xFF08;&#x7C7B;&#x4F3C;SJF/STCF&#xFF09;&#xFF0C;&#x5BF9;&#x4E8E;CPU&#x5BC6;&#x96C6;&#x7684;&#x957F;&#x4EFB;&#x52A1;&#x63D0;&#x4F9B;&#x516C;&#x5E73;&#x6027;&#xFF0C;&#x4FDD;&#x8BC1;&#x5176;&#x5F97;&#x5230;&#x63A8;&#x8FDB;&#x3002;</p>
+<p><img src="../../.gitbook/assets/image 20211207221913721" alt=""></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="7.scheduling-introduction.html" class="navigation navigation-prev " aria-label="Previous page: 7.Scheduling: Introduction">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="9.scheduling-proportional-share.html" class="navigation navigation-next " aria-label="Next page: 9.Scheduling: Proportional Share">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"8.Scheduling: The Multi-Level Feedback Queue","level":"2.1.3","depth":2,"next":{"title":"9.Scheduling: Proportional Share","level":"2.1.4","depth":2,"path":"ostep/virtualization/9.scheduling-proportional-share.md","ref":"ostep/virtualization/9.scheduling-proportional-share.md","articles":[]},"previous":{"title":"7.Scheduling: Introduction","level":"2.1.2","depth":2,"path":"ostep/virtualization/7.scheduling-introduction.md","ref":"ostep/virtualization/7.scheduling-introduction.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ostep/virtualization/8.scheduling-the-multi-level-feedback-queue.md","mtime":"2022-03-30T14:11:57.197Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-03-30T14:33:14.910Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

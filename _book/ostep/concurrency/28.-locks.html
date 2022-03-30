@@ -1,0 +1,886 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>28. Locks · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="29.-lock-based-concurrent-data-structures.html" />
+    
+    
+    <link rel="prev" href="27.-interlude-thread-api.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    CS Notes
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">OSTEP</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../virtualization/">
+            
+                <a href="../virtualization/">
+            
+                    
+                    Virtualization
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="../virtualization/6.mechanism-limited-direct-execution.html">
+            
+                <a href="../virtualization/6.mechanism-limited-direct-execution.html">
+            
+                    
+                    6.Mechanism: Limited Direct Execution
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="../virtualization/7.scheduling-introduction.html">
+            
+                <a href="../virtualization/7.scheduling-introduction.html">
+            
+                    
+                    7.Scheduling: Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.3" data-path="../virtualization/8.scheduling-the-multi-level-feedback-queue.html">
+            
+                <a href="../virtualization/8.scheduling-the-multi-level-feedback-queue.html">
+            
+                    
+                    8.Scheduling: The Multi-Level Feedback Queue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.4" data-path="../virtualization/9.scheduling-proportional-share.html">
+            
+                <a href="../virtualization/9.scheduling-proportional-share.html">
+            
+                    
+                    9.Scheduling: Proportional Share
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.5" data-path="../virtualization/10.-multiprocessor-scheduling.html">
+            
+                <a href="../virtualization/10.-multiprocessor-scheduling.html">
+            
+                    
+                    10. Multiprocessor Scheduling
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.6" data-path="../virtualization/13.the-abstraction-address-spaces.html">
+            
+                <a href="../virtualization/13.the-abstraction-address-spaces.html">
+            
+                    
+                    13.The Abstraction: Address Spaces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.7" data-path="../virtualization/14.interlude-memory-api.html">
+            
+                <a href="../virtualization/14.interlude-memory-api.html">
+            
+                    
+                    14.Interlude: Memory API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.8" data-path="../virtualization/15.mechanism-address-translation.html">
+            
+                <a href="../virtualization/15.mechanism-address-translation.html">
+            
+                    
+                    15.Mechanism: Address Translation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.9" data-path="../virtualization/16.-segmentation.html">
+            
+                <a href="../virtualization/16.-segmentation.html">
+            
+                    
+                    16. Segmentation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.10" data-path="../virtualization/17.-free-space-management.html">
+            
+                <a href="../virtualization/17.-free-space-management.html">
+            
+                    
+                    17. Free-Space Management
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.11" data-path="../virtualization/18.-paging-introduction.html">
+            
+                <a href="../virtualization/18.-paging-introduction.html">
+            
+                    
+                    18. Paging: Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.12" data-path="../virtualization/19.-paging-faster-translations-tlbs.html">
+            
+                <a href="../virtualization/19.-paging-faster-translations-tlbs.html">
+            
+                    
+                    19. Paging: Faster Translations (TLBs)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.13" data-path="../virtualization/20.-paging-smaller-tables.html">
+            
+                <a href="../virtualization/20.-paging-smaller-tables.html">
+            
+                    
+                    20. Paging: Smaller Tables
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.14" data-path="../virtualization/21.-beyond-physical-memory-mechanisms.html">
+            
+                <a href="../virtualization/21.-beyond-physical-memory-mechanisms.html">
+            
+                    
+                    21. Beyond Physical Memory: Mechanisms
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.15" data-path="../virtualization/22.beyond-physical-memory-policies.html">
+            
+                <a href="../virtualization/22.beyond-physical-memory-policies.html">
+            
+                    
+                    22.Beyond Physical Memory: Policies
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.16" data-path="../virtualization/23.-complete-virtual-memory-systems.html">
+            
+                <a href="../virtualization/23.-complete-virtual-memory-systems.html">
+            
+                    
+                    23. Complete Virtual Memory Systems
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Concurrency
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="26.-concurrency-an-introduction.html">
+            
+                <a href="26.-concurrency-an-introduction.html">
+            
+                    
+                    26. Concurrency: An Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.2" data-path="27.-interlude-thread-api.html">
+            
+                <a href="27.-interlude-thread-api.html">
+            
+                    
+                    27. Interlude: Thread API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.2.3" data-path="28.-locks.html">
+            
+                <a href="28.-locks.html">
+            
+                    
+                    28. Locks
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.4" data-path="29.-lock-based-concurrent-data-structures.html">
+            
+                <a href="29.-lock-based-concurrent-data-structures.html">
+            
+                    
+                    29. Lock-based Concurrent Data Structures
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.5" data-path="30.-condition-variables.html">
+            
+                <a href="30.-condition-variables.html">
+            
+                    
+                    30. Condition Variables
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.6" data-path="31.-semaphores.html">
+            
+                <a href="31.-semaphores.html">
+            
+                    
+                    31. Semaphores
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.7" data-path="32.common-concurrency-problems.html">
+            
+                <a href="32.common-concurrency-problems.html">
+            
+                    
+                    32.Common Concurrency Problems
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.8" data-path="33.-event-based-concurrency.html">
+            
+                <a href="33.-event-based-concurrency.html">
+            
+                    
+                    33. Event-based Concurrency
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../persistence.md">
+            
+                <span>
+            
+                    
+                    Persistence
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.3.1" data-path="../persistence/36. IO Devices.html">
+            
+                <a href="../persistence/36. IO Devices.html">
+            
+                    
+                    36. IO Devices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.2" data-path="../persistence/39.Interlude Files and Directories.html">
+            
+                <a href="../persistence/39.Interlude Files and Directories.html">
+            
+                    
+                    39.Interlude Files and Directories
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.3" data-path="../persistence/40.File System Implementation.html">
+            
+                <a href="../persistence/40.File System Implementation.html">
+            
+                    
+                    40.File System Implementation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.4" data-path="../persistence/41.Locality and The Fast File System.html">
+            
+                <a href="../persistence/41.Locality and The Fast File System.html">
+            
+                    
+                    41.Locality and The Fast File System
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.5" data-path="../persistence/42.Crash Consistency FSCK and Journaling.html">
+            
+                <a href="../persistence/42.Crash Consistency FSCK and Journaling.html">
+            
+                    
+                    42.Crash Consistency FSCK and Journaling
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.6" data-path="../persistence/43.Log-structured File Systems.html">
+            
+                <a href="../persistence/43.Log-structured File Systems.html">
+            
+                    
+                    43.Log-structured File Systems
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >28. Locks</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="28-locks">28. Locks</h1>
+<h2 id="281-locks-the-basic-idea">28.1 Locks: The Basic Idea</h2>
+<p>&#x9501;&#x6709;&#x4E24;&#x79CD;&#x72B6;&#x6001;&#xFF1A;<strong>available&#xFF08;unlocked&#xFF0C;free&#xFF09;&#x548C;acquired&#xFF08;locked&#xFF0C;held&#xFF09;</strong>&#x3002;</p>
+<p>&#x5F53;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;A&#x8C03;&#x7528;lock()&#x5C1D;&#x8BD5;&#x83B7;&#x5F97;&#x9501;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x9501;&#xFF0C;&#x90A3;&#x4E48;A&#x7EBF;&#x7A0B;&#x5C31;&#x4F1A;&#x83B7;&#x5F97;&#x9501;&#x5E76;&#x8FDB;&#x5165;critical section&#xFF0C;&#x79F0;&#x4E3A;<strong>owner</strong>&#x3002;&#x5982;&#x679C;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;B&#x8C03;&#x7528;&#x4E86;lock()&#x4F01;&#x56FE;&#x83B7;&#x5F97;&#x540C;&#x4E00;&#x4E2A;&#x9501;&#x53D8;&#x91CF;&#xFF0C;&#x5219;B&#x7EBF;&#x7A0B;&#x4E0D;&#x80FD;&#x8FDB;&#x5165;critical section&#xFF0C;&#x7B49;&#x5F85;A&#x7EBF;&#x7A0B;unlock&#x3002;</p>
+<p>&#x7EBF;&#x7A0B;&#x662F;&#x4E00;&#x79CD;&#x7531;&#x7A0B;&#x5E8F;&#x5458;&#x521B;&#x5EFA;&#x3001;&#x7531;OS&#x8C03;&#x5EA6;&#x7684;&#x5B9E;&#x4F53;&#xFF0C;&#x5C06;&#x4E00;&#x90E8;&#x5206;&#x63A7;&#x5236;&#x6743;&#x4EA4;&#x7ED9;&#x4E86;&#x7A0B;&#x5E8F;&#x5458;&#xFF0C;&#x6765;&#x4FDD;&#x8BC1;critical section&#x53EA;&#x80FD;&#x7531;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x8FD0;&#x884C;&#x3002;</p>
+<h2 id="282-pthread-locks">28.2 Pthread Locks</h2>
+<p>&#x5728;POSIX&#x5E93;&#x4E2D;&#xFF0C;&#x9501;&#x53EB;<strong>mutex</strong>&#xFF0C;&#x56E0;&#x4E3A;&#x5176;&#x7528;&#x4E8E;&#x63D0;&#x4F9B;<strong>mutual exclusion</strong></p>
+<pre><code class="lang-c"><span class="hljs-keyword">pthread_mutex_t</span> lock = PTHREAD_MUTEX_INITIALIZER;
+Pthread_mutex_lock(&amp;lock); <span class="hljs-comment">// wrapper; exits on failure</span>
+balance = balance + <span class="hljs-number">1</span>;
+Pthread_mutex_unlock(&amp;lock);
+</code></pre>
+<p>POSIX&#x4E2D;&#x9700;&#x8981;&#x4F20;&#x9012;&#x4E00;&#x4E2A;&#x9501;&#x53D8;&#x91CF;&#x6765;&#x52A0;&#x9501;&#x548C;&#x89E3;&#x9501;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7528;&#x4E0D;&#x540C;&#x7684;&#x9501;&#x6765;&#x4FDD;&#x62A4;&#x4E0D;&#x540C;&#x7684;&#x53D8;&#x91CF;&#x3002;&#x8FD9;&#x662F;&#x4E00;&#x79CD;<strong>fine-grained</strong> approach</p>
+<h2 id="283-building-a-lock">28.3 Building A Lock</h2>
+<p>CRUX&#xFF1A;&#x5982;&#x4F55;&#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x9501;&#xFF1F;</p>
+<h2 id="284-evaluating-locks">28.4 Evaluating Locks</h2>
+<p>&#x6211;&#x4EEC;&#x7528;&#x4EE5;&#x4E0B;&#x4E09;&#x4E2A;&#x65B9;&#x9762;&#x6765;&#x8BC4;&#x4F30;&#x9501;&#xFF1A;</p>
+<ul>
+<li><strong>mutual exclusion</strong></li>
+<li><strong>fairness</strong>&#xFF1A;&#x5404;&#x7EBF;&#x7A0B;&#x83B7;&#x5F97;&#x9501;&#x7684;&#x673A;&#x4F1A;</li>
+<li><strong>performance</strong>&#xFF1A;&#x4F7F;&#x7528;&#x9501;&#x589E;&#x52A0;&#x7684;&#x65F6;&#x95F4;&#x5F00;&#x9500;&#xFF08;&#x6CA1;&#x6709;&#x7ADE;&#x4E89;&#x65F6;&#xFF1F;&#x5927;&#x91CF;&#x7ADE;&#x4E89;&#x65F6;&#xFF1F;&#x591A;&#x4E2A;CPU&#x4ECB;&#x5165;&#x65F6;&#xFF1F;&#xFF09;</li>
+</ul>
+<h2 id="285-controlling-interrupts">28.5 Controlling Interrupts</h2>
+<p>&#x6700;&#x65E9;&#x671F;&#x7684;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#x662F;&#xFF1A;&#x7981;&#x6B62;interrupts&#x3002;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x4F46;&#x6709;&#x5F88;&#x591A;&#x7F3A;&#x70B9;&#xFF1A;</p>
+<ul>
+<li>&#x9700;&#x8981;&#x5141;&#x8BB8;&#x4EFB;&#x4F55;&#x8C03;&#x7528;&#x7EBF;&#x7A0B;&#x6267;&#x884C;privileged&#x64CD;&#x4F5C;&#xFF0C;OS&#x53EF;&#x80FD;&#x88AB;&#x7A0B;&#x5E8F;&#x5784;&#x65AD;&#xFF0C;&#x9020;&#x6210;&#x5B89;&#x5168;&#x9690;&#x60A3;&#x3002;</li>
+<li>&#x5728;&#x591A;&#x5904;&#x7406;&#x5668;&#x4E0A;&#x4E0D;work</li>
+<li>&#x53EF;&#x80FD;&#x4F7F;interrupt&#x4E22;&#x5931;&#xFF0C;&#x9020;&#x6210;&#x4E25;&#x91CD;&#x7CFB;&#x7EDF;&#x95EE;&#x9898;&#x3002;&#x5982;CPU&#x9519;&#x8FC7;&#x4E86;&#x78C1;&#x76D8;&#x5B8C;&#x6210;&#x4E86;&#x8BFB;&#x8BF7;&#x6C42;&#xFF0C;&#x5BFC;&#x81F4;&#x65E0;&#x6CD5;&#x5524;&#x9192;&#x53D1;&#x8D77;&#x8BFB;&#x8BF7;&#x6C42;&#x7684;&#x8FDB;&#x7A0B;&#x3002;</li>
+<li>&#x6548;&#x7387;&#x4F4E;&#x3002;&#x5F00;&#x5173;interrupt&#x5728;&#x73B0;&#x4EE3;CPU&#x4E0A;&#x6267;&#x884C;&#x5F97;&#x5F88;&#x6162;&#x3002;</li>
+</ul>
+<h2 id="286-a-failed-attempt-just-using-loadsstores">28.6 A Failed Attempt: Just Using Loads/Stores</h2>
+<p>loads/stores&#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">while</span>(flag == <span class="hljs-number">1</span>)    <span class="hljs-comment">//TEST the flag</span>
+    ;    <span class="hljs-comment">// spin-wait(do nothing)</span>
+flag = <span class="hljs-number">1</span>;
+<span class="hljs-comment">// enter critical section</span>
+flag = <span class="hljs-number">0</span>;    <span class="hljs-comment">// unlock</span>
+</code></pre>
+<p>&#x8FD9;&#x662F;&#x4E2A;&#x5931;&#x8D25;&#x7684;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<ul>
+<li><strong>interleaving</strong>: no mutual exclusion&#xFF0C;&#x5982;&#x679C;TEST&#x8FC7;&#x7A0B;&#x4E2D;&#x88AB;&#x5207;&#x65AD;&#xFF0C;&#x4E24;&#x4E2A;&#x8FDB;&#x7A0B;&#x80FD;&#x540C;&#x65F6;&#x628A;flag&#x7F6E;1.</li>
+<li><strong>spin-waiting</strong>: &#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#x9700;&#x8981;&#x7B49;&#x5F85;&#x53E6;&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#x89E3;&#x9501;&#xFF0C;&#x6D6A;&#x8D39;&#x65F6;&#x95F4;&#xFF0C;&#x5C24;&#x5176;&#x5BF9;&#x4E8E;&#x5355;&#x5904;&#x7406;&#x5668;&#x3002;</li>
+</ul>
+<h2 id="287-building-working-spin-locks-with-test-and-set">28.7 Building Working Spin Locks with Test-And-Set</h2>
+<p>&#x7B80;&#x5355;&#x7684;loads/stores&#x4E0D;&#x8D77;&#x4F5C;&#x7528;&#xFF0C;&#x6211;&#x4EEC;&#x8003;&#x8651;&#x786C;&#x4EF6;&#x7684;&#x652F;&#x6301;&#x3002;</p>
+<p>&#x4E00;&#x79CD;&#x6700;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x6CD5;&#x662F;<strong>test-and-set&#xFF08;atomic exchange&#xFF09;</strong>&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">TestAndSet</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *old_ptr, <span class="hljs-keyword">int</span> new)</span> </span>{
+    <span class="hljs-keyword">int</span> old = *old_ptr;    <span class="hljs-comment">//fetch old value at old_ptr</span>
+    *old_ptr = <span class="hljs-keyword">new</span>;    <span class="hljs-comment">//store &apos;new&apos; into old_ptr</span>
+    <span class="hljs-keyword">return</span> old;    <span class="hljs-comment">//return the old value</span>
+}
+</code></pre>
+<p>Test-And-Set&#x64CD;&#x4F5C;&#x662F;&#x539F;&#x5B50;&#x5316;&#x7684;&#xFF0C;&#x5B83;&#x80FD;&#x5728;test&#x65E7;&#x503C;&#x7684;&#x540C;&#x65F6;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x8BBE;&#x7F6E;&#x65B0;&#x503C;&#x3002;&#x6211;&#x4EEC;&#x4EE5;&#x6B64;&#x5EFA;&#x7ACB;<strong>&#x81EA;&#x65CB;&#x9501;&#xFF08;spin lock&#xFF09;</strong></p>
+<pre><code class="lang-c"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-keyword">__lock_t</span> {
+    <span class="hljs-keyword">int</span> flag;
+} <span class="hljs-keyword">lock_t</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(lock_t *lock)</span> </span>{
+    <span class="hljs-comment">// 0: lock is available, 1: lock is held</span>
+    lock-&gt;flag = <span class="hljs-number">0</span>;
+}
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lock</span><span class="hljs-params">(lock_t *lock)</span> </span>{
+    <span class="hljs-keyword">while</span> (TestAndSet(&amp;lock-&gt;flag, <span class="hljs-number">1</span>) == <span class="hljs-number">1</span>)
+        ;    <span class="hljs-comment">// spin-wait(do nothing)</span>
+}
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">unlock</span><span class="hljs-params">(lock_t *lock)</span> </span>{
+    lock-&gt;flag = <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>&#x7EBF;&#x7A0B;&#x53CD;&#x590D;&#x68C0;&#x67E5;&#x9501;&#x53D8;&#x91CF;&#x662F;&#x5426;&#x53EF;&#x7528;&#xFF0C;&#x4E00;&#x65E6;&#x83B7;&#x53D6;&#x4E86;&#x81EA;&#x65CB;&#x9501;&#xFF0C;&#x7EBF;&#x7A0B;&#x4F1A;&#x4E00;&#x76F4;&#x4FDD;&#x6301;&#x8BE5;&#x9501;&#xFF0C;&#x76F4;&#x81F3;&#x663E;&#x5F0F;&#x91CA;&#x653E;&#x3002;</p>
+<p>&#x82E5;&#x5728;&#x5355;&#x5904;&#x7406;&#x5668;&#x4E0A;&#x8FD0;&#x884C;&#xFF0C;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x62A2;&#x5360;&#x5F0F;&#x8C03;&#x5EA6;&#x5668;&#xFF08;<strong>preemptive scheduler</strong>&#xFF09;&#x3002;</p>
+<h2 id="288-evaluating-spin-locks">28.8 Evaluating Spin Locks</h2>
+<ul>
+<li><strong>correctness</strong>: yes</li>
+<li><strong>fairness:</strong> no&#x3002;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x53EF;&#x80FD;&#x4F1A;&#x6C38;&#x8FDC;&#x65CB;&#x8F6C;&#xFF0C;&#x5BFC;&#x81F4;starvation</li>
+<li><strong>performance:</strong> &#x5728;&#x5355;&#x5904;&#x7406;&#x5668;&#x4E0A;&#x8868;&#x73B0;&#x4E0D;&#x597D;&#xFF0C;&#x4F46;&#x5728;&#x591A;&#x5904;&#x7406;&#x5668;&#x4E0A;&#x8868;&#x73B0;&#x8F83;&#x597D;&#xFF08;&#x7EBF;&#x7A0B;&#x6570;&#x7EA6;&#x7B49;&#x4E8E;CPU&#x6570;&#xFF09;</li>
+</ul>
+<h2 id="289-compare-and-swap">28.9 Compare-And-Swap</h2>
+<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">CompareAndSwap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *ptr, <span class="hljs-keyword">int</span> expected, <span class="hljs-keyword">int</span> new)</span> </span>{
+    <span class="hljs-keyword">int</span> original = *ptr;
+    <span class="hljs-keyword">if</span> (original == expected)
+        *ptr = <span class="hljs-keyword">new</span>;
+    <span class="hljs-keyword">return</span> original;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lock</span><span class="hljs-params">(lock_t *lock)</span> </span>{
+    <span class="hljs-keyword">while</span> (CompareAndSwap(&amp;lock-&gt;flag, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>) == <span class="hljs-number">1</span>)
+        ; <span class="hljs-comment">// spin</span>
+}
+</code></pre>
+<p>&#x5982;&#x679C;&#x53EA;&#x662F;&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;&#x81EA;&#x65CB;&#x9501;&#xFF0C;compare-and-swap&#x65B9;&#x6CD5;&#x548C;test-and-set&#x662F;&#x7B49;&#x4EF7;&#x7684;&#x3002;&#x4F46;&#x5B83;&#x5728;<strong>lock-free synchronization</strong>&#x4E0A;&#x6709;&#x5F3A;&#x5927;&#x4F5C;&#x7528;&#xFF0C;&#x4F1A;&#x5728;&#x4EE5;&#x540E;&#x4ECB;&#x7ECD;&#x3002;</p>
+<h2 id="2810-load-linked-and-store-conditional">28.10 Load-Linked and Store-Conditional</h2>
+<p>&#x5728;MIPS&#x67B6;&#x6784;&#x4E2D;&#xFF0C;&#x4F7F;&#x7528;<strong>load-linked</strong>&#x548C;<strong>store-conditional</strong>&#x6307;&#x4EE4;&#x6765;&#x6784;&#x5EFA;&#x9501;&#x3002;</p>
+<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">LoadLinked</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *ptr)</span> </span>{
+    <span class="hljs-keyword">return</span> *ptr;
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">StoreConditional</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *ptr, <span class="hljs-keyword">int</span> value)</span> </span>{
+    <span class="hljs-keyword">if</span> (no update to *ptr since LoadLinked to <span class="hljs-keyword">this</span> address) {
+    *ptr = value;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>; <span class="hljs-comment">// success!</span>
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// failed to update</span>
+    }
+}
+</code></pre>
+<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lock</span><span class="hljs-params">(lock_t *lock)</span> </span>{
+    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">while</span> (LoadLinked(&amp;lock-&gt;flag) == <span class="hljs-number">1</span>)
+            ; <span class="hljs-comment">// spin until it&#x2019;s zero</span>
+        <span class="hljs-keyword">if</span> (StoreConditional(&amp;lock-&gt;flag, <span class="hljs-number">1</span>) == <span class="hljs-number">1</span>)
+            <span class="hljs-keyword">return</span>; <span class="hljs-comment">// if set-it-to-1 was a success: all done</span>
+        <span class="hljs-comment">// otherwise: try it all over again</span>
+    }
+}
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">unlock</span><span class="hljs-params">(lock_t *lock)</span> </span>{
+    lock-&gt;flag = <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="2811-fetch-and-add">28.11 Fetch-And-Add</h2>
+<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">FetchAndAdd</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *ptr)</span> </span>{
+    <span class="hljs-keyword">int</span> old = *ptr;
+    *ptr = old + <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">return</span> old;
+}
+</code></pre>
+<pre><code class="lang-c"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-keyword">__lock_t</span> {
+    <span class="hljs-keyword">int</span> ticket;
+    <span class="hljs-keyword">int</span> turn;
+} <span class="hljs-keyword">lock_t</span>;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lock_init</span><span class="hljs-params">(lock_t *lock)</span> </span>{
+    lock-&gt;ticket = <span class="hljs-number">0</span>;
+    lock-&gt;turn = <span class="hljs-number">0</span>;
+}
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lock</span><span class="hljs-params">(lock_t *lock)</span> </span>{
+    <span class="hljs-keyword">int</span> myturn = FetchAndAdd(&amp;lock-&gt;ticket);
+    <span class="hljs-keyword">while</span> (lock-&gt;turn != myturn)
+        ;    <span class="hljs-comment">// spin</span>
+}
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">unlock</span><span class="hljs-params">(lock_t *lock)</span> </span>{
+    lock-&gt;turn = lock-&gt;turn + <span class="hljs-number">1</span>;
+}
+</code></pre>
+<p>&#x6B64;&#x65B9;&#x6CD5;&#x7684;&#x4F18;&#x70B9;&#x5728;&#x4E8E;&#xFF1A;&#x4E00;&#x65E6;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x88AB;&#x5206;&#x914D;&#x4E86;ticket&#xFF0C;&#x90A3;&#x4E48;&#x4FDD;&#x8BC1;&#x4E86;&#x5B83;&#x672A;&#x6765;&#x4E00;&#x5B9A;&#x4F1A;&#x88AB;&#x8C03;&#x5EA6;&#x5230;&#xFF08;&#x53EA;&#x8981;&#x4E4B;&#x524D;&#x7684;&#x7EBF;&#x7A0B;&#x901A;&#x8FC7;&#x4E86;critical section&#x5E76;unlock&#xFF09;&#xFF1B;&#x800C;test-and-set&#x53EF;&#x80FD;&#x4F1A;&#x4F7F;&#x4E00;&#x4E9B;&#x7EBF;&#x7A0B;&#x6C38;&#x8FDC;spin&#x4E0B;&#x53BB;&#xFF08;&#x67D0;&#x7EBF;&#x7A0B;unlock&#x53C8;&#x9A6C;&#x4E0A;lock&#xFF09;&#x3002;</p>
+<h2 id="2812-too-much-spinning-what-now">28.12 Too Much Spinning: What Now?</h2>
+<p>&#x81EA;&#x65CB;&#x9501;&#x6D6A;&#x8D39;&#x5927;&#x91CF;&#x65F6;&#x95F4;&#x7528;&#x6765;spin&#xFF08;&#x68C0;&#x67E5;&#x9501;&#xFF09;&#xFF0C;&#x5C24;&#x5176;&#x5BF9;&#x4E8E;&#x5355;&#x5904;&#x7406;&#x5668;&#x3002;</p>
+<p>CRUX&#xFF1A;&#x5982;&#x4F55;&#x907F;&#x514D;&#x4E0D;&#x5FC5;&#x8981;&#x7684;&#x65CB;&#x8F6C;&#xFF1F;</p>
+<p>&#x5355;&#x51ED;&#x786C;&#x4EF6;&#x652F;&#x6301;&#x4E0D;&#x591F;&#x89E3;&#x51B3;&#x95EE;&#x9898;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;OS&#x7684;&#x652F;&#x6301;&#x3002;</p>
+<h2 id="2813-a-simple-approach-just-yield-baby">28.13 A Simple Approach: Just Yield, Baby</h2>
+<p>&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x6CD5;&#x5C31;&#x662F;&#xFF1A;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x8BD5;&#x56FE;lock()&#x4F46;&#x53D1;&#x73B0;&#x7EBF;&#x7A0B;&#x5DF2;&#x88AB;held&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x8C03;&#x7528;yield()&#x8FD9;&#x4E2A;system call&#x6765;&#x653E;&#x5F03;CPU&#xFF0C;&#x4ECE;&#x800C;deschedule&#x81EA;&#x5DF1;&#x3002;</p>
+<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lock</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">while</span> (TestAndSet(&amp;flag, <span class="hljs-number">1</span>) == <span class="hljs-number">1</span>)
+            yield();    <span class="hljs-comment">// give up the CPU</span>
+}
+</code></pre>
+<p>&#x7136;&#x800C;&#x7F3A;&#x70B9;&#x5728;&#x4E8E;&#xFF1A;</p>
+<ul>
+<li>&#x5360;&#x6709;&#x9501;&#x7684;&#x7EBF;&#x7A0B;&#x4F1A;&#x5728;&#x89E3;&#x9501;&#x524D;&#x88AB;&#x6253;&#x65AD;&#xFF0C;&#x5207;&#x6362;&#x5230;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#xFF0C;&#x9891;&#x7E41;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x5207;&#x6362;&#xFF08;round-robin-like&#xFF09;&#x6D6A;&#x8D39;&#x5927;&#x91CF;CPU&#x8D44;&#x6E90;&#x3002;</li>
+<li>&#x6CA1;&#x6709;&#x89E3;&#x51B3;starvation&#x95EE;&#x9898;</li>
+</ul>
+<h2 id="2814-using-queues-sleeping-instead-of-spinning">28.14 Using Queues: Sleeping Instead Of Spinning</h2>
+<p>&#x5F53;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x53D1;&#x73B0;&#x9501;&#x88AB;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x6301;&#x6709;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;&#x5176;&#x653E;&#x8FDB;&#x4E00;&#x4E2A;&#x961F;&#x5217;&#x7B49;&#x5F85;&#xFF0C;&#x5E76;&#x8FDB;&#x5165;sleep&#x72B6;&#x6001;&#xFF1B;&#x5F53;&#x6709;&#x9501;&#x91CA;&#x653E;&#x65F6;&#xFF0C;&#x518D;&#x4ECE;&#x961F;&#x5217;&#x4E2D;&#x62FF;&#x51FA;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x5C06;&#x5176;&#x5524;&#x9192;&#x3002;</p>
+<p><img src="../../.gitbook/assets/image 20211215213116473" alt="image-20211215213116473"></p>
+<p>&#x4EE5;&#x4E0A;&#x65F6;Solaris&#x4E2D;&#x7684;&#x5B9E;&#x73B0;&#x4EE3;&#x7801;&#xFF0C;&#x7528;park()&#x548C;unpark()&#x6765;&#x50AC;&#x7720;/&#x5524;&#x9192;&#x7EBF;&#x7A0B;&#xFF0C;&#x4F7F;&#x7528;guard&#x4F5C;&#x4E3A;&#x81EA;&#x65CB;&#x9501;&#x4FDD;&#x62A4;flag&#x548C;queue&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x4F7F;&#x5F97;&#x5F53;&#x9501;&#x88AB;&#x5360;&#x6709;&#x65F6;&#xFF0C;&#x4EFB;&#x4F55;&#x8BD5;&#x56FE;&#x83B7;&#x5F97;&#x9501;&#x7684;&#x7EBF;&#x7A0B;&#x90FD;&#x4F1A;&#x88AB;&#x963B;&#x585E;&#xFF0C;&#x4FDD;&#x8BC1;&#x4E86;&#x5360;&#x6709;&#x9501;&#x7684;&#x7EBF;&#x7A0B;&#x4E0D;&#x4F1A;&#x88AB;&#x6253;&#x65AD;&#x3002;&#xFF08;&#x4F7F;&#x8BBF;&#x95EE;critical section&#x7684;&#x64CD;&#x4F5C;&#x6210;&#x4E3A;&#x4E00;&#x4E2A;&#x539F;&#x5B50;&#x64CD;&#x4F5C;&#xFF09;</p>
+<h2 id="2815-different-os-different-support">28.15 Different OS, Different Support</h2>
+<p>Linux&#x4E2D;futex&#x9501;&#x7684;&#x8BBE;&#x8BA1;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">mutex_lock</span> <span class="hljs-params">(<span class="hljs-keyword">int</span>*mutex)</span> </span>{
+    <span class="hljs-keyword">int</span> v;
+    <span class="hljs-comment">/*Bit 31 was clear, we got the mutex (the fastpath)*/</span>
+    <span class="hljs-keyword">if</span> (atomic_bit_test_set (mutex, <span class="hljs-number">31</span>) == <span class="hljs-number">0</span>)
+        <span class="hljs-keyword">return</span>;
+    atomic_increment (mutex);
+    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">if</span> (atomic_bit_test_set (mutex, <span class="hljs-number">31</span>) == <span class="hljs-number">0</span>) {
+            atomic_decrement (mutex);
+            <span class="hljs-keyword">return</span>;
+        }
+        <span class="hljs-comment">/*We have to wait
+        First make sure the futex value 
+        we are monitoring is truly negative (locked).*/</span>
+        v =*mutex;
+        <span class="hljs-keyword">if</span> (v &gt;= <span class="hljs-number">0</span>)
+            <span class="hljs-keyword">continue</span>;
+        futex_wait (mutex, v);
+    }
+}
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">mutex_unlock</span> <span class="hljs-params">(<span class="hljs-keyword">int</span>*mutex)</span> </span>{
+    <span class="hljs-comment">/*Adding 0x80000000 to counter results in 0 if and
+    only if there are not other interested threads*/</span>
+    <span class="hljs-keyword">if</span> (atomic_add_zero (mutex, <span class="hljs-number">0x80000000</span>))
+        <span class="hljs-keyword">return</span>;
+    <span class="hljs-comment">/*There are other threads waiting for this mutex,
+    wake one of them up.*/</span>
+    futex_wake (mutex);
+}
+</code></pre>
+<h2 id="2816-two-phase-locks">28.16 Two-Phase Locks</h2>
+<p>&#x65E9;&#x671F;&#x9501;&#x6709;&#x4E24;&#x9636;&#x6BB5;&#xFF1B;&#x73B0;&#x5728;&#x5728;Linux&#x4E2D;&#x7684;&#x9501;&#xFF08;futex&#xFF09;&#x53EF;&#x4EE5;&#x5FAA;&#x73AF;&#x81EA;&#x65CB;&#x3002;</p>
+<p>two-phase locks&#x662F;&#x4E00;&#x79CD;hybrid approach</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="27.-interlude-thread-api.html" class="navigation navigation-prev " aria-label="Previous page: 27. Interlude: Thread API">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="29.-lock-based-concurrent-data-structures.html" class="navigation navigation-next " aria-label="Next page: 29. Lock-based Concurrent Data Structures">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"28. Locks","level":"2.2.3","depth":2,"next":{"title":"29. Lock-based Concurrent Data Structures","level":"2.2.4","depth":2,"path":"ostep/concurrency/29.-lock-based-concurrent-data-structures.md","ref":"ostep/concurrency/29.-lock-based-concurrent-data-structures.md","articles":[]},"previous":{"title":"27. Interlude: Thread API","level":"2.2.2","depth":2,"path":"ostep/concurrency/27.-interlude-thread-api.md","ref":"ostep/concurrency/27.-interlude-thread-api.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ostep/concurrency/28.-locks.md","mtime":"2022-03-30T14:11:57.192Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-03-30T14:33:14.910Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

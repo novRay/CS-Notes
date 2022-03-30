@@ -1,0 +1,730 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>17. Free-Space Management · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="18.-paging-introduction.html" />
+    
+    
+    <link rel="prev" href="16.-segmentation.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    CS Notes
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">OSTEP</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Virtualization
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="6.mechanism-limited-direct-execution.html">
+            
+                <a href="6.mechanism-limited-direct-execution.html">
+            
+                    
+                    6.Mechanism: Limited Direct Execution
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="7.scheduling-introduction.html">
+            
+                <a href="7.scheduling-introduction.html">
+            
+                    
+                    7.Scheduling: Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.3" data-path="8.scheduling-the-multi-level-feedback-queue.html">
+            
+                <a href="8.scheduling-the-multi-level-feedback-queue.html">
+            
+                    
+                    8.Scheduling: The Multi-Level Feedback Queue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.4" data-path="9.scheduling-proportional-share.html">
+            
+                <a href="9.scheduling-proportional-share.html">
+            
+                    
+                    9.Scheduling: Proportional Share
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.5" data-path="10.-multiprocessor-scheduling.html">
+            
+                <a href="10.-multiprocessor-scheduling.html">
+            
+                    
+                    10. Multiprocessor Scheduling
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.6" data-path="13.the-abstraction-address-spaces.html">
+            
+                <a href="13.the-abstraction-address-spaces.html">
+            
+                    
+                    13.The Abstraction: Address Spaces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.7" data-path="14.interlude-memory-api.html">
+            
+                <a href="14.interlude-memory-api.html">
+            
+                    
+                    14.Interlude: Memory API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.8" data-path="15.mechanism-address-translation.html">
+            
+                <a href="15.mechanism-address-translation.html">
+            
+                    
+                    15.Mechanism: Address Translation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.9" data-path="16.-segmentation.html">
+            
+                <a href="16.-segmentation.html">
+            
+                    
+                    16. Segmentation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.1.10" data-path="17.-free-space-management.html">
+            
+                <a href="17.-free-space-management.html">
+            
+                    
+                    17. Free-Space Management
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.11" data-path="18.-paging-introduction.html">
+            
+                <a href="18.-paging-introduction.html">
+            
+                    
+                    18. Paging: Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.12" data-path="19.-paging-faster-translations-tlbs.html">
+            
+                <a href="19.-paging-faster-translations-tlbs.html">
+            
+                    
+                    19. Paging: Faster Translations (TLBs)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.13" data-path="20.-paging-smaller-tables.html">
+            
+                <a href="20.-paging-smaller-tables.html">
+            
+                    
+                    20. Paging: Smaller Tables
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.14" data-path="21.-beyond-physical-memory-mechanisms.html">
+            
+                <a href="21.-beyond-physical-memory-mechanisms.html">
+            
+                    
+                    21. Beyond Physical Memory: Mechanisms
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.15" data-path="22.beyond-physical-memory-policies.html">
+            
+                <a href="22.beyond-physical-memory-policies.html">
+            
+                    
+                    22.Beyond Physical Memory: Policies
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.16" data-path="23.-complete-virtual-memory-systems.html">
+            
+                <a href="23.-complete-virtual-memory-systems.html">
+            
+                    
+                    23. Complete Virtual Memory Systems
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../concurrency/">
+            
+                <a href="../concurrency/">
+            
+                    
+                    Concurrency
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="../concurrency/26.-concurrency-an-introduction.html">
+            
+                <a href="../concurrency/26.-concurrency-an-introduction.html">
+            
+                    
+                    26. Concurrency: An Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.2" data-path="../concurrency/27.-interlude-thread-api.html">
+            
+                <a href="../concurrency/27.-interlude-thread-api.html">
+            
+                    
+                    27. Interlude: Thread API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.3" data-path="../concurrency/28.-locks.html">
+            
+                <a href="../concurrency/28.-locks.html">
+            
+                    
+                    28. Locks
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.4" data-path="../concurrency/29.-lock-based-concurrent-data-structures.html">
+            
+                <a href="../concurrency/29.-lock-based-concurrent-data-structures.html">
+            
+                    
+                    29. Lock-based Concurrent Data Structures
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.5" data-path="../concurrency/30.-condition-variables.html">
+            
+                <a href="../concurrency/30.-condition-variables.html">
+            
+                    
+                    30. Condition Variables
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.6" data-path="../concurrency/31.-semaphores.html">
+            
+                <a href="../concurrency/31.-semaphores.html">
+            
+                    
+                    31. Semaphores
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.7" data-path="../concurrency/32.common-concurrency-problems.html">
+            
+                <a href="../concurrency/32.common-concurrency-problems.html">
+            
+                    
+                    32.Common Concurrency Problems
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.8" data-path="../concurrency/33.-event-based-concurrency.html">
+            
+                <a href="../concurrency/33.-event-based-concurrency.html">
+            
+                    
+                    33. Event-based Concurrency
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../persistence.md">
+            
+                <span>
+            
+                    
+                    Persistence
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.3.1" data-path="../persistence/36. IO Devices.html">
+            
+                <a href="../persistence/36. IO Devices.html">
+            
+                    
+                    36. IO Devices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.2" data-path="../persistence/39.Interlude Files and Directories.html">
+            
+                <a href="../persistence/39.Interlude Files and Directories.html">
+            
+                    
+                    39.Interlude Files and Directories
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.3" data-path="../persistence/40.File System Implementation.html">
+            
+                <a href="../persistence/40.File System Implementation.html">
+            
+                    
+                    40.File System Implementation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.4" data-path="../persistence/41.Locality and The Fast File System.html">
+            
+                <a href="../persistence/41.Locality and The Fast File System.html">
+            
+                    
+                    41.Locality and The Fast File System
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.5" data-path="../persistence/42.Crash Consistency FSCK and Journaling.html">
+            
+                <a href="../persistence/42.Crash Consistency FSCK and Journaling.html">
+            
+                    
+                    42.Crash Consistency FSCK and Journaling
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.6" data-path="../persistence/43.Log-structured File Systems.html">
+            
+                <a href="../persistence/43.Log-structured File Systems.html">
+            
+                    
+                    43.Log-structured File Systems
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >17. Free-Space Management</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="17-free-space-management">17. Free-Space Management</h1>
+<p>&#x5206;&#x6BB5;&#x673A;&#x5236;&#x5BFC;&#x81F4;&#x5916;&#x90E8;&#x788E;&#x7247;&#xFF0C;&#x4F7F;&#x5F97;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x4E0D;&#x80FD;&#x88AB;&#x5F88;&#x597D;&#x5730;&#x5145;&#x5206;&#x5229;&#x7528;&#x3002;&#x5E94;&#x8BE5;&#x5982;&#x4F55;&#x66F4;&#x597D;&#x5730;&#x7BA1;&#x7406;free space&#xFF1F;</p>
+<h2 id="171-assumptions">17.1 Assumptions</h2>
+<p>OS&#x7528;&#x4E00;&#x4E2A;free list&#x50A8;&#x5B58;free chunks of space&#x7684;&#x5F15;&#x7528;&#xFF08;&#x6307;&#x9488;&#xFF09;&#x3002;</p>
+<p>&#x4E00;&#x65E6;&#x4E00;&#x5757;&#x5185;&#x5B58;&#x88AB;&#x5206;&#x914D;&#x7ED9;&#x4E86;&#x7A0B;&#x5E8F;&#xFF08;malloc&#xFF09;&#xFF0C;&#x8FD9;&#x5757;&#x5185;&#x5B58;&#x533A;&#x57DF;&#x5C31;&#x88AB;&#x7A0B;&#x5E8F;&#x201C;&#x62E5;&#x6709;&#x201D;&#xFF0C;&#x76F4;&#x5230;&#x7528;&#x7A0B;&#x5E8F;free&#x91CA;&#x653E;&#x3002;&#x56E0;&#x6B64;compaction of free space&#x662F;&#x4E0D;&#x53EF;&#x80FD;&#x7684;&#xFF08;&#x5728;&#x5F3A;&#x7C7B;&#x578B;&#x3001;&#x652F;&#x6301;&#x5783;&#x573E;&#x56DE;&#x6536;&#x7684;&#x8BED;&#x8A00;&#x4E2D;&#x53EF;&#x80FD;&#x5E76;&#x975E;&#x5982;&#x6B64;&#xFF09;&#x3002;compaction&#x53EA;&#x53EF;&#x80FD;&#x88AB;OS&#x7528;&#x4E8E;&#x5904;&#x7406;segmentation&#x3002;</p>
+<h2 id="172-low-level-mechanisms">17.2 Low-level Mechanisms</h2>
+<ul>
+<li><strong>Splitting and Coalescing&#xFF1A;</strong>&#x7533;&#x8BF7;&#x65B0;&#x7684;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x65F6;&#xFF0C;&#x4F1A;&#x5C06;&#x4E00;&#x5757;&#x5927;&#x5C0F;&#x7B26;&#x5408;&#x8981;&#x6C42;&#x7684;free space&#x62C6;&#x5206;&#x6210;&#x4E24;&#x5757;&#xFF0C;&#x7B2C;&#x4E00;&#x5757;&#x4F5C;&#x4E3A;&#x7ED3;&#x679C;&#x8FD4;&#x56DE;&#xFF0C;&#x7B2C;&#x4E8C;&#x5757;&#x7559;&#x5728;free list&#x4E0A;&#x3002;&#x91CA;&#x653E;&#x7A7A;&#x95F4;&#x65F6;&#xFF0C;&#x4F1A;&#x68C0;&#x67E5;&#x5DE6;&#x53F3;&#x662F;&#x5426;&#x6709;&#x53EF;&#x5408;&#x5E76;&#x533A;&#x95F4;&#xFF0C;&#x82E5;&#x6709;&#xFF0C;&#x5C06;&#x5B83;&#x4EEC;&#x5408;&#x5E76;&#x3002;</li>
+<li><strong>Tracking The Size Of Allocated Regions&#xFF1A;</strong>&#x5185;&#x5B58;&#x4E2D;&#x6709;&#x4E00;&#x4E2A;header&#x5757;&#xFF0C;&#x5176;&#x4E2D;&#x8BB0;&#x5F55;&#x4E86;size&#x6307;&#x9488;&#x5206;&#x914D;&#x7684;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#xFF0C;&#x4EE5;&#x53CA;&#x4E00;&#x4E2A;magic number&#x3002;&#x4F7F;&#x7528;free&#x65F6;&#xFF0C;library&#x68C0;&#x67E5;magic&#x662F;&#x5426;&#x5339;&#x914D;&#xFF0C;&#x5E76;&#x5229;&#x7528;size&#x51B3;&#x5B9A;&#x91CA;&#x653E;&#x7A7A;&#x95F4;&#x7684;&#x5927;&#x5C0F;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x4E00;&#x5757;free region&#x7684;&#x5927;&#x5C0F;&#x65F6;header&#x7684;&#x5927;&#x5C0F;&#x52A0;&#x4E0A;&#x5206;&#x914D;&#x51FA;&#x7684;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#x3002;<ul>
+<li><pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">free</span><span class="hljs-params">(<span class="hljs-keyword">void</span> *ptr)</span></span>{<span class="hljs-keyword">header_t</span> *hptr = (<span class="hljs-keyword">header_t</span> *)ptr - <span class="hljs-number">1</span>;}
+</code></pre>
+*</li>
+</ul>
+</li>
+<li><strong>Embedding A Free List&#xFF1A;</strong> free list&#x662F;&#x5728;free space&#x5185;&#x90E8;&#x6784;&#x5EFA;&#x7684;&#x3002;<ul>
+<li><pre><code>typedef struct __node_t {
+    int                size;    // size of allocated memory
+    struct __node_t *next;    // next address of free space
+} node_t;
+</code></pre></li>
+</ul>
+</li>
+<li><strong>Growing The Heap&#xFF1A;</strong> allocators&#x4E00;&#x5F00;&#x59CB;&#x4F1A;&#x5206;&#x914D;&#x4E00;&#x4E2A;&#x8F83;&#x5C0F;&#x7684;&#x5806;&#xFF0C;&#x5982;&#x679C;&#x7A7A;&#x95F4;&#x7528;&#x5B8C;&#xFF0C;&#x5219;&#x4F1A;&#x5411;OS&#x53D1;&#x8D77;sbrk&#xFF08;UNIX&#xFF09;&#x8BF7;&#x6C42;&#xFF0C;OS&#x627E;&#x5230;&#x4E00;&#x5757;&#x7A7A;&#x95F2;&#x7684;&#x7269;&#x7406;&#x9875;&#xFF0C;&#x5C06;&#x5176;&#x6620;&#x5C04;&#x5230;&#x8FDB;&#x7A0B;&#x7684;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#xFF0C;&#x8FD4;&#x56DE;&#x65B0;&#x5806;&#x7684;&#x672B;&#x5C3E;&#x7684;&#x503C;&#x3002;</li>
+</ul>
+<h2 id="173-basic-strategies">17.3 Basic Strategies</h2>
+<p>&#x4E0B;&#x9762;&#x4ECB;&#x7ECD;&#x4E00;&#x4E9B;&#x7A7A;&#x95F2;&#x7A7A;&#x95F4;&#x7BA1;&#x7406;&#x7B56;&#x7565;&#xFF1A;</p>
+<ul>
+<li><strong>Best Fit&#xFF1A;</strong>&#x641C;&#x7D22;&#x6700;&#x5927;&#x5C0F;&#x6700;&#x63A5;&#x8FD1;&#x7684;&#x7A7A;&#x95F4;&#x3002;&#x5B9E;&#x73B0;&#x7B80;&#x5355;&#xFF0C;&#x4F46;&#x662F;&#x6734;&#x7D20;&#x7684;&#x641C;&#x7D22;&#x65B9;&#x5F0F;&#x5F00;&#x9500;&#x5927;&#x3002;</li>
+<li><strong>Worst Fit&#xFF1A;</strong>&#x641C;&#x7D22;&#x6700;&#x5927;&#x7684;&#x7A7A;&#x95F4;&#x3002;&#x540C;&#x6837;&#x8017;&#x65F6;&#xFF0C;&#x800C;&#x4E14;&#x4F1A;&#x5BFC;&#x81F4;&#x8FC7;&#x591A;&#x788E;&#x7247;&#x3002;</li>
+<li><strong>First Fit&#xFF1A;</strong>&#x627E;&#x5230;&#x7B2C;&#x4E00;&#x4E2A;&#x8DB3;&#x591F;&#x5927;&#x7684;&#x7A7A;&#x95F4;&#x3002;&#x597D;&#x5904;&#x662F;&#x901F;&#x5EA6;&#x5FEB;&#xFF0C;&#x574F;&#x5904;&#x662F;&#x5728;list&#x5F00;&#x5934;&#x9020;&#x6210;&#x5F88;&#x591A;&#x788E;&#x7247;&#x3002;&#x5BF9;free space&#x6309;&#x5730;&#x5740;&#x6392;&#x5E8F;&#x53EF;&#x4EE5;&#x51CF;&#x5C11;&#x3002;</li>
+<li><strong>Next Fit&#xFF1A;</strong>&#x548C;first fit&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x627E;&#x7684;&#x662F;&#x4E0B;&#x4E00;&#x4E2A;&#x8DB3;&#x591F;&#x5927;&#x7684;&#x7A7A;&#x95F4;&#x3002;&#x53EF;&#x4EE5;&#x907F;&#x514D;&#x5728;&#x5F00;&#x5934;&#x9020;&#x6210;&#x5F88;&#x591A;&#x788E;&#x7247;&#x3002;</li>
+</ul>
+<h2 id="174-other-approaches">17.4 Other Approaches</h2>
+<ul>
+<li><strong>Segregated Lists&#xFF1A;</strong>&#x7528;&#x4E00;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x5217;&#x8868;&#x7BA1;&#x7406;&#x5E38;&#x89C1;&#x5927;&#x5C0F;&#x7684;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x3002;<ul>
+<li><strong>slab allocator&#xFF1A;&#x6BCF;&#x5F53;kernel&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x4F1A;&#x5206;&#x914D;&#x4E00;&#x4E9B;object caches</strong>&#x7528;&#x4E8E;&#x7BA1;&#x7406;&#x9891;&#x7E41;&#x4F7F;&#x7528;&#x7684;object&#xFF08;&#x5982;&#x9501;&#x3001;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;inodes&#x7B49;&#xFF09;&#x3002;&#x5982;&#x679C;cache&#x7528;&#x5C3D;&#xFF0C;&#x5219;&#x4F1A;&#x5411;&#x901A;&#x7528;&#x7684;allocator&#x7533;&#x8BF7;<strong>slabs</strong>&#xFF1B;&#x76F8;&#x53CD;&#xFF0C;&#x5982;&#x679C;slab&#x4E2D;&#x7684;&#x5F15;&#x7528;&#x7528;&#x5B8C;&#x4E86;&#xFF0C;&#x901A;&#x7528;allocator&#x4E5F;&#x4F1A;&#x5411;&#x7279;&#x6B8A;allocator&#x56DE;&#x6536;&#x7A7A;&#x95F4;&#x3002;slab allocator&#x4FDD;&#x5B58;&#x4E86;&#x4E0E;&#x521D;&#x59CB;&#x5316;&#x72B6;&#x6001;&#xFF0C;&#x907F;&#x514D;&#x4E86;&#x9891;&#x7E41;&#x7684;&#x521D;&#x59CB;&#x5316;&#x548C;&#x9500;&#x6BC1;&#xFF0C;&#x63D0;&#x5347;&#x4E86;&#x6548;&#x7387;&#x3002;</li>
+</ul>
+</li>
+<li><strong>Buddy Allocation</strong>&#x5C06;&#x7A7A;&#x95F2;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#x89C6;&#x4F5C;2&#x7684;N&#x6B21;&#x65B9;&#xFF0C;&#x901A;&#x8FC7;&#x4E8C;&#x5206;&#x6CD5;&#x9012;&#x5F52;&#x641C;&#x7D22;&#xFF0C;&#x76F4;&#x5230;&#x5339;&#x914D;&#x5185;&#x5B58;&#x7533;&#x8BF7;&#x5927;&#x5C0F;&#x3002;&#x5728;&#x4E8C;&#x8FDB;&#x5236;&#x5730;&#x5740;&#x8868;&#x793A;&#x4E0A;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;buddy&#x5BF9;&#x53EA;&#x76F8;&#x5DEE;&#x4E00;&#x4F4D;&#xFF08;&#x54EA;&#x4E00;&#x4F4D;&#x53C8;&#x6811;&#x7684;&#x5C42;&#x7EA7;&#x51B3;&#x5B9A;&#xFF09;&#xFF0C;&#x5229;&#x7528;&#x8FD9;&#x4E00;&#x7279;&#x6027;&#xFF0C;&#x91CA;&#x653E;&#x7A7A;&#x95F4;&#x65F6;&#x53EF;&#x4EE5;&#x5F88;&#x65B9;&#x4FBF;&#x5730;&#x68C0;&#x67E5;&#x5DE6;&#x53F3;&#x7A7A;&#x95F4;&#x6765;&#x5408;&#x5E76;&#x533A;&#x95F4;&#x3002;<ul>
+<li><img src="../../.gitbook/assets/image-20211209211222200 (1" alt="">.png&gt;)</li>
+</ul>
+</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="16.-segmentation.html" class="navigation navigation-prev " aria-label="Previous page: 16. Segmentation">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="18.-paging-introduction.html" class="navigation navigation-next " aria-label="Next page: 18. Paging: Introduction">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"17. Free-Space Management","level":"2.1.10","depth":2,"next":{"title":"18. Paging: Introduction","level":"2.1.11","depth":2,"path":"ostep/virtualization/18.-paging-introduction.md","ref":"ostep/virtualization/18.-paging-introduction.md","articles":[]},"previous":{"title":"16. Segmentation","level":"2.1.9","depth":2,"path":"ostep/virtualization/16.-segmentation.md","ref":"ostep/virtualization/16.-segmentation.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ostep/virtualization/17.-free-space-management.md","mtime":"2022-03-30T14:11:57.195Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-03-30T14:33:14.910Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,731 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>26. Concurrency: An Introduction · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="27.-interlude-thread-api.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    CS Notes
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">OSTEP</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../virtualization/">
+            
+                <a href="../virtualization/">
+            
+                    
+                    Virtualization
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="../virtualization/6.mechanism-limited-direct-execution.html">
+            
+                <a href="../virtualization/6.mechanism-limited-direct-execution.html">
+            
+                    
+                    6.Mechanism: Limited Direct Execution
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="../virtualization/7.scheduling-introduction.html">
+            
+                <a href="../virtualization/7.scheduling-introduction.html">
+            
+                    
+                    7.Scheduling: Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.3" data-path="../virtualization/8.scheduling-the-multi-level-feedback-queue.html">
+            
+                <a href="../virtualization/8.scheduling-the-multi-level-feedback-queue.html">
+            
+                    
+                    8.Scheduling: The Multi-Level Feedback Queue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.4" data-path="../virtualization/9.scheduling-proportional-share.html">
+            
+                <a href="../virtualization/9.scheduling-proportional-share.html">
+            
+                    
+                    9.Scheduling: Proportional Share
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.5" data-path="../virtualization/10.-multiprocessor-scheduling.html">
+            
+                <a href="../virtualization/10.-multiprocessor-scheduling.html">
+            
+                    
+                    10. Multiprocessor Scheduling
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.6" data-path="../virtualization/13.the-abstraction-address-spaces.html">
+            
+                <a href="../virtualization/13.the-abstraction-address-spaces.html">
+            
+                    
+                    13.The Abstraction: Address Spaces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.7" data-path="../virtualization/14.interlude-memory-api.html">
+            
+                <a href="../virtualization/14.interlude-memory-api.html">
+            
+                    
+                    14.Interlude: Memory API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.8" data-path="../virtualization/15.mechanism-address-translation.html">
+            
+                <a href="../virtualization/15.mechanism-address-translation.html">
+            
+                    
+                    15.Mechanism: Address Translation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.9" data-path="../virtualization/16.-segmentation.html">
+            
+                <a href="../virtualization/16.-segmentation.html">
+            
+                    
+                    16. Segmentation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.10" data-path="../virtualization/17.-free-space-management.html">
+            
+                <a href="../virtualization/17.-free-space-management.html">
+            
+                    
+                    17. Free-Space Management
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.11" data-path="../virtualization/18.-paging-introduction.html">
+            
+                <a href="../virtualization/18.-paging-introduction.html">
+            
+                    
+                    18. Paging: Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.12" data-path="../virtualization/19.-paging-faster-translations-tlbs.html">
+            
+                <a href="../virtualization/19.-paging-faster-translations-tlbs.html">
+            
+                    
+                    19. Paging: Faster Translations (TLBs)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.13" data-path="../virtualization/20.-paging-smaller-tables.html">
+            
+                <a href="../virtualization/20.-paging-smaller-tables.html">
+            
+                    
+                    20. Paging: Smaller Tables
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.14" data-path="../virtualization/21.-beyond-physical-memory-mechanisms.html">
+            
+                <a href="../virtualization/21.-beyond-physical-memory-mechanisms.html">
+            
+                    
+                    21. Beyond Physical Memory: Mechanisms
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.15" data-path="../virtualization/22.beyond-physical-memory-policies.html">
+            
+                <a href="../virtualization/22.beyond-physical-memory-policies.html">
+            
+                    
+                    22.Beyond Physical Memory: Policies
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.16" data-path="../virtualization/23.-complete-virtual-memory-systems.html">
+            
+                <a href="../virtualization/23.-complete-virtual-memory-systems.html">
+            
+                    
+                    23. Complete Virtual Memory Systems
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Concurrency
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="2.2.1" data-path="26.-concurrency-an-introduction.html">
+            
+                <a href="26.-concurrency-an-introduction.html">
+            
+                    
+                    26. Concurrency: An Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.2" data-path="27.-interlude-thread-api.html">
+            
+                <a href="27.-interlude-thread-api.html">
+            
+                    
+                    27. Interlude: Thread API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.3" data-path="28.-locks.html">
+            
+                <a href="28.-locks.html">
+            
+                    
+                    28. Locks
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.4" data-path="29.-lock-based-concurrent-data-structures.html">
+            
+                <a href="29.-lock-based-concurrent-data-structures.html">
+            
+                    
+                    29. Lock-based Concurrent Data Structures
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.5" data-path="30.-condition-variables.html">
+            
+                <a href="30.-condition-variables.html">
+            
+                    
+                    30. Condition Variables
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.6" data-path="31.-semaphores.html">
+            
+                <a href="31.-semaphores.html">
+            
+                    
+                    31. Semaphores
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.7" data-path="32.common-concurrency-problems.html">
+            
+                <a href="32.common-concurrency-problems.html">
+            
+                    
+                    32.Common Concurrency Problems
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.8" data-path="33.-event-based-concurrency.html">
+            
+                <a href="33.-event-based-concurrency.html">
+            
+                    
+                    33. Event-based Concurrency
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../persistence.md">
+            
+                <span>
+            
+                    
+                    Persistence
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.3.1" data-path="../persistence/36. IO Devices.html">
+            
+                <a href="../persistence/36. IO Devices.html">
+            
+                    
+                    36. IO Devices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.2" data-path="../persistence/39.Interlude Files and Directories.html">
+            
+                <a href="../persistence/39.Interlude Files and Directories.html">
+            
+                    
+                    39.Interlude Files and Directories
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.3" data-path="../persistence/40.File System Implementation.html">
+            
+                <a href="../persistence/40.File System Implementation.html">
+            
+                    
+                    40.File System Implementation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.4" data-path="../persistence/41.Locality and The Fast File System.html">
+            
+                <a href="../persistence/41.Locality and The Fast File System.html">
+            
+                    
+                    41.Locality and The Fast File System
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.5" data-path="../persistence/42.Crash Consistency FSCK and Journaling.html">
+            
+                <a href="../persistence/42.Crash Consistency FSCK and Journaling.html">
+            
+                    
+                    42.Crash Consistency FSCK and Journaling
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.6" data-path="../persistence/43.Log-structured File Systems.html">
+            
+                <a href="../persistence/43.Log-structured File Systems.html">
+            
+                    
+                    43.Log-structured File Systems
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >26. Concurrency: An Introduction</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="26-concurrency-an-introduction">26. Concurrency: An Introduction</h1>
+<p>&#x672C;&#x7AE0;&#x5F00;&#x59CB;&#x6211;&#x4EEC;&#x5C06;&#x4ECB;&#x7ECD;<strong>&#x5E76;&#x53D1;&#xFF08;concurrency&#xFF09;</strong>&#x76F8;&#x5173;&#x7684;&#x77E5;&#x8BC6;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x4E3A;&#x4E00;&#x4E2A;single running process&#x5F15;&#x5165;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x62BD;&#x8C61;&#xFF1A;<strong>&#x7EBF;&#x7A0B;&#xFF08;thread&#xFF09;</strong>&#x3002;&#x8FC7;&#x53BB;&#x6211;&#x4EEC;&#x7684;&#x89C2;&#x70B9;&#x662F;&#x4E00;&#x4E2A;&#x7A0B;&#x5E8F;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x6267;&#x884C;&#x70B9;&#xFF08;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684;PC&#x53D6;&#x56DE;&#x5E76;&#x6267;&#x884C;&#x6307;&#x4EE4;&#xFF09;&#xFF0C;&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x5F15;&#x5165;<strong>&#x591A;&#x7EBF;&#x7A0B;&#xFF08;multi-threaded&#xFF09;</strong>&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x4E00;&#x4E2A;&#x7A0B;&#x5E8F;&#x53EF;&#x4EE5;&#x6709;&#x591A;&#x4E2A;&#x6267;&#x884C;&#x70B9;&#xFF08;&#x6709;&#x591A;&#x4E2A;PC&#xFF09;&#x3002;</p>
+<ul>
+<li>&#x6BCF;&#x4E2A;&#x7EBF;&#x7A0B;&#x53EF;&#x4EE5;&#x770B;&#x6210;&#x4E00;&#x4E2A;&#x5206;&#x79BB;&#x7684;&#x8FDB;&#x7A0B;&#xFF0C;&#x4F46;&#x4E0D;&#x540C;&#x70B9;&#x5728;&#x4E8E;&#xFF1A;&#x7EBF;&#x7A0B;&#x95F4;&#x5171;&#x4EAB;&#x540C;&#x4E00;&#x5757;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#xFF0C;&#x56E0;&#x6B64;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#x76F8;&#x540C;&#x7684;&#x6570;&#x636E;&#x3002;</li>
+<li>&#x6B63;&#x5982;&#x8FDB;&#x7A0B;&#x9700;&#x8981;&#x7528;PCB&#x6765;&#x4FDD;&#x5B58;&#x72B6;&#x6001;&#xFF0C;&#x7EBF;&#x7A0B;&#x9700;&#x8981;&#x7528;**thread control blocks&#xFF08;TCBs&#xFF09;**&#x6765;&#x4FDD;&#x5B58;&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#x5185;&#x6BCF;&#x4E2A;&#x7EBF;&#x7A0B;&#x7684;&#x72B6;&#x6001;&#x3002;&#x4E0E;PCB&#x7684;&#x533A;&#x522B;&#x540C;&#x6837;&#x5728;&#x4E8E;&#xFF1A;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#x4E0D;&#x6539;&#x53D8;&#xFF08;&#x4E0D;&#x9700;&#x8981;&#x5207;&#x6362;&#x9875;&#x8868;&#xFF09;</li>
+<li>&#x7EBF;&#x7A0B;&#x4E0E;&#x8FDB;&#x7A0B;&#x7684;&#x533A;&#x522B;&#x8FD8;&#x5728;&#x4E8E;&#xFF1A;&#x5728;&#x591A;&#x7EBF;&#x7A0B;&#x7A0B;&#x5E8F;&#x4E2D;&#xFF0C;&#x6BCF;&#x4E2A;&#x7EBF;&#x7A0B;&#x72EC;&#x7ACB;&#x8FD0;&#x884C;&#xFF0C;&#x6808;&#x4E0D;&#x5171;&#x7528;&#x3002;&#x56E0;&#x6B64;&#x5B58;&#x653E;&#x6808;&#x6570;&#x636E;&#x7684;&#x5730;&#x65B9;&#x53EB;<strong>thread-local</strong> storage&#x3002;&#x6211;&#x4EEC;&#x4E0D;&#x592A;&#x7528;&#x62C5;&#x5FC3;&#x591A;&#x4E2A;&#x6808;&#x4F1A;&#x6EA2;&#x51FA;&#xFF0C;&#x9664;&#x4E86;&#x4E00;&#x79CD;&#x7279;&#x6B8A;&#x60C5;&#x51B5;&#xFF1A;&#x9012;&#x5F52;&#x3002;
+*</li>
+</ul>
+<p><img src="../../.gitbook/assets/image-20211213222335517.png" alt=""></p>
+<h2 id="261-why-use-threads">26.1 Why Use Threads?</h2>
+<p>&#x4F7F;&#x7528;&#x591A;&#x7EBF;&#x7A0B;&#x7684;&#x597D;&#x5904;&#xFF1A;</p>
+<ol>
+<li><strong>Parallelism&#xFF1A;</strong>&#x5E76;&#x884C;&#x5730;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#xFF0C;&#x63D0;&#x9AD8;&#x901F;&#x5EA6;&#x3002;</li>
+<li>&#x9632;&#x6B62;I/O&#x963B;&#x585E;&#xFF1A;&#x5F53;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x5728;&#x7B49;&#x5F85;I/O&#x5B8C;&#x6210;&#xFF0C;CPU&#x53EF;&#x4EE5;&#x8C03;&#x5EA6;&#x5B83;&#x53BB;&#x505A;&#x5176;&#x4ED6;&#x4E8B;&#x3002;&#x8FD9;&#x79CD;overlap of I/O within a single program &#x5C31;&#x50CF;multiprogramming did for processes across programs&#x3002;&#x56E0;&#x6B64;&#x8BB8;&#x591A;&#x73B0;&#x4EE3;server-based&#x5E94;&#x7528;&#x90FD;&#x4F1A;&#x5229;&#x7528;&#x7EBF;&#x7A0B;&#x3002;&#xFF08;web&#x670D;&#x52A1;&#x5668;&#x3001;&#x6570;&#x636E;&#x5E93;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#x7B49;&#xFF09;</li>
+</ol>
+<h2 id="262-an-example-thread-creation">26.2 An Example: Thread Creation</h2>
+<p>&#x6211;&#x4EEC;&#x5728;&#x4E3B;&#x7EBF;&#x7A0B;&#x4F9D;&#x6B21;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;A&#x3001;B&#xFF0C;&#x53EF;&#x80FD;&#x7684;&#x60C5;&#x51B5;&#x6709;&#xFF1A;</p>
+<ul>
+<li>&#x521B;&#x5EFA;A-&gt;&#x8FD0;&#x884C;A-&gt;&#x521B;&#x5EFA;B-&gt;&#x8FD0;&#x884C;B</li>
+<li>&#x521B;&#x5EFA;A-&gt;&#x521B;&#x5EFA;B-&gt;&#x8FD0;&#x884C;A-&gt;&#x8FD0;&#x884C;B</li>
+<li>&#x521B;&#x5EFA;A-&gt;&#x521B;&#x5EFA;B-&gt;&#x8FD0;&#x884C;B-&gt;&#x8FD0;&#x884C;A</li>
+</ul>
+<p>&#x6211;&#x4EEC;&#x5F88;&#x96BE;&#x77E5;&#x9053;&#x54EA;&#x4E2A;&#x7EBF;&#x7A0B;&#x5728;&#x54EA;&#x4E2A;&#x65F6;&#x5019;&#x8FD0;&#x884C;&#x3002;</p>
+<h2 id="263-why-it-gets-worse-shared-data">26.3 Why It Gets Worse: Shared Data</h2>
+<p>&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x4E24;&#x4E2A;&#x7EBF;&#x7A0B;&#xFF0C;&#x5728;&#x6BCF;&#x4E2A;&#x7EBF;&#x7A0B;&#x5185;&#x8C03;&#x7528;&#x540C;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x8BA9;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x5FAA;&#x73AF;&#x52A0;1&#xFF0C;&#x76F4;&#x81F3;&#x52A0;10,000,000&#x3002;&#x7136;&#x800C;&#x6700;&#x7EC8;&#x7ED3;&#x679C;&#x5E76;&#x4E0D;&#x662F;20,000,000&#xFF0C;&#x751A;&#x81F3;&#x662F;&#x4E0D;&#x786E;&#x5B9A;&#x7684;&#x3002;</p>
+<h2 id="264-the-heart-of-the-problem-uncontrolled-scheduling">26.4 The Heart Of The Problem: Uncontrolled Scheduling</h2>
+<p><img src="../../.gitbook/assets/image 20211214210935048" alt="image-20211214210935048"></p>
+<p>&#x95EE;&#x9898;&#x5728;&#x4E8E;&#x51FA;&#x73B0;&#x4E86;<strong>race condition&#xFF08;data race&#xFF09;</strong>&#xFF0C;&#x7ED3;&#x679C;&#x53D6;&#x51B3;&#x4E8E;&#x4EE3;&#x7801;&#x7684;&#x6267;&#x884C;&#x65F6;&#x673A;&#xFF0C;&#x5BFC;&#x81F4;&#x7ED3;&#x679C;&#x662F;<strong>&#x4E0D;&#x5B9A;&#x7684;&#xFF08;indeterminate&#xFF09;</strong>&#x3002;&#x8FD9;&#x6837;&#x7684;&#x4EE3;&#x7801;&#x53EB;&#x505A;<strong>critical section</strong>&#xFF1A;&#x4E00;&#x6BB5;&#x4EE3;&#x7801;&#x8BBF;&#x95EE;&#x5171;&#x4EAB;&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x80FD;&#x88AB;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x5E76;&#x53D1;&#x6267;&#x884C;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x60F3;&#x8981;&#x7684;&#x662F;&#x8BA9;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x5177;&#x6709;<strong>&#x4E92;&#x65A5;(mutual exclusion)</strong>&#x6027;&#x8D28;&#x3002;</p>
+<h2 id="265-the-wish-for-atomicity">26.5 The Wish For Atomicity</h2>
+<p>&#x6211;&#x4EEC;&#x5E0C;&#x671B;&#x6307;&#x4EE4;&#x5177;&#x6709;<strong>&#x539F;&#x5B50;&#x6027;&#xFF08;atomicity&#xFF09;</strong>&#xFF0C;&#x5373;&#x786C;&#x4EF6;&#x4E0D;&#x80FD;&#x5728;&#x6307;&#x4EE4;&#x4E2D;&#x95F4;&#x6253;&#x65AD;&#x3002;&#x5F53;interrupt&#x53D1;&#x751F;&#xFF0C;&#x6307;&#x4EE4;&#x53EA;&#x6709;run&#x4E86;&#x548C;&#x6CA1;run&#x4E24;&#x4E2A;&#x72B6;&#x6001;&#x3002;&#x5C06;&#x8BB8;&#x591A;&#x52A8;&#x4F5C;&#x7EC4;&#x5408;&#x6210;&#x4E00;&#x4E2A;&#x539F;&#x5B50;&#x52A8;&#x4F5C;&#x53EB;&#x505A;<strong>transaction</strong>&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x9700;&#x8981;&#x786C;&#x4EF6;&#x63D0;&#x4F9B;&#x4E00;&#x4E9B;&#x6307;&#x4EE4;&#xFF0C;&#x5728;&#x6B64;&#x57FA;&#x7840;&#x4E0A;&#x5EFA;&#x7ACB;&#x4E00;&#x7CFB;&#x5217;<strong>synchronization primitives</strong>&#xFF0C;&#x8054;&#x5408;OS&#x7684;&#x5E2E;&#x52A9;&#x6765;&#x5EFA;&#x7ACB;&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x7EDF;&#x3002;</p>
+<p>CRUX&#xFF1A;&#x5982;&#x4F55;&#x652F;&#x6301;&#x540C;&#x6B65;</p>
+<h2 id="266-one-more-problem-waiting-for-another">26.6 One More Problem: Waiting For Another</h2>
+<p>&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x5FC5;&#x987B;&#x7B49;&#x5F85;&#x53E6;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x5B8C;&#x6210;&#x67D0;&#x4E9B;&#x64CD;&#x4F5C;&#x624D;&#x80FD;&#x7EE7;&#x7EED;&#xFF0C;&#x540E;&#x7EED;&#x7684;&#x7AE0;&#x8282;&#x6211;&#x4EEC;&#x5C06;&#x5B66;&#x4E60;&#x652F;&#x6301;&#x591A;&#x7EBF;&#x7A0B;&#x4E2D;sleeping/waking&#x7684;&#x673A;&#x5236;&#x3002;</p>
+<h2 id="267-summary">26.7 Summary</h2>
+<p>&#x5E76;&#x53D1;&#x4E2D;&#x7684;&#x56DB;&#x4E2A;&#x5173;&#x952E;&#x540D;&#x8BCD;&#x3002;&#x5B83;&#x4EEC;&#x90FD;&#x7531;Dijkstra&#x63D0;&#x51FA;&#x3002;</p>
+<ul>
+<li>A <strong>critical section</strong> is a piece of code that accesses a shared resource, usually a variable or data structure.</li>
+<li>A <strong>race condition</strong> (or <strong>data race</strong>) arises if multiple threads of execution enter the critical section at roughly the same time; both attempt to update the shared data structure, leading to a surprising (and perhaps undesirable) outcome.</li>
+<li>An <strong>indeterminate</strong> program consists of one or more race conditions; the output of the program varies from run to run, depending on which threads ran when. The outcome is thus not <strong>deterministic</strong>, something we usually expect from computer systems.</li>
+<li>To avoid these problems, threads should use some kind of <strong>mutual exclusion</strong> primitives; doing so guarantees that only a single thread ever enters a critical section, thus avoiding races, and resulting in deterministic program outputs.</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Concurrency">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="27.-interlude-thread-api.html" class="navigation navigation-next " aria-label="Next page: 27. Interlude: Thread API">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"26. Concurrency: An Introduction","level":"2.2.1","depth":2,"next":{"title":"27. Interlude: Thread API","level":"2.2.2","depth":2,"path":"ostep/concurrency/27.-interlude-thread-api.md","ref":"ostep/concurrency/27.-interlude-thread-api.md","articles":[]},"previous":{"title":"Concurrency","level":"2.2","depth":1,"path":"ostep/concurrency/README.md","ref":"ostep/concurrency/README.md","articles":[{"title":"26. Concurrency: An Introduction","level":"2.2.1","depth":2,"path":"ostep/concurrency/26.-concurrency-an-introduction.md","ref":"ostep/concurrency/26.-concurrency-an-introduction.md","articles":[]},{"title":"27. Interlude: Thread API","level":"2.2.2","depth":2,"path":"ostep/concurrency/27.-interlude-thread-api.md","ref":"ostep/concurrency/27.-interlude-thread-api.md","articles":[]},{"title":"28. Locks","level":"2.2.3","depth":2,"path":"ostep/concurrency/28.-locks.md","ref":"ostep/concurrency/28.-locks.md","articles":[]},{"title":"29. Lock-based Concurrent Data Structures","level":"2.2.4","depth":2,"path":"ostep/concurrency/29.-lock-based-concurrent-data-structures.md","ref":"ostep/concurrency/29.-lock-based-concurrent-data-structures.md","articles":[]},{"title":"30. Condition Variables","level":"2.2.5","depth":2,"path":"ostep/concurrency/30.-condition-variables.md","ref":"ostep/concurrency/30.-condition-variables.md","articles":[]},{"title":"31. Semaphores","level":"2.2.6","depth":2,"path":"ostep/concurrency/31.-semaphores.md","ref":"ostep/concurrency/31.-semaphores.md","articles":[]},{"title":"32.Common Concurrency Problems","level":"2.2.7","depth":2,"path":"ostep/concurrency/32.common-concurrency-problems.md","ref":"ostep/concurrency/32.common-concurrency-problems.md","articles":[]},{"title":"33. Event-based Concurrency","level":"2.2.8","depth":2,"path":"ostep/concurrency/33.-event-based-concurrency.md","ref":"ostep/concurrency/33.-event-based-concurrency.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ostep/concurrency/26.-concurrency-an-introduction.md","mtime":"2022-03-30T14:11:57.192Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-03-30T14:33:14.910Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
