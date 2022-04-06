@@ -1,4 +1,4 @@
-# #11 Query Execution I
+# #11: Query Execution I
 
 ## Introduction
 
@@ -34,7 +34,7 @@ DBMS的**processing model** 定义了系统如何执行一个query plan。不同
 
 这是一种自下而上的模型。底层算子处理完后向上“吐出“数据，直到根结点。像火山喷发一样。
 
-![](<../.gitbook/assets/image (5).png>)
+![](<../.gitbook/assets/image (5) (1).png>)
 
 ![Volcano Model的调用](<../.gitbook/assets/image (6).png>)
 
@@ -56,7 +56,7 @@ DBMS的**processing model** 定义了系统如何执行一个query plan。不同
 
 这是一中自顶向下的模型
 
-![Materialization Model](<../.gitbook/assets/image (2).png>)
+![Materialization Model](<../.gitbook/assets/image (2) (1).png>)
 
 这种模型更适合OLTP：query一次只接触小规模的tuple。
 
@@ -72,7 +72,7 @@ DBMS的**processing model** 定义了系统如何执行一个query plan。不同
 * 算子的循环内部一次处理多个tuple
 * batch的大小可以基于硬件或query properties改变。
 
-![Vectorization Model](<../.gitbook/assets/image (7).png>)
+![Vectorization Model](<../.gitbook/assets/image (7) (1).png>)
 
 这种模型是OLAP的理想模型：
 
@@ -126,7 +126,7 @@ DBMS会维护一个内部**cursor**来追踪上一个被检查的page/slot
 
 预先计算好一张页内数据的统计信息attribute values。DBMS先检查zone map来决定是否进一步获取数据。
 
-![Zone Maps](<../.gitbook/assets/image (8).png>)
+![Zone Maps](<../.gitbook/assets/image (8) (1).png>)
 
 如上图，由于MAX为400，而条件是val > 600，因此不需要扫描该页。
 
@@ -139,7 +139,7 @@ DBMS会维护一个内部**cursor**来追踪上一个被检查的page/slot
 
 延迟拼接tuple，只向上传满足条件的tuple的offset，而不是完整的tuple。适合列存。
 
-![Late Materizalization](<../.gitbook/assets/image (10).png>)
+![Late Materizalization](<../.gitbook/assets/image (10) (1).png>)
 
 ### Index Scan
 
@@ -169,7 +169,7 @@ DBMS挑选query所需tuple的索引。使用哪个索引取决于：
 
 在Postgres中，这种方法叫**BitMap Scan**
 
-![](<../.gitbook/assets/image (9).png>)
+![](<../.gitbook/assets/image (9) (1).png>)
 
 ## Modification Queries
 
@@ -187,7 +187,7 @@ DBMS挑选query所需tuple的索引。使用哪个索引取决于：
 
 #### Halloween Problem
 
-![](<../.gitbook/assets/image (4).png>)
+![](<../.gitbook/assets/image (4) (1).png>)
 
 更新操作改变了一个tuple的物理位置，导致scan算子多次访问了同一个tuple
 
