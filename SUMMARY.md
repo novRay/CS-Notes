@@ -40,5 +40,6 @@
 
 ## CMU 15-445
 
-* [Project #1 - Buffer Pool](cmu-15-445/project-1-buffer-pool.md)
 * [#11 Query Execution I](cmu-15-445/11-query-execution-i.md)
+* [Project](cmu-15-445/project/README.md)
+  * [Project #1 - Buffer Pool](cmu-15-445/project/project-1-buffer-pool.md)

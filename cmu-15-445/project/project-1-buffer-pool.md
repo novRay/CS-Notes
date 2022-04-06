@@ -4,11 +4,11 @@
 
 ## OVERVIEW
 
-![](../.gitbook/assets/image-20220402133031292.png)
+![](../../.gitbook/assets/image-20220402133031292.png)
 
 文件在内存中按固定大小的**页(page)形式存储，组成一个数组，数组的每个entry称为一帧(frame)**。当DBMS请求一个页时，会把这个页放到buffer pool的一帧中。
 
-![](../.gitbook/assets/image-20220402132853885.png)
+![](../../.gitbook/assets/image-20220402132853885.png)
 
 每一个buffer pool实例有一个对应的page table来管理页的存储，即一个以page id为key，frame id为value的hash map。只要外部提供page id，就可以O(1)时间找到对应页在buffer pool中的位置。
 
