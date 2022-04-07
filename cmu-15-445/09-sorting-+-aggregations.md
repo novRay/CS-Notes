@@ -35,7 +35,7 @@
 * Tuple（早物化）
 * Record ID（晚物化）
 
-![](<../.gitbook/assets/image (10) (1).png>)
+![](<../.gitbook/assets/image (10) (1) (1).png>)
 
 #### 2-Way External Merge Sort
 
@@ -53,11 +53,11 @@ _Pass #1,2,3,..._
 * 递归地合并两个run成一个两倍长度的run
 * 用到三个buffer pages（2个放输入，1个放输出）
 
-![2-way external merge sort](<../.gitbook/assets/image (14) (1).png>)
+![2-way external merge sort](<../.gitbook/assets/image (14) (1) (1).png>)
 
 流程及复杂度分析：
 
-![](<../.gitbook/assets/image (9) (1).png>)
+![](<../.gitbook/assets/image (9) (1) (1).png>)
 
 #### Double Buffering Optimization
 
@@ -114,7 +114,7 @@ _Case #2 - Unclustered B+Tree_
 
 ### Sorting Aggregation
 
-![Sorting Aggregation](<../.gitbook/assets/image (15) (1).png>)
+![Sorting Aggregation](<../.gitbook/assets/image (15) (1) (1).png>)
 
 如果我们并不需要数据是有序的呢？比如**GROUP BY**，**DISTINCT**
 

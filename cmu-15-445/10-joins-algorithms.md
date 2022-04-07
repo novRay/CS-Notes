@@ -29,7 +29,7 @@ Join算子的考察维度：
 
 * **Record Ids**: Late Materialization模型。只记录匹配上的tuple的record id，后续操作根据id再从原表中获取数据。对列存友好，因为DBMS不需要复制多余的数据。
 
-![Late Materialization](<../.gitbook/assets/image (9).png>)
+![Late Materialization](<../.gitbook/assets/image (9) (1).png>)
 
 ### Cost Analysis
 
@@ -39,7 +39,7 @@ Join算子的考察维度：
 
 简单暴力双循环：
 
-![Stupid Nested Loop Join](<../.gitbook/assets/image (15).png>)
+![Stupid Nested Loop Join](<../.gitbook/assets/image (15) (1).png>)
 
 为什么说它stupid？R中的每一条数据，都要全表S作比较。
 
@@ -49,7 +49,7 @@ $$Cost=M + (m ×N )$$
 
 对stupid方法的改进，每次取R表的一个block，来与S表比较。
 
-![Block Nested Loop Join](<../.gitbook/assets/image (16).png>)
+![Block Nested Loop Join](<../.gitbook/assets/image (16) (1).png>)
 
 $$Cost=M + ( M×N )$$
 
@@ -67,7 +67,7 @@ $$Cost: M + ( [M / (B-2)] ∙N)$$
 
 因此我们想到用采用建立**索引**，来避免对内表的顺序扫描。
 
-![Index Nested Loop Join](<../.gitbook/assets/image (18).png>)
+![Index Nested Loop Join](<../.gitbook/assets/image (18) (1).png>)
 
 假设索引探测的时间开销为常数$$C$$，则总代价为：
 
@@ -136,7 +136,7 @@ Build Phase创建Bloom filter，过滤掉不太可能出现在哈希表中的key
 * 探测哈希表前，线程会先检查filter。速度更快，因为filter能fit进CPU cache
 * 也叫**sideways information passing**
 
-![](<../.gitbook/assets/image (19).png>)
+![](<../.gitbook/assets/image (19) (1).png>)
 
 **Bloom Filters**
 
@@ -156,7 +156,7 @@ Example：
 
 查询字符串’Raekwon‘，哈希后检查第5位和第3位。由于第5位为0，得到false
 
-![](<../.gitbook/assets/image (10).png>)
+![](<../.gitbook/assets/image (10) (1).png>)
 
 查询字符串'ODB'，哈希后检查第6位和第3位，均为1。得到True（false positive）
 
@@ -175,11 +175,11 @@ Basic Algorithm的问题：
 * Build Phase: 用相同的哈希函数对两表都进行哈希partition
 * Probe Phase: 比较两表对应partition内的tuple，进行join
 
-![Grace Hash Join](<../.gitbook/assets/image (1).png>)
+![Grace Hash Join](<../.gitbook/assets/image (1) (1).png>)
 
 如果某个partition还是放不进内存，则对它递归分区(**recursive partitioning**)，用另外一个哈希函数继续对它分区，使它能放进内存
 
-![recursive partitioning 1](<../.gitbook/assets/image (13).png>)
+![recursive partitioning 1](<../.gitbook/assets/image (13) (1).png>)
 
 ![recursive partitioning 2](<../.gitbook/assets/image (4).png>)
 

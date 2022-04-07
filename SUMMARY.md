@@ -43,5 +43,6 @@
 * [#09: Sorting + Aggregations](cmu-15-445/09-sorting-+-aggregations.md)
 * [#10: Joins Algorithms](cmu-15-445/10-joins-algorithms.md)
 * [#11: Query Execution I](cmu-15-445/11-query-execution-i.md)
+* [#12: Query Execution II](cmu-15-445/12-query-execution-ii.md)
 * [Project](cmu-15-445/project/README.md)
   * [Project #1 - Buffer Pool](cmu-15-445/project/project-1-buffer-pool.md)
