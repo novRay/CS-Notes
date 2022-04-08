@@ -36,7 +36,7 @@ Example：从A的银行账户中转账100$到B的账户中。
 我们希望并发地执行独立的事务。为什么？
 
 * 更高的利用率(utilization)、吞吐量(throughput)
-* 增加对用户响应时间
+* 降低对用户响应时间
 
 但我们也希望：
 
@@ -239,7 +239,7 @@ Logging几乎被所有DBMS采用
 
 View Serializability是一种更weaker的serializability，允许更多的schedules。但很难实现。
 
-![](<../.gitbook/assets/image (11).png>)
+!["blind write" example](<../.gitbook/assets/image (11).png>)
 
 注意，两种定义都不能让所有的schedule被认为是“serializable”，因为它们并不能理解操作的数据的意义。（如上面的例3）
 
