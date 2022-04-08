@@ -44,13 +44,13 @@ SQL是声明式的(declarative)。不同的query plan的性能差别可能会非
 
 谓词下方，提前缩小数据行范围
 
-![](<../.gitbook/assets/image (10).png>)
+![](<../.gitbook/assets/image (10) (1).png>)
 
 ### Projection Pushdown
 
 投影下放，提前缩小数据列范围，减少中间结果。对列存不重要。
 
-![](<../.gitbook/assets/image (1).png>)
+![](<../.gitbook/assets/image (1) (1).png>)
 
 ## Logical Query Optimization
 
@@ -76,7 +76,7 @@ DBMS把where语句中的嵌套子查询看成是一个函数：接收参数，�
 
 #### Rewrite：
 
-![](<../.gitbook/assets/image (5).png>)
+![](<../.gitbook/assets/image (5) (1).png>)
 
 #### Decompose:
 
@@ -86,7 +86,7 @@ DBMS把where语句中的嵌套子查询看成是一个函数：接收参数，�
 
 ![](<../.gitbook/assets/image (17).png>)
 
-![](<../.gitbook/assets/image (9).png>)
+![](<../.gitbook/assets/image (9) (1).png>)
 
 ## Expression Rewriting
 

@@ -58,7 +58,7 @@ DBMS的process models定义了系统如何架构，以支持来自多用户应�
 * 对CPU缓存局部性不好
 * Exampel: IBM DB2, Postgres(2015)
 
-![Process Pool](<../.gitbook/assets/image (15).png>)
+![Process Pool](<../.gitbook/assets/image (15) (1).png>)
 
 ### Approach #3: Thread Per Worker
 
@@ -69,7 +69,7 @@ DBMS的process models定义了系统如何架构，以支持来自多用户应�
 * 线程crash可能kill整个系统
 * Example: IBM DB2, MSSQL, MySQL, Oracle(2014)
 
-![Thread Per Worker](<../.gitbook/assets/image (10) (1).png>)
+![Thread Per Worker](<../.gitbook/assets/image (10) (1) (1).png>)
 
 多线程架构的优点：
 
@@ -126,7 +126,7 @@ DBMS会插入一个**exchange**算子，来合并/分割来自children/parent算
 
 也叫**pipeline parallelism**
 
-![Inter-Operator](<../.gitbook/assets/image (16).png>)
+![Inter-Operator](<../.gitbook/assets/image (16) (1).png>)
 
 此方法常用于流处理系统
 
@@ -134,7 +134,7 @@ DBMS会插入一个**exchange**算子，来合并/分割来自children/parent算
 
 经典hybrid方法
 
-![Bushy Parallelism](<../.gitbook/assets/image (9) (1).png>)
+![Bushy Parallelism](<../.gitbook/assets/image (9) (1) (1).png>)
 
 #### Observation
 
@@ -191,13 +191,13 @@ CREATE TABLE foo (
 );
 ```
 
-![](<../.gitbook/assets/image (1) (1).png>)
+![](<../.gitbook/assets/image (1) (1) (1).png>)
 
 #### Horizontal Partitioning
 
 把表基于某种partitioning key分割成disjoint segements，比如Hash Partitioning, Range Partitioning, Predicate Partitioning
 
-![](<../.gitbook/assets/image (13).png>)
+![](<../.gitbook/assets/image (13) (1).png>)
 
 ## Conclusion
 
