@@ -35,7 +35,7 @@
 * Tuple（早物化）
 * Record ID（晚物化）
 
-![](<../.gitbook/assets/image (10) (1) (1).png>)
+![](<../.gitbook/assets/image (10) (1) (1) (1).png>)
 
 #### 2-Way External Merge Sort
 
@@ -57,7 +57,7 @@ _Pass #1,2,3,..._
 
 流程及复杂度分析：
 
-![](<../.gitbook/assets/image (9) (1) (1).png>)
+![](<../.gitbook/assets/image (9) (1) (1) (1).png>)
 
 #### Double Buffering Optimization
 
@@ -101,7 +101,7 @@ _Case #2 - Unclustered B+Tree_
 
 需要追随指针来找目标数据所在页，一个bad idea，每条数据都有可能引发I/O开销
 
-![Unclustered B+Tree](<../.gitbook/assets/image (5) (1).png>)
+![Unclustered B+Tree](<../.gitbook/assets/image (5) (1) (1).png>)
 
 ## Aggregations
 
