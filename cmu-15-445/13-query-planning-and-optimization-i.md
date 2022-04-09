@@ -11,7 +11,7 @@ SQL是声明式的(declarative)。不同的query plan的性能差别可能会非
   * 用一种模型来评估query执行的开销
   * 评估多个等价的query plan，选取代价最小的
 
-![Architecture Overview](<../.gitbook/assets/image (18).png>)
+![Architecture Overview](<../.gitbook/assets/image (18) (1).png>)
 
 ### Logical vs. Physical Plans
 
@@ -76,7 +76,7 @@ DBMS把where语句中的嵌套子查询看成是一个函数：接收参数，�
 
 #### Rewrite：
 
-![](<../.gitbook/assets/image (5) (1).png>)
+![](<../.gitbook/assets/image (5) (1) (1).png>)
 
 #### Decompose:
 
@@ -84,9 +84,9 @@ DBMS把where语句中的嵌套子查询看成是一个函数：接收参数，�
 
 子查询会被写入临时表中。当整个query结束，临时表会被丢弃。
 
-![](<../.gitbook/assets/image (17).png>)
+![](<../.gitbook/assets/image (17) (1).png>)
 
-![](<../.gitbook/assets/image (9) (1).png>)
+![](<../.gitbook/assets/image (9) (1) (1).png>)
 
 ## Expression Rewriting
 
