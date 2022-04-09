@@ -2,7 +2,7 @@
 
 DBMS的并发控制(concurrency control)与恢复组件(recovery components)贯穿了整个架构设计
 
-![](<../.gitbook/assets/image (9) (1).png>)
+![](<../.gitbook/assets/image (9) (1) (1).png>)
 
 Motivation：
 
@@ -135,7 +135,7 @@ Logging几乎被所有DBMS采用
 
 由于是并发执行的，没法保证谁先执行。但结果AB账户余额之和必须是2000\*1.06=2120，让两个事务看起来是串行(serially)的。
 
-![](<../.gitbook/assets/image (23) (1).png>)
+![](<../.gitbook/assets/image (23) (1) (1).png>)
 
 我们想要让两个事务交织在一起执行，充分利用并发性（低磁盘/网络 I/O；多核CPU）。当某个事务因为某个资源的问题（比如page fault）停滞(stall)了，另一个事务能继续推进。
 
@@ -182,19 +182,19 @@ Logging几乎被所有DBMS采用
 
 读-写冲突（**R-W**）
 
-![](../.gitbook/assets/image.png)
+![](<../.gitbook/assets/image (1).png>)
 
 #### Read Uncommited（Dirty Reads） 读未提交（脏读）
 
 写-读冲突（**W-R**）
 
-![](<../.gitbook/assets/image (1).png>)
+![](<../.gitbook/assets/image (1) (1).png>)
 
 #### Overwriting Uncommitted Data 覆盖未提交
 
 写-写冲突（**W-W**）
 
-![](<../.gitbook/assets/image (6) (1).png>)
+![](<../.gitbook/assets/image (6) (1) (1).png>)
 
 知道了这些冲突，我们就可以理解schedule的可串行化意味着什么，以此**检查**schedule是否正确。但这不意味着我们能够提前规划好一个正确的schedule。
 
@@ -217,7 +217,7 @@ Logging几乎被所有DBMS采用
 
 但对于下图，由于W(A)和W(A)冲突，不能得到serial schedule，因此不是confilct serializable的
 
-![](<../.gitbook/assets/image (15) (1).png>)
+![](<../.gitbook/assets/image (15) (1) (1).png>)
 
 如果schedule中只有两个事务，交换操作是很容易的。但如果有多个操作就很费劲。一种更快的算法是用依赖图（**dependency graphs**）：
 
@@ -225,7 +225,7 @@ Logging几乎被所有DBMS采用
 
 例1不是conflict serializable的，因为出现了环
 
-![](<../.gitbook/assets/image (21).png>)
+![](<../.gitbook/assets/image (21) (1).png>)
 
 例2是conflict serializable的，可以转换成T2,T1,T3串行
 
@@ -233,13 +233,13 @@ Logging几乎被所有DBMS采用
 
 例3出现了环，但事实上它是conflict serializable的。虽然出现了W(A)-R(A)和R(B)-W(B)冲突，但实际上不影响结果。
 
-![](<../.gitbook/assets/image (5) (1).png>)
+![](<../.gitbook/assets/image (5) (1) (1).png>)
 
 #### View Serializability
 
 View Serializability是一种更weaker的serializability，允许更多的schedules。但很难实现。
 
-!["blind write" example](<../.gitbook/assets/image (11) (1).png>)
+!["blind write" example](<../.gitbook/assets/image (11) (1) (1).png>)
 
 注意，两种定义都不能让所有的schedule被认为是“serializable”，因为它们并不能理解操作的数据的意义。（如上面的例3）
 
@@ -247,7 +247,7 @@ In practice，**conflict serializability**被广泛使用，因为它易于实�
 
 #### Universe Of Schedules
 
-![](<../.gitbook/assets/image (22).png>)
+![](<../.gitbook/assets/image (22) (1).png>)
 
 ## Durability
 

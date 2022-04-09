@@ -47,5 +47,6 @@
 * [#13: Query Planning & Optimization I](cmu-15-445/13-query-planning-and-optimization-i.md)
 * [#15: Concurrency Control Theory](cmu-15-445/15-concurrency-control-theory.md)
 * [#16: Two-Phase Locking Concurrency Control](cmu-15-445/16-two-phase-locking-concurrency-control.md)
+* [#17: Timestamp Ordering Concurrency Control](cmu-15-445/17-timestamp-ordering-concurrency-control.md)
 * [Project](cmu-15-445/project/README.md)
   * [Project #1 - Buffer Pool](cmu-15-445/project/project-1-buffer-pool.md)

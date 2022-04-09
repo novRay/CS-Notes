@@ -6,7 +6,7 @@
 
 如下图所示，Artist和Album之间的多对多关系拆成Artist, Album, ArtistAlbum三张表，使得数据存储的冗余减少。查询时，我们就需要用Join语句来重建关系，获得完整数据。
 
-![](<../.gitbook/assets/image (7) (1).png>)
+![](<../.gitbook/assets/image (7) (1) (1).png>)
 
 ## Join Algorithm
 
@@ -29,17 +29,17 @@ Join算子的考察维度：
 
 * **Record Ids**: Late Materialization模型。只记录匹配上的tuple的record id，后续操作根据id再从原表中获取数据。对列存友好，因为DBMS不需要复制多余的数据。
 
-![Late Materialization](<../.gitbook/assets/image (9) (1) (1) (1) (1).png>)
+![Late Materialization](<../.gitbook/assets/image (9) (1) (1) (1) (1) (1).png>)
 
 ### Cost Analysis
 
-![Cost Analysis](<../.gitbook/assets/image (8) (1) (1).png>)
+![Cost Analysis](<../.gitbook/assets/image (8) (1) (1) (1).png>)
 
 ## Nested LoopJoin
 
 简单暴力双循环：
 
-![Stupid Nested Loop Join](<../.gitbook/assets/image (15) (1) (1) (1).png>)
+![Stupid Nested Loop Join](<../.gitbook/assets/image (15) (1) (1) (1) (1).png>)
 
 为什么说它stupid？R中的每一条数据，都要全表S作比较。
 
@@ -120,7 +120,7 @@ _Phase #2: Probe_
 
 * 扫描内标，对每个tuple用$$h_1$$得到哈希值，在哈希表上对应位置找到匹配的项
 
-![Basic Hash Join Algorithm](<../.gitbook/assets/image (6) (1) (1).png>)
+![Basic Hash Join Algorithm](<../.gitbook/assets/image (6) (1) (1) (1).png>)
 
 #### Hash Table Contents
 
@@ -152,7 +152,7 @@ Example：
 
 如下图，插入字符串’RZA‘，将第6位和第4位置1。插入字符串'GZA'，将第3位和第1位置1
 
-![](<../.gitbook/assets/image (11) (1) (1).png>)
+![](<../.gitbook/assets/image (11) (1) (1) (1).png>)
 
 查询字符串’Raekwon‘，哈希后检查第5位和第3位。由于第5位为0，得到false
 
@@ -175,7 +175,7 @@ Basic Algorithm的问题：
 * Build Phase: 用相同的哈希函数对两表都进行哈希partition
 * Probe Phase: 比较两表对应partition内的tuple，进行join
 
-![Grace Hash Join](<../.gitbook/assets/image (1) (1) (1) (1).png>)
+![Grace Hash Join](<../.gitbook/assets/image (1) (1) (1) (1) (1).png>)
 
 如果某个partition还是放不进内存，则对它递归分区(**recursive partitioning**)，用另外一个哈希函数继续对它分区，使它能放进内存
 

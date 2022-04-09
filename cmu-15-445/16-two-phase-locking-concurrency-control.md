@@ -4,7 +4,7 @@
 
 我们需要一种办法，在不提前知道schdule的前提下，确保所有执行的shedule是正确的（也就是serializable的）。解决方案是：用**lock**保护数据库对象
 
-![](<../.gitbook/assets/image (6).png>)
+![](<../.gitbook/assets/image (6) (1).png>)
 
 本节大纲：
 
@@ -35,7 +35,7 @@
 
 **X-LOCK**：用于写的排他锁
 
-![](<../.gitbook/assets/image (8).png>)
+![](<../.gitbook/assets/image (8) (1).png>)
 
 ### Executing With Locks
 
@@ -47,7 +47,7 @@
 
 一个shedule example如下：
 
-![](<../.gitbook/assets/image (7).png>)
+![](<../.gitbook/assets/image (7) (1).png>)
 
 但这实际上并没有保证schedule的正确性，因为T1释放锁A后T2又对A写入，导致T1前后两次读A读到了不一样的值。
 
@@ -118,11 +118,11 @@ Example:
 
 2PL，结果正确。当T2想读B时，由于已经进入了shrinking阶段，请求被deny。直到T1把所有的锁释放，才获得了读B的锁。
 
-![](<../.gitbook/assets/image (23).png>)
+![](<../.gitbook/assets/image (23) (1).png>)
 
 严格的2PL，T2对A的读锁请求要等到整个T1完成了才被grant。结果同样正确，但并发性稍差。
 
-![](<../.gitbook/assets/image (15).png>)
+![](<../.gitbook/assets/image (15) (1).png>)
 
 把no cascading aborts加入universe of schedule：
 
@@ -141,7 +141,7 @@ Example:
 
 创建waits-for graph。周期性检查是否存在环，决定如何打破环。
 
-![](<../.gitbook/assets/image (5).png>)
+![](<../.gitbook/assets/image (5) (1).png>)
 
 死锁处理方案：挑选一个victim事务，rollback
 
@@ -240,6 +240,6 @@ Hierarchical locks在实践中很有用，让事务只需要更少的锁。
 
 事务通常不需要手动上锁。显式锁在对数据库作重大改动时有用。
 
-![](<../.gitbook/assets/image (9).png>)
+![](<../.gitbook/assets/image (9) (1).png>)
 
-![](<../.gitbook/assets/image (11).png>)
+![](<../.gitbook/assets/image (11) (1).png>)

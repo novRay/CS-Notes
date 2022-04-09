@@ -57,7 +57,7 @@ _Pass #1,2,3,..._
 
 流程及复杂度分析：
 
-![](<../.gitbook/assets/image (9) (1) (1) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (9) (1) (1) (1) (1) (1) (1).png>)
 
 #### Double Buffering Optimization
 
@@ -65,7 +65,7 @@ _Pass #1,2,3,..._
 
 可以减少等待I/O请求的时间，连续地利用磁盘
 
-![](<../.gitbook/assets/image (7) (1) (1).png>)
+![](<../.gitbook/assets/image (7) (1) (1) (1).png>)
 
 #### General External Merge Sort
 
@@ -101,7 +101,7 @@ _Case #2 - Unclustered B+Tree_
 
 需要追随指针来找目标数据所在页，一个bad idea，每条数据都有可能引发I/O开销
 
-![Unclustered B+Tree](<../.gitbook/assets/image (5) (1) (1) (1) (1).png>)
+![Unclustered B+Tree](<../.gitbook/assets/image (5) (1) (1) (1) (1) (1).png>)
 
 ## Aggregations
 
@@ -114,7 +114,7 @@ _Case #2 - Unclustered B+Tree_
 
 ### Sorting Aggregation
 
-![Sorting Aggregation](<../.gitbook/assets/image (15) (1) (1) (1) (1).png>)
+![Sorting Aggregation](<../.gitbook/assets/image (15) (1) (1) (1) (1) (1).png>)
 
 如果我们并不需要数据是有序的呢？比如**GROUP BY**，**DISTINCT**
 
@@ -147,12 +147,12 @@ Phase #2 - ReHash
 
 ReHash的目的在于区分阶段1中的哈希碰撞的值，并让数据fit in memory
 
-![](<../.gitbook/assets/image (11) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (11) (1) (1) (1) (1).png>)
 
 在 ReHash阶段中，存着(GroupKey -> RunningVal)的键值对，当我们需要向哈希表中插入新的 tuple 时：
 
 * 如果我们发现相应的 GroupKey 已经在内存中，只需要更新 RunningVal 就可以
 * 否则，插入新的 GroupKey 到 RunningVal 的键值对
 
-![](<../.gitbook/assets/image (8) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (8) (1) (1) (1) (1).png>)
 
