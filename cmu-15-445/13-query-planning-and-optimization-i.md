@@ -11,7 +11,7 @@ SQL是声明式的(declarative)。不同的query plan的性能差别可能会非
   * 用一种模型来评估query执行的开销
   * 评估多个等价的query plan，选取代价最小的
 
-![Architecture Overview](<../.gitbook/assets/image (18) (1).png>)
+![Architecture Overview](<../.gitbook/assets/image (18) (1) (1).png>)
 
 ### Logical vs. Physical Plans
 
@@ -44,13 +44,13 @@ SQL是声明式的(declarative)。不同的query plan的性能差别可能会非
 
 谓词下方，提前缩小数据行范围
 
-![](<../.gitbook/assets/image (10) (1).png>)
+![](<../.gitbook/assets/image (10) (1) (1).png>)
 
 ### Projection Pushdown
 
 投影下放，提前缩小数据列范围，减少中间结果。对列存不重要。
 
-![](<../.gitbook/assets/image (1) (1) (1).png>)
+![](<../.gitbook/assets/image (1) (1) (1) (1).png>)
 
 ## Logical Query Optimization
 
@@ -84,9 +84,9 @@ DBMS把where语句中的嵌套子查询看成是一个函数：接收参数，�
 
 子查询会被写入临时表中。当整个query结束，临时表会被丢弃。
 
-![](<../.gitbook/assets/image (17) (1).png>)
+![](<../.gitbook/assets/image (17) (1) (1).png>)
 
-![](<../.gitbook/assets/image (9) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (9) (1) (1) (1) (1).png>)
 
 ## Expression Rewriting
 

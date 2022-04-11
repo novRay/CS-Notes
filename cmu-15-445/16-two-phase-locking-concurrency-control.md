@@ -35,7 +35,7 @@
 
 **X-LOCK**：用于写的排他锁
 
-![](<../.gitbook/assets/image (8) (1).png>)
+![](<../.gitbook/assets/image (8) (1) (1).png>)
 
 ### Executing With Locks
 
@@ -51,7 +51,7 @@
 
 但这实际上并没有保证schedule的正确性，因为T1释放锁A后T2又对A写入，导致T1前后两次读A读到了不一样的值。
 
-![](<../.gitbook/assets/image (17).png>)
+![](<../.gitbook/assets/image (17) (1).png>)
 
 我们需要一种并发控制协议，用于确定事务是否可以即时访问数据库中的对象。二阶段锁（2PL）就是其中之一。
 
@@ -68,13 +68,13 @@ _Phase #2: Shrinking_
 
 * 允许事务释放之前获得的锁。不能获得新锁。
 
-![](<../.gitbook/assets/image (20).png>)
+![](<../.gitbook/assets/image (20) (1).png>)
 
 ![](<../.gitbook/assets/image (4).png>)
 
 Example:
 
-![](<../.gitbook/assets/image (18).png>)
+![](<../.gitbook/assets/image (18) (1).png>)
 
 2PL本身已经足够保证conflict serializable。它生成的依赖图是无环的。
 
@@ -82,7 +82,7 @@ Example:
 
 如下图所示。当T1 abort，T2也必须abort。否则意味着T2读到了T1写入、但是abort了的数据。也就是说T1的数据"泄露"给了T2
 
-![](<../.gitbook/assets/image (24).png>)
+![](<../.gitbook/assets/image (24) (1).png>)
 
 ### 2PL Obervation
 
@@ -97,7 +97,7 @@ Example:
 
 更严格的2PL，当且仅当在commit或abort时，释放掉所有的锁。
 
-![](<../.gitbook/assets/image (13).png>)
+![](<../.gitbook/assets/image (13) (1).png>)
 
 严格的2PL保证了：如果一个值被一个事务写过，那么其他事务就不允许读或写这个值，知道当前事务结束。
 
@@ -118,15 +118,15 @@ Example:
 
 2PL，结果正确。当T2想读B时，由于已经进入了shrinking阶段，请求被deny。直到T1把所有的锁释放，才获得了读B的锁。
 
-![](<../.gitbook/assets/image (23) (1).png>)
+![](<../.gitbook/assets/image (23) (1) (1).png>)
 
 严格的2PL，T2对A的读锁请求要等到整个T1完成了才被grant。结果同样正确，但并发性稍差。
 
-![](<../.gitbook/assets/image (15) (1) (1).png>)
+![](<../.gitbook/assets/image (15) (1) (1) (1).png>)
 
 把no cascading aborts加入universe of schedule：
 
-![](<../.gitbook/assets/image (25).png>)
+![](<../.gitbook/assets/image (25) (1).png>)
 
 ## Deadlock
 
@@ -181,7 +181,7 @@ victim事务可以重启，也可以终止（common）。
   * 老事务要年轻事务的锁，年轻事务自杀，把锁给老事务。
   * 年轻事务要老事务的锁，年轻事务等老事务。
 
-![](<../.gitbook/assets/image (12).png>)
+![](<../.gitbook/assets/image (12) (1).png>)
 
 **为什么这些方案能保证没有死锁？**
 
@@ -211,7 +211,7 @@ victim事务可以重启，也可以终止（common）。
 
 * 更少的lock，更大的粒度 vs. 更多的锁，更小的粒度
 
-![](<../.gitbook/assets/image (16).png>)
+![](<../.gitbook/assets/image (16) (1).png>)
 
 ### Intention Locks
 
@@ -240,6 +240,6 @@ Hierarchical locks在实践中很有用，让事务只需要更少的锁。
 
 事务通常不需要手动上锁。显式锁在对数据库作重大改动时有用。
 
-![](<../.gitbook/assets/image (9) (1).png>)
+![](<../.gitbook/assets/image (9) (1) (1).png>)
 
-![](<../.gitbook/assets/image (11) (1).png>)
+![](<../.gitbook/assets/image (11) (1) (1).png>)

@@ -46,7 +46,7 @@
 
 #### Example 1
 
-![](<../.gitbook/assets/image (15) (1).png>)
+![](<../.gitbook/assets/image (15) (1) (1).png>)
 
 1. T1读B，1 ≥ W-TS(B)=0，可读，R-TS(B)改为1
 2. T2读B，2 ≥ W-TS(B)=1，可读，R-TS(B)改为2
@@ -58,7 +58,7 @@
 
 #### Example 2
 
-![](<../.gitbook/assets/image (21).png>)
+![](<../.gitbook/assets/image (21) (1).png>)
 
 1. T1读A，1 ≥ W-TS(A)=0，可读，R-TS(A)改为1
 2. T2写A，2 ≥ W-TS(A)=0，且2 ≥ R-TS(A)=1，可写，W-TS(A)=2
@@ -86,7 +86,7 @@
 
 下图就是一个不可恢复的例子。T2读了T1写入的A，然而T1在T2提交后abort，T2依赖T1写入的数据A并没有真实写入
 
-![](<../.gitbook/assets/image (8).png>)
+![](<../.gitbook/assets/image (8) (1).png>)
 
 #### Performance Issues
 
@@ -146,7 +146,7 @@ Example:
 
 检查“未来”的事务
 
-![](../.gitbook/assets/image.png)
+![](<../.gitbook/assets/image (1).png>)
 
 事务会在validation阶段开始时被赋予一个时间戳。
 
@@ -156,7 +156,7 @@ Example:
 
 Ti整个三阶段都在Tj开始前完成
 
-![](<../.gitbook/assets/image (23).png>)
+![](<../.gitbook/assets/image (23) (1).png>)
 
 #### Step 2：
 
@@ -164,11 +164,11 @@ Ti在Tj的Write阶段开始前完成，并且$$WriteSet(T_j)∩ReadSet(T_j)=Ø$$
 
 下图的情形中，T1先validate，比T2早。而未来的T2读取的还是原表A的值（T1工作区还未写入），因此T1必须abort
 
-![](<../.gitbook/assets/image (11).png>)
+![](<../.gitbook/assets/image (11) (1).png>)
 
 而如果T2先validate，则T1是未来的事务。T2正确读取了T1发生前原表中的数据。两者都可以安全的提交。
 
-![](<../.gitbook/assets/image (22).png>)
+![](<../.gitbook/assets/image (22) (1).png>)
 
 #### Step 3：
 
@@ -207,7 +207,7 @@ $$WriteSet(T_i) ∩ WriteSet(T_j) = Ø$$
 
 之前提到的事务只涉及读和更新已经存在的数据。如果我们的数据支持插入、删除操作，就可能会导致“幻读”的问题：
 
-![](<../.gitbook/assets/image (27).png>)
+![](<../.gitbook/assets/image (27) (1).png>)
 
 发生的原因：事务T1只锁住了已经存在的记录。
 
@@ -256,4 +256,4 @@ serializability很有用，让程序员可以不用关注并发问题。但是�
 
 常见DBMS支持的隔离级别：
 
-![](<../.gitbook/assets/image (15).png>)
+![](<../.gitbook/assets/image (15) (1).png>)

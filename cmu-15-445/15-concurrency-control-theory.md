@@ -2,7 +2,7 @@
 
 DBMS的并发控制(concurrency control)与恢复组件(recovery components)贯穿了整个架构设计
 
-![](<../.gitbook/assets/image (9) (1) (1).png>)
+![](<../.gitbook/assets/image (9) (1) (1) (1).png>)
 
 Motivation：
 
@@ -127,7 +127,7 @@ Logging几乎被所有DBMS采用
 
 假设A、B各有$1000，有这样两个事务并发执行：
 
-![](<../.gitbook/assets/image (16) (1).png>)
+![](<../.gitbook/assets/image (16) (1) (1).png>)
 
 正确结果既可以是T1先执行，T2后执行，得到A=954，B=1166
 
@@ -135,13 +135,13 @@ Logging几乎被所有DBMS采用
 
 由于是并发执行的，没法保证谁先执行。但结果AB账户余额之和必须是2000\*1.06=2120，让两个事务看起来是串行(serially)的。
 
-![](<../.gitbook/assets/image (23) (1) (1).png>)
+![](<../.gitbook/assets/image (23) (1) (1) (1).png>)
 
 我们想要让两个事务交织在一起执行，充分利用并发性（低磁盘/网络 I/O；多核CPU）。当某个事务因为某个资源的问题（比如page fault）停滞(stall)了，另一个事务能继续推进。
 
 一个good example如下：
 
-![](<../.gitbook/assets/image (10).png>)
+![](<../.gitbook/assets/image (10) (1).png>)
 
 而一个bad example如下：
 
@@ -149,7 +149,7 @@ Logging几乎被所有DBMS采用
 
 对应数据库的读写操作：
 
-![](<../.gitbook/assets/image (20) (1).png>)
+![](<../.gitbook/assets/image (20) (1) (1).png>)
 
 **如何判断一种调度是否正确？**
 
@@ -182,13 +182,13 @@ Logging几乎被所有DBMS采用
 
 读-写冲突（**R-W**）
 
-![](<../.gitbook/assets/image (1).png>)
+![](<../.gitbook/assets/image (1) (1).png>)
 
 #### Read Uncommited（Dirty Reads） 读未提交（脏读）
 
 写-读冲突（**W-R**）
 
-![](<../.gitbook/assets/image (1) (1).png>)
+![](<../.gitbook/assets/image (1) (1) (1).png>)
 
 #### Overwriting Uncommitted Data 覆盖未提交
 
@@ -213,11 +213,11 @@ Logging几乎被所有DBMS采用
 
 例如对于上图，通过一系列交换，可以得到一个serial schedule：
 
-![](<../.gitbook/assets/image (13) (1).png>)
+![](<../.gitbook/assets/image (13) (1) (1).png>)
 
 但对于下图，由于W(A)和W(A)冲突，不能得到serial schedule，因此不是confilct serializable的
 
-![](<../.gitbook/assets/image (15) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (15) (1) (1) (1) (1).png>)
 
 如果schedule中只有两个事务，交换操作是很容易的。但如果有多个操作就很费劲。一种更快的算法是用依赖图（**dependency graphs**）：
 
@@ -225,11 +225,11 @@ Logging几乎被所有DBMS采用
 
 例1不是conflict serializable的，因为出现了环
 
-![](<../.gitbook/assets/image (21) (1).png>)
+![](<../.gitbook/assets/image (21) (1) (1).png>)
 
 例2是conflict serializable的，可以转换成T2,T1,T3串行
 
-![](<../.gitbook/assets/image (12) (1).png>)
+![](<../.gitbook/assets/image (12) (1) (1).png>)
 
 例3出现了环，但事实上它是conflict serializable的。虽然出现了W(A)-R(A)和R(B)-W(B)冲突，但实际上不影响结果。
 
@@ -239,7 +239,7 @@ Logging几乎被所有DBMS采用
 
 View Serializability是一种更weaker的serializability，允许更多的schedules。但很难实现。
 
-!["blind write" example](<../.gitbook/assets/image (11) (1) (1).png>)
+!["blind write" example](<../.gitbook/assets/image (11) (1) (1) (1).png>)
 
 注意，两种定义都不能让所有的schedule被认为是“serializable”，因为它们并不能理解操作的数据的意义。（如上面的例3）
 
@@ -247,7 +247,7 @@ In practice，**conflict serializability**被广泛使用，因为它易于实�
 
 #### Universe Of Schedules
 
-![](<../.gitbook/assets/image (22) (1).png>)
+![](<../.gitbook/assets/image (22) (1) (1).png>)
 
 ## Durability
 

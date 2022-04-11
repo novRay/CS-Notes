@@ -126,7 +126,7 @@ DBMS会维护一个内部**cursor**来追踪上一个被检查的page/slot
 
 预先计算好一张页内数据的统计信息attribute values。DBMS先检查zone map来决定是否进一步获取数据。
 
-![Zone Maps](<../.gitbook/assets/image (8) (1) (1) (1) (1) (1).png>)
+![Zone Maps](<../.gitbook/assets/image (8) (1) (1) (1) (1) (1) (1).png>)
 
 如上图，由于MAX为400，而条件是val > 600，因此不需要扫描该页。
 
@@ -139,7 +139,7 @@ DBMS会维护一个内部**cursor**来追踪上一个被检查的page/slot
 
 延迟拼接tuple，只向上传满足条件的tuple的offset，而不是完整的tuple。适合列存。
 
-![Late Materizalization](<../.gitbook/assets/image (10) (1) (1) (1) (1) (1).png>)
+![Late Materizalization](<../.gitbook/assets/image (10) (1) (1) (1) (1) (1) (1).png>)
 
 ### Index Scan
 
@@ -169,7 +169,7 @@ DBMS挑选query所需tuple的索引。使用哪个索引取决于：
 
 在Postgres中，这种方法叫**BitMap Scan**
 
-![](<../.gitbook/assets/image (9) (1) (1) (1) (1) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (9) (1) (1) (1) (1) (1) (1) (1) (1).png>)
 
 ## Modification Queries
 
@@ -199,7 +199,7 @@ DBMS挑选query所需tuple的索引。使用哪个索引取决于：
 
 DBMS用一棵**expression tree**表示**WHERE**语句：
 
-![](<../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png>)
 
 DBMS遍历整棵树来实现对数据的过滤。虽然灵活，但整个过程速度很慢。
 
