@@ -65,7 +65,7 @@ _Pass #1,2,3,..._
 
 可以减少等待I/O请求的时间，连续地利用磁盘
 
-![](<../.gitbook/assets/image (7) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (7) (1) (1) (1) (1).png>)
 
 #### General External Merge Sort
 
@@ -114,7 +114,7 @@ _Case #2 - Unclustered B+Tree_
 
 ### Sorting Aggregation
 
-![Sorting Aggregation](<../.gitbook/assets/image (15) (1) (1) (1) (1) (1).png>)
+![Sorting Aggregation](<../.gitbook/assets/image (15) (1) (1) (1) (1) (1) (1).png>)
 
 如果我们并不需要数据是有序的呢？比如**GROUP BY**，**DISTINCT**
 

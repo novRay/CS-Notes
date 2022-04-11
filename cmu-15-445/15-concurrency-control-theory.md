@@ -217,7 +217,7 @@ Logging几乎被所有DBMS采用
 
 但对于下图，由于W(A)和W(A)冲突，不能得到serial schedule，因此不是confilct serializable的
 
-![](<../.gitbook/assets/image (15) (1) (1).png>)
+![](<../.gitbook/assets/image (15) (1) (1) (1).png>)
 
 如果schedule中只有两个事务，交换操作是很容易的。但如果有多个操作就很费劲。一种更快的算法是用依赖图（**dependency graphs**）：
 

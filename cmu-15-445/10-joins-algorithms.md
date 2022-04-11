@@ -6,7 +6,7 @@
 
 如下图所示，Artist和Album之间的多对多关系拆成Artist, Album, ArtistAlbum三张表，使得数据存储的冗余减少。查询时，我们就需要用Join语句来重建关系，获得完整数据。
 
-![](<../.gitbook/assets/image (7) (1) (1).png>)
+![](<../.gitbook/assets/image (7) (1) (1) (1).png>)
 
 ## Join Algorithm
 
@@ -39,7 +39,7 @@ Join算子的考察维度：
 
 简单暴力双循环：
 
-![Stupid Nested Loop Join](<../.gitbook/assets/image (15) (1) (1) (1) (1).png>)
+![Stupid Nested Loop Join](<../.gitbook/assets/image (15) (1) (1) (1) (1) (1).png>)
 
 为什么说它stupid？R中的每一条数据，都要全表S作比较。
 

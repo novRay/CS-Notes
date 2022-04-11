@@ -46,7 +46,7 @@
 
 #### Example 1
 
-![](<../.gitbook/assets/image (15).png>)
+![](<../.gitbook/assets/image (15) (1).png>)
 
 1. T1读B，1 ≥ W-TS(B)=0，可读，R-TS(B)改为1
 2. T2读B，2 ≥ W-TS(B)=1，可读，R-TS(B)改为2
@@ -184,7 +184,7 @@ $$WriteSet(T_i) ∩ WriteSet(T_j) = Ø$$
 
 当T2读A，读到的是T1写入的A，符合逻辑顺序，因此最后也可以安全提交。
 
-![](<../.gitbook/assets/image (7).png>)
+![](<../.gitbook/assets/image (7) (1).png>)
 
 #### OCC - Obersavation
 
@@ -202,5 +202,58 @@ $$WriteSet(T_i) ∩ WriteSet(T_j) = Ø$$
 * 复制数据的高额开销
 * Validate/Write阶段的瓶颈
 * 如果abort，比2PL更浪费。因为OCC的abort只会发生在事务执行之后。
-*
 
+### The Phantom Problem
+
+之前提到的事务只涉及读和更新已经存在的数据。如果我们的数据支持插入、删除操作，就可能会导致“幻读”的问题：
+
+![](<../.gitbook/assets/image (27).png>)
+
+发生的原因：事务T1只锁住了已经存在的记录。
+
+解决方案：
+
+#### Approach #1: Re-Execute Scans
+
+DBMS维护一个scan set，记录WHERE语句筛出的记录。事务COMMIT时，再扫描一遍，看scan set是否相同。
+
+#### Approach #2: Predicate Locking
+
+给SELECT的WHERE上共享锁，给UPDATE, INSERT, DELETE的WHERE上排他锁。
+
+这个方法只在Hyper系统中实现过。
+
+![](<../.gitbook/assets/image (7).png>)
+
+#### Approach #3: Index Locking
+
+以上文中的例子为例，如果status attribute上有索引，则锁住所有包含status='lit'的索引页。
+
+如果没有索引，则：
+
+* 给table的每个页上锁，防止其他记录的status被改为lit
+* 给table本身上锁，防止添加或删除status=‘lit'
+
+## Isolation Levels
+
+serializability很有用，让程序员可以不用关注并发问题。但是强制实现它会导致太低的并发度和性能，因此我们希望一种更低层次的一致性，以此提高scalability。
+
+更弱的隔离级别会把事务一定程度上暴露给其他事务，提高并发性，代价是会出现一些问题：
+
+* 脏读 Dirty Reads
+* 不可重复度 Unrepeatable Reads
+* 幻读 Phantom Reads
+
+隔离级别由强到弱：\
+
+
+![](<../.gitbook/assets/image (26).png>)
+
+* SERIALIZABLE：首先获得所有锁；加上索引锁；加上严格的2PL
+* REPEATABLE READS：同上，但没有索引锁
+* READ COMMITTED：同上，但共享锁会第一时间立即释放
+* READ UNCOMMITTED：同上，但允许脏读（没有共享锁）
+
+常见DBMS支持的隔离级别：
+
+![](<../.gitbook/assets/image (15).png>)

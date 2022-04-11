@@ -72,7 +72,7 @@ DBMS的**processing model** 定义了系统如何执行一个query plan。不同
 * 算子的循环内部一次处理多个tuple
 * batch的大小可以基于硬件或query properties改变。
 
-![Vectorization Model](<../.gitbook/assets/image (7) (1) (1) (1) (1).png>)
+![Vectorization Model](<../.gitbook/assets/image (7) (1) (1) (1) (1) (1).png>)
 
 这种模型是OLAP的理想模型：
 

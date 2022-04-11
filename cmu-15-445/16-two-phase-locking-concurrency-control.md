@@ -47,7 +47,7 @@
 
 一个shedule example如下：
 
-![](<../.gitbook/assets/image (7) (1).png>)
+![](<../.gitbook/assets/image (7) (1) (1).png>)
 
 但这实际上并没有保证schedule的正确性，因为T1释放锁A后T2又对A写入，导致T1前后两次读A读到了不一样的值。
 
@@ -122,7 +122,7 @@ Example:
 
 严格的2PL，T2对A的读锁请求要等到整个T1完成了才被grant。结果同样正确，但并发性稍差。
 
-![](<../.gitbook/assets/image (15) (1).png>)
+![](<../.gitbook/assets/image (15) (1) (1).png>)
 
 把no cascading aborts加入universe of schedule：
 
