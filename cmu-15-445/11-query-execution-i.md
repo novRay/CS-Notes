@@ -4,7 +4,7 @@
 
 本节将介绍DBMS query的执行和处理。
 
-![](<../.gitbook/assets/image (2) (1).png>)
+![](<../.gitbook/assets/image (2) (1) (1).png>)
 
 DBMS会把SQL语句转换成一个查询计划(query plan)。计划中的算子会被组织成一棵树（如上图所示），数据从叶结点流向根结点，根结点的输出即为query的最终结果。
 
@@ -56,7 +56,7 @@ DBMS的**processing model** 定义了系统如何执行一个query plan。不同
 
 这是一中自顶向下的模型
 
-![Materialization Model](<../.gitbook/assets/image (2) (1) (1) (1).png>)
+![Materialization Model](<../.gitbook/assets/image (2) (1) (1) (1) (1).png>)
 
 这种模型更适合OLTP：query一次只接触小规模的tuple。
 
@@ -153,7 +153,7 @@ DBMS挑选query所需tuple的索引。使用哪个索引取决于：
 
 在13节会进一步介绍上述内容。
 
-![](<../.gitbook/assets/image (3) (1) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (3) (1) (1) (1) (1) (1).png>)
 
 针对不同的情景，选取合适的索引来过滤掉更多的数据。
 

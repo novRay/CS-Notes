@@ -145,7 +145,7 @@ Logging几乎被所有DBMS采用
 
 而一个bad example如下：
 
-![](<../.gitbook/assets/image (3) (1).png>)
+![](<../.gitbook/assets/image (3) (1) (1).png>)
 
 对应数据库的读写操作：
 

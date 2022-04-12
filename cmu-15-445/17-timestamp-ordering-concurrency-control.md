@@ -146,7 +146,7 @@ Example:
 
 检查“未来”的事务
 
-![](<../.gitbook/assets/image (1).png>)
+![](<../.gitbook/assets/image (2).png>)
 
 事务会在validation阶段开始时被赋予一个时间戳。
 
@@ -247,7 +247,7 @@ serializability很有用，让程序员可以不用关注并发问题。但是�
 隔离级别由强到弱：\
 
 
-![](<../.gitbook/assets/image (26).png>)
+![](<../.gitbook/assets/image (26) (1).png>)
 
 * SERIALIZABLE：首先获得所有锁；加上索引锁；加上严格的2PL
 * REPEATABLE READS：同上，但没有索引锁

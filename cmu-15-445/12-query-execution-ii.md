@@ -117,7 +117,7 @@ Intra-Quey: 并行执行一个query。可以降低long-running query的延迟。
 
 DBMS会插入一个**exchange**算子，来合并/分割来自children/parent算子的结果。exhange算子有三种：**Gather, Distribute, Repartition**
 
-![Intra-Operator](<../.gitbook/assets/image (14) (1).png>)
+![Intra-Operator](<../.gitbook/assets/image (14) (1) (1).png>)
 
 #### Approach #2: Inter-Operator (Vertical)
 

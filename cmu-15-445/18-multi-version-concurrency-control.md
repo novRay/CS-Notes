@@ -27,29 +27,29 @@
 
 T1写A，创建一个A的新版本A1，标记Begin为1，并将A0版本的End标记为1。
 
-![](<../.gitbook/assets/image (23).png>)
+![](<../.gitbook/assets/image (30).png>)
 
 T2读A，由于T1还没提交，T2只能读取A0版本
 
-![](<../.gitbook/assets/image (21).png>)
+![](<../.gitbook/assets/image (28).png>)
 
 T2写A，由于存在一个还未提交的新版本A1，T2需要等待T1提交
 
-![](<../.gitbook/assets/image (24).png>)
+![](<../.gitbook/assets/image (31).png>)
 
 T1读A，读取新版本A1
 
-![](<../.gitbook/assets/image (20).png>)
+![](<../.gitbook/assets/image (26).png>)
 
 T1提交，T2创建新版本A2
 
-![](<../.gitbook/assets/image (17).png>)
+![](<../.gitbook/assets/image (21).png>)
 
 由上面的例子可以看出，MVCC本身并不能实现serializability，还需要结合2PL或OCC。
 
 MVCC不仅仅是一种并发控制协议。它深刻影响了DBMS如何管理事务和数据库。
 
-![](<../.gitbook/assets/image (15).png>)
+![](<../.gitbook/assets/image (17).png>)
 
 ## MVCC Design Decisions
 
@@ -86,7 +86,7 @@ MVCC不仅仅是一种并发控制协议。它深刻影响了DBMS如何管理事
 
 更新时只要在表的空余位置附加一条新版本的tuple
 
-![](<../.gitbook/assets/image (13).png>)
+![](<../.gitbook/assets/image (15).png>)
 
 版本链的顺序有两种：
 
@@ -103,7 +103,7 @@ MVCC不仅仅是一种并发控制协议。它深刻影响了DBMS如何管理事
 
 每次更新，把当前版本复制到time-travel表中，并更新指针。
 
-![](<../.gitbook/assets/image (18).png>)
+![](<../.gitbook/assets/image (22).png>)
 
 ![](../.gitbook/assets/image.png)
 
@@ -135,7 +135,7 @@ DBMS每隔一段时间需要删除一些可回收的（reclaimable）物理版�
 
 用专门的线程周期性地扫描表，查找可回收版本。可用于任何storage
 
-![](<../.gitbook/assets/image (27).png>)
+![](<../.gitbook/assets/image (35).png>)
 
 优化：可以用一个dirty block，标记改动过的页。扫描时只需要扫描这些脏页。
 
@@ -145,7 +145,7 @@ DBMS每隔一段时间需要删除一些可回收的（reclaimable）物理版�
 
 让某个工作线程在遍历版本链时识别可回收版本。只用于O2N
 
-![](<../.gitbook/assets/image (11).png>)
+![](<../.gitbook/assets/image (13).png>)
 
 #### Transaction-Level GC
 
@@ -153,11 +153,11 @@ DBMS每隔一段时间需要删除一些可回收的（reclaimable）物理版�
 
 如下图，事务更新A和更新B时记录下旧版本A2，B6
 
-![](<../.gitbook/assets/image (12).png>)
+![](<../.gitbook/assets/image (14).png>)
 
 DBMS回收掉TS<10的版本，则A2，B6被回收
 
-![](<../.gitbook/assets/image (28).png>)
+![](<../.gitbook/assets/image (38).png>)
 
 ### Index Management
 
@@ -173,15 +173,15 @@ DBMS回收掉TS<10的版本，则A2，B6被回收
 
 使用物理指针，辅助索引都指向了链表头。如果更新版本，需要移动所有指针。
 
-![](<../.gitbook/assets/image (19).png>)
+![](<../.gitbook/assets/image (25).png>)
 
 使用逻辑指针，让辅助索引指针指向主键索引。
 
-![](<../.gitbook/assets/image (25).png>)
+![](<../.gitbook/assets/image (33).png>)
 
 指向中间表（tuple id），每次更新不需要更新所有辅助索引。空间换时间。
 
-![](<../.gitbook/assets/image (22).png>)
+![](<../.gitbook/assets/image (29).png>)
 
 #### MVCC Indexs
 
@@ -199,7 +199,7 @@ MVCC DBMS通常不存储索引的版本信息
 
 若此时线程1想要再次读A，应该读哪个版本？
 
-![](<../.gitbook/assets/image (16).png>)
+![](<../.gitbook/assets/image (19).png>)
 
 **MVCC Indexes**
 
@@ -231,4 +231,4 @@ DBMS只有当一个**逻辑上**被删除的tuple的所有版本不可见是，�
 
 ## Conclusion
 
-MVCC被各种DBMS广泛使用，甚至是不支持多语句的系统（e.g., NoSQL）
+MVCC被各种DBMS广泛使用，甚至是不支持多语句事务的系统（e.g., NoSQL）

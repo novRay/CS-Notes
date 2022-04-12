@@ -114,7 +114,7 @@ Example:
 
 非2PL，T2读了还没加上100的B，导致出错。
 
-![](<../.gitbook/assets/image (3).png>)
+![](<../.gitbook/assets/image (3) (1).png>)
 
 2PL，结果正确。当T2想读B时，由于已经进入了shrinking阶段，请求被deny。直到T1把所有的锁释放，才获得了读B的锁。
 
@@ -226,7 +226,7 @@ victim事务可以重启，也可以终止（common）。
 * Shared+Intention-Exclusive(SIX)
   * 对整个下层结点上共享锁，但某些结点上了排他锁
 
-![](<../.gitbook/assets/image (14).png>)
+![](<../.gitbook/assets/image (14) (1).png>)
 
 Hierarchical locks在实践中很有用，让事务只需要更少的锁。
 

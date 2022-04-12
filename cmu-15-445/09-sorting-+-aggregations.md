@@ -53,7 +53,7 @@ _Pass #1,2,3,..._
 * 递归地合并两个run成一个两倍长度的run
 * 用到三个buffer pages（2个放输入，1个放输出）
 
-![2-way external merge sort](<../.gitbook/assets/image (14) (1) (1) (1).png>)
+![2-way external merge sort](<../.gitbook/assets/image (14) (1) (1) (1) (1).png>)
 
 流程及复杂度分析：
 
@@ -95,7 +95,7 @@ _Case #1 - Clustered B+Tree_
 
 从left-most leaf page遍历即可。这种办法总是比外排序好，因为没有计算开销，磁盘访问也是顺序的
 
-![Clustered B+Tree](<../.gitbook/assets/image (2) (1) (1).png>)
+![Clustered B+Tree](<../.gitbook/assets/image (2) (1) (1) (1).png>)
 
 _Case #2 - Unclustered B+Tree_
 

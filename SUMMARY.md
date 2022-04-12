@@ -49,5 +49,6 @@
 * [#16: Two-Phase Locking Concurrency Control](cmu-15-445/16-two-phase-locking-concurrency-control.md)
 * [#17: Timestamp Ordering Concurrency Control](cmu-15-445/17-timestamp-ordering-concurrency-control.md)
 * [#18: Multi-Version Concurrency Control](cmu-15-445/18-multi-version-concurrency-control.md)
+* [#19: Logging Protocols + Schemes](cmu-15-445/19-logging-protocols-+-schemes.md)
 * [Project](cmu-15-445/project/README.md)
   * [Project #1 - Buffer Pool](cmu-15-445/project/project-1-buffer-pool.md)

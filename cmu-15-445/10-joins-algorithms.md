@@ -25,7 +25,7 @@ Join算子的考察维度：
 
 * **Data**: Early Materialization模型。将inner tuple和outer tuple的attribute组成新的tuple。之后的操作都不需要再从原表中获取数据。
 
-![Early Materialization](<../.gitbook/assets/image (2).png>)
+![Early Materialization](<../.gitbook/assets/image (2) (1).png>)
 
 * **Record Ids**: Late Materialization模型。只记录匹配上的tuple的record id，后续操作根据id再从原表中获取数据。对列存友好，因为DBMS不需要复制多余的数据。
 
@@ -55,7 +55,7 @@ $$Cost=M + ( M×N )$$
 
 如果我们有B个buffer可用，则可以用B-2个buffer来扫描外表，1个buffer扫描内表，还有1个buffer放输出：
 
-![](<../.gitbook/assets/image (3) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (3) (1) (1) (1) (1).png>)
 
 $$Cost: M + ( [M / (B-2)] ∙N)$$
 
