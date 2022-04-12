@@ -58,7 +58,7 @@ DBMS的process models定义了系统如何架构，以支持来自多用户应�
 * 对CPU缓存局部性不好
 * Exampel: IBM DB2, Postgres(2015)
 
-![Process Pool](<../.gitbook/assets/image (15) (1) (1) (1) (1) (1).png>)
+![Process Pool](<../.gitbook/assets/image (15) (1) (1) (1) (1) (1) (1).png>)
 
 ### Approach #3: Thread Per Worker
 
@@ -191,7 +191,7 @@ CREATE TABLE foo (
 );
 ```
 
-![](<../.gitbook/assets/image (1) (1) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png>)
 
 #### Horizontal Partitioning
 

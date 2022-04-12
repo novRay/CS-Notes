@@ -50,5 +50,6 @@
 * [#17: Timestamp Ordering Concurrency Control](cmu-15-445/17-timestamp-ordering-concurrency-control.md)
 * [#18: Multi-Version Concurrency Control](cmu-15-445/18-multi-version-concurrency-control.md)
 * [#19: Logging Protocols + Schemes](cmu-15-445/19-logging-protocols-+-schemes.md)
+* [#20: Crash Recovery Algorithms](cmu-15-445/20-crash-recovery-algorithms.md)
 * [Project](cmu-15-445/project/README.md)
   * [Project #1 - Buffer Pool](cmu-15-445/project/project-1-buffer-pool.md)

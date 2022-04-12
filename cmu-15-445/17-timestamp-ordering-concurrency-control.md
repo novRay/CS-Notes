@@ -46,7 +46,7 @@
 
 #### Example 1
 
-![](<../.gitbook/assets/image (15) (1) (1).png>)
+![](<../.gitbook/assets/image (15) (1) (1) (1).png>)
 
 1. T1读B，1 ≥ W-TS(B)=0，可读，R-TS(B)改为1
 2. T2读B，2 ≥ W-TS(B)=1，可读，R-TS(B)改为2
@@ -86,7 +86,7 @@
 
 下图就是一个不可恢复的例子。T2读了T1写入的A，然而T1在T2提交后abort，T2依赖T1写入的数据A并没有真实写入
 
-![](<../.gitbook/assets/image (8) (1).png>)
+![](<../.gitbook/assets/image (8) (1) (1).png>)
 
 #### Performance Issues
 
@@ -123,7 +123,7 @@ DBMS给每个事务创建一个工作区。
 
 Example:
 
-![](<../.gitbook/assets/image (5).png>)
+![](<../.gitbook/assets/image (5) (1).png>)
 
 1. T1开始READ阶段
 2. T1读A，向工作区写入（A,123,0）
@@ -256,4 +256,4 @@ serializability很有用，让程序员可以不用关注并发问题。但是�
 
 常见DBMS支持的隔离级别：
 
-![](<../.gitbook/assets/image (15) (1).png>)
+![](<../.gitbook/assets/image (15) (1) (1).png>)

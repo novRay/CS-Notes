@@ -182,13 +182,13 @@ Logging几乎被所有DBMS采用
 
 读-写冲突（**R-W**）
 
-![](<../.gitbook/assets/image (1) (1).png>)
+![](<../.gitbook/assets/image (1) (1) (1).png>)
 
 #### Read Uncommited（Dirty Reads） 读未提交（脏读）
 
 写-读冲突（**W-R**）
 
-![](<../.gitbook/assets/image (1) (1) (1).png>)
+![](<../.gitbook/assets/image (1) (1) (1) (1).png>)
 
 #### Overwriting Uncommitted Data 覆盖未提交
 
@@ -217,7 +217,7 @@ Logging几乎被所有DBMS采用
 
 但对于下图，由于W(A)和W(A)冲突，不能得到serial schedule，因此不是confilct serializable的
 
-![](<../.gitbook/assets/image (15) (1) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (15) (1) (1) (1) (1) (1).png>)
 
 如果schedule中只有两个事务，交换操作是很容易的。但如果有多个操作就很费劲。一种更快的算法是用依赖图（**dependency graphs**）：
 
@@ -233,7 +233,7 @@ Logging几乎被所有DBMS采用
 
 例3出现了环，但事实上它是conflict serializable的。虽然出现了W(A)-R(A)和R(B)-W(B)冲突，但实际上不影响结果。
 
-![](<../.gitbook/assets/image (5) (1) (1).png>)
+![](<../.gitbook/assets/image (5) (1) (1) (1).png>)
 
 #### View Serializability
 

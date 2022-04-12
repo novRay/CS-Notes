@@ -33,13 +33,13 @@ Join算子的考察维度：
 
 ### Cost Analysis
 
-![Cost Analysis](<../.gitbook/assets/image (8) (1) (1) (1) (1).png>)
+![Cost Analysis](<../.gitbook/assets/image (8) (1) (1) (1) (1) (1).png>)
 
 ## Nested LoopJoin
 
 简单暴力双循环：
 
-![Stupid Nested Loop Join](<../.gitbook/assets/image (15) (1) (1) (1) (1) (1) (1).png>)
+![Stupid Nested Loop Join](<../.gitbook/assets/image (15) (1) (1) (1) (1) (1) (1) (1).png>)
 
 为什么说它stupid？R中的每一条数据，都要全表S作比较。
 
@@ -175,7 +175,7 @@ Basic Algorithm的问题：
 * Build Phase: 用相同的哈希函数对两表都进行哈希partition
 * Probe Phase: 比较两表对应partition内的tuple，进行join
 
-![Grace Hash Join](<../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png>)
+![Grace Hash Join](<../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png>)
 
 如果某个partition还是放不进内存，则对它递归分区(**recursive partitioning**)，用另外一个哈希函数继续对它分区，使它能放进内存
 

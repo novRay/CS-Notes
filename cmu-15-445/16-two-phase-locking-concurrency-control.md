@@ -35,7 +35,7 @@
 
 **X-LOCK**：用于写的排他锁
 
-![](<../.gitbook/assets/image (8) (1) (1).png>)
+![](<../.gitbook/assets/image (8) (1) (1) (1).png>)
 
 ### Executing With Locks
 
@@ -122,7 +122,7 @@ Example:
 
 严格的2PL，T2对A的读锁请求要等到整个T1完成了才被grant。结果同样正确，但并发性稍差。
 
-![](<../.gitbook/assets/image (15) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (15) (1) (1) (1) (1).png>)
 
 把no cascading aborts加入universe of schedule：
 
@@ -141,7 +141,7 @@ Example:
 
 创建waits-for graph。周期性检查是否存在环，决定如何打破环。
 
-![](<../.gitbook/assets/image (5) (1).png>)
+![](<../.gitbook/assets/image (5) (1) (1).png>)
 
 死锁处理方案：挑选一个victim事务，rollback
 

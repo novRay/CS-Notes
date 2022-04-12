@@ -50,7 +50,7 @@ SQL是声明式的(declarative)。不同的query plan的性能差别可能会非
 
 投影下放，提前缩小数据列范围，减少中间结果。对列存不重要。
 
-![](<../.gitbook/assets/image (1) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (1) (1) (1) (1) (1).png>)
 
 ## Logical Query Optimization
 
@@ -76,7 +76,7 @@ DBMS把where语句中的嵌套子查询看成是一个函数：接收参数，�
 
 #### Rewrite：
 
-![](<../.gitbook/assets/image (5) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (5) (1) (1) (1) (1).png>)
 
 #### Decompose:
 

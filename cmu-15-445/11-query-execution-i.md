@@ -34,7 +34,7 @@ DBMS的**processing model** 定义了系统如何执行一个query plan。不同
 
 这是一种自下而上的模型。底层算子处理完后向上“吐出“数据，直到根结点。像火山喷发一样。
 
-![](<../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1).png>)
 
 ![Volcano Model的调用](<../.gitbook/assets/image (6) (1) (1) (1) (1).png>)
 
@@ -126,7 +126,7 @@ DBMS会维护一个内部**cursor**来追踪上一个被检查的page/slot
 
 预先计算好一张页内数据的统计信息attribute values。DBMS先检查zone map来决定是否进一步获取数据。
 
-![Zone Maps](<../.gitbook/assets/image (8) (1) (1) (1) (1) (1) (1).png>)
+![Zone Maps](<../.gitbook/assets/image (8) (1) (1) (1) (1) (1) (1) (1).png>)
 
 如上图，由于MAX为400，而条件是val > 600，因此不需要扫描该页。
 
@@ -199,7 +199,7 @@ DBMS挑选query所需tuple的索引。使用哪个索引取决于：
 
 DBMS用一棵**expression tree**表示**WHERE**语句：
 
-![](<../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png>)
 
 DBMS遍历整棵树来实现对数据的过滤。虽然灵活，但整个过程速度很慢。
 

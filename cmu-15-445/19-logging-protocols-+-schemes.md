@@ -130,11 +130,11 @@ Example：
 
 事务开始，复制一份shadow
 
-![](<../.gitbook/assets/image (37).png>)
+![](<../.gitbook/assets/image (37) (1).png>)
 
 在shadow上作改动。T1提交，将Root指针指向shadow，把内存中原来的master给删掉。
 
-![](<../.gitbook/assets/image (1).png>)
+![](<../.gitbook/assets/image (1) (1).png>)
 
 #### **Shadow Paging - Undo/Redo**
 

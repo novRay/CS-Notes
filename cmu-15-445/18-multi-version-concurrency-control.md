@@ -31,7 +31,7 @@ T1写A，创建一个A的新版本A1，标记Begin为1，并将A0版本的End标
 
 T2读A，由于T1还没提交，T2只能读取A0版本
 
-![](<../.gitbook/assets/image (28).png>)
+![](<../.gitbook/assets/image (28) (1).png>)
 
 T2写A，由于存在一个还未提交的新版本A1，T2需要等待T1提交
 
@@ -86,7 +86,7 @@ MVCC不仅仅是一种并发控制协议。它深刻影响了DBMS如何管理事
 
 更新时只要在表的空余位置附加一条新版本的tuple
 
-![](<../.gitbook/assets/image (15).png>)
+![](<../.gitbook/assets/image (15) (1).png>)
 
 版本链的顺序有两种：
 
@@ -157,7 +157,7 @@ DBMS每隔一段时间需要删除一些可回收的（reclaimable）物理版�
 
 DBMS回收掉TS<10的版本，则A2，B6被回收
 
-![](<../.gitbook/assets/image (38).png>)
+![](<../.gitbook/assets/image (38) (1).png>)
 
 ### Index Management
 
@@ -227,7 +227,7 @@ DBMS只有当一个**逻辑上**被删除的tuple的所有版本不可见是，�
 
 ### MVCC Implementations
 
-![](<../.gitbook/assets/image (8).png>)
+![](<../.gitbook/assets/image (8) (1).png>)
 
 ## Conclusion
 
