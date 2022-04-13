@@ -103,9 +103,9 @@ MVCC不仅仅是一种并发控制协议。它深刻影响了DBMS如何管理事
 
 每次更新，把当前版本复制到time-travel表中，并更新指针。
 
-![](<../.gitbook/assets/image (22).png>)
+![](<../.gitbook/assets/image (22) (1).png>)
 
-![](../.gitbook/assets/image.png)
+![](<../.gitbook/assets/image (1).png>)
 
 #### Delta Storage
 
@@ -145,7 +145,7 @@ DBMS每隔一段时间需要删除一些可回收的（reclaimable）物理版�
 
 让某个工作线程在遍历版本链时识别可回收版本。只用于O2N
 
-![](<../.gitbook/assets/image (13).png>)
+![](<../.gitbook/assets/image (13) (1).png>)
 
 #### Transaction-Level GC
 

@@ -105,7 +105,7 @@ abort是ARISE undo操作的一种特殊情况：回滚单个事务
 
 它包括所有update日志记录的field，外加一个undoNext指针（下一个要被undo的LSN）
 
-![](<../.gitbook/assets/image (1).png>)
+![](<../.gitbook/assets/image (1) (1).png>)
 
 ### Abort Algorithm
 
@@ -159,4 +159,101 @@ DBMS允许在设检查点时让活跃事务继续运行。
 * **CHECKPOINT-BEGIN**：表示检查点开始
 * **CHECKPOINT-END**：包含**ATT + DPT**
 
-****
+只有当检查点成功完成，CHECKPOINT-BEGIN的LSN才会写到数据库的MasterRecord项中。
+
+任何在检查点启动之后开始的事务不会写到CHECKPOINT-END的ATT当中。
+
+![](../.gitbook/assets/image.png)
+
+## Recovery Algorithm
+
+经过以上的准备工作，现在我们可以梳理ARIES恢复算法的整个过程了。
+
+ARIES恢复算法的三阶段：
+
+* Phase #1 - Analysis：分析。从最新的MasterRecord读取WAL，找出buffer pool中的脏页，以及崩溃时活跃的事务。
+* Phase #2 –Redo：在日志的某个合适的点开始，重复所有操作。（即便事务将会abort）
+* Phase #3 –Undo：复原崩溃前未提交事务的所有操作。
+
+![](<../.gitbook/assets/image (22).png>)
+
+### Analysis Phase
+
+从日志的最新一个成功的检查点开始顺序扫描，如果找到**TXN-END**，将对应事务从**ATT**删除。
+
+对于其他的记录：
+
+* 事务放入**ATT**，标记状态**UNDO**
+* 若遇到事务提交，改变状态为**COMMIT**
+* 对于**UPDATE**记录：如果页P不在**DPT**，则放入**DPT**，设置它的**recLSN=LSN**
+
+分析结束时，ATT中的事务在崩溃时仍然活跃；DPT中的脏页还未写入磁盘。
+
+![分析示范。分析结束时，活跃事务T97未提交，脏页P33和P20未刷盘。](<../.gitbook/assets/image (13).png>)
+
+### Redo Phase
+
+Redo的目的是重复历史，以重建崩溃时的状态。（重放所有更新，包括中止事务，重做**CLRs**）。有一些办法可以让DBMS避免不必要的读写，但本节课不做介绍。
+
+从**DPT**中最小的**recLSN**开始顺序扫描。重做每条更新日志或**CLR**，除非：
+
+* 被影响的页不在**DPT**中，或
+* 被影响的页在**DPT**中，但记录的LSN比页的**recLSN**小（只重做最后一次更新）
+
+重做时，需要：
+
+* 重新执行日志操作
+* 设**pageLSN**为日志记录的**LSN**
+* 不再新增日志，也不强制刷盘！
+
+Redo阶段结束，为所有状态为**C**的事务写一条**TXN-END**日志记录，并将其从**ATT**中删除。
+
+### Undo Phase
+
+撤销崩溃时还在活跃的事务的所有操作（分析阶段结束后，**ATT**中状态为**U**的事务）。
+
+利用**lastLSN**，倒序执行。
+
+每一次撤销，写一条**CLR**。
+
+
+
+完整的执行范例见课程[slides](https://15445.courses.cs.cmu.edu/fall2021/slides/20-recovery.pdf)的118-136页。
+
+### Additional Crash Issues
+
+> 如果DBMS在分析阶段崩溃怎么办？
+
+无所谓，再次恢复就行。
+
+> 如果DBMS在Redo阶段崩溃怎么办？
+
+也无所谓，再次重做就行。
+
+> 如何在Redo阶段提高性能？
+
+假设不会再次崩溃的情况下，可以将所有改动在后台**异步**地刷入磁盘。
+
+> 如何在Undo阶段提高性能?
+
+* Lazily rollback：新事物访问数据页时才回滚
+* 重写应用程序，避免长运行事务
+
+## Conlusion
+
+ARIES的main ideas回顾：
+
+* WAL with **STEAL + NO-FORCE**
+* Fuzzy Checkpoints（脏页ID的快照）
+* 从最早的脏页开始redo一切
+* undo从未提交的事务
+* undo时写**CLRs**，避免重启时再次故障。
+
+Log Sequence Numbers：
+
+* LSNs标明日志记录；每个事务内通过prevLSN构建双向链表。
+* pageLSN允许数据页和日志记录作比较。
+
+
+
+至此，单节点DBMS的构建介绍完毕。

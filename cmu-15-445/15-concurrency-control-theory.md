@@ -2,7 +2,7 @@
 
 DBMS的并发控制(concurrency control)与恢复组件(recovery components)贯穿了整个架构设计
 
-![](<../.gitbook/assets/image (9) (1) (1) (1).png>)
+<img src="../.gitbook/assets/image (9) (1) (1) (1).png" alt="" data-size="original">
 
 Motivation：
 
@@ -182,13 +182,13 @@ Logging几乎被所有DBMS采用
 
 读-写冲突（**R-W**）
 
-![](<../.gitbook/assets/image (1) (1) (1).png>)
+![](<../.gitbook/assets/image (1) (1) (1) (1).png>)
 
 #### Read Uncommited（Dirty Reads） 读未提交（脏读）
 
 写-读冲突（**W-R**）
 
-![](<../.gitbook/assets/image (1) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (1) (1) (1) (1) (1).png>)
 
 #### Overwriting Uncommitted Data 覆盖未提交
 
@@ -213,7 +213,7 @@ Logging几乎被所有DBMS采用
 
 例如对于上图，通过一系列交换，可以得到一个serial schedule：
 
-![](<../.gitbook/assets/image (13) (1) (1).png>)
+![](<../.gitbook/assets/image (13) (1) (1) (1).png>)
 
 但对于下图，由于W(A)和W(A)冲突，不能得到serial schedule，因此不是confilct serializable的
 
@@ -247,7 +247,7 @@ In practice，**conflict serializability**被广泛使用，因为它易于实�
 
 #### Universe Of Schedules
 
-![](<../.gitbook/assets/image (22) (1) (1).png>)
+![](<../.gitbook/assets/image (22) (1) (1) (1).png>)
 
 ## Durability
 

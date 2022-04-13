@@ -168,7 +168,7 @@ Ti在Tj的Write阶段开始前完成，并且$$WriteSet(T_j)∩ReadSet(T_j)=Ø$$
 
 而如果T2先validate，则T1是未来的事务。T2正确读取了T1发生前原表中的数据。两者都可以安全的提交。
 
-![](<../.gitbook/assets/image (22) (1).png>)
+![](<../.gitbook/assets/image (22) (1) (1).png>)
 
 #### Step 3：
 

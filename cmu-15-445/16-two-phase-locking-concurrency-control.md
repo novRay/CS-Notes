@@ -97,7 +97,7 @@ Example:
 
 更严格的2PL，当且仅当在commit或abort时，释放掉所有的锁。
 
-![](<../.gitbook/assets/image (13) (1).png>)
+![](<../.gitbook/assets/image (13) (1) (1).png>)
 
 严格的2PL保证了：如果一个值被一个事务写过，那么其他事务就不允许读或写这个值，知道当前事务结束。
 

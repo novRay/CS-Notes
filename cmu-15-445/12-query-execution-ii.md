@@ -160,7 +160,7 @@ DBMS会插入一个**exchange**算子，来合并/分割来自children/parent算
 
 
 
-![](<../.gitbook/assets/image (19) (1) (1).png>)![](<../.gitbook/assets/image (18) (1) (1) (1).png>)
+<img src="../.gitbook/assets/image (19) (1) (1).png" alt="" data-size="original">![](<../.gitbook/assets/image (18) (1) (1) (1).png>)
 
 ### Database Partitioning
 
@@ -191,13 +191,13 @@ CREATE TABLE foo (
 );
 ```
 
-![](<../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png>)
 
 #### Horizontal Partitioning
 
 把表基于某种partitioning key分割成disjoint segements，比如Hash Partitioning, Range Partitioning, Predicate Partitioning
 
-![](<../.gitbook/assets/image (13) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (13) (1) (1) (1) (1).png>)
 
 ## Conclusion
 

@@ -187,7 +187,7 @@ DBMS挑选query所需tuple的索引。使用哪个索引取决于：
 
 #### Halloween Problem
 
-![](<../.gitbook/assets/image (4) (1) (1) (1) (1).png>)
+<img src="../.gitbook/assets/image (4) (1) (1) (1) (1).png" alt="" data-size="original">
 
 更新操作改变了一个tuple的物理位置，导致scan算子多次访问了同一个tuple
 
@@ -199,7 +199,7 @@ DBMS挑选query所需tuple的索引。使用哪个索引取决于：
 
 DBMS用一棵**expression tree**表示**WHERE**语句：
 
-![](<../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png>)
+![](<../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1).png>)
 
 DBMS遍历整棵树来实现对数据的过滤。虽然灵活，但整个过程速度很慢。
 
